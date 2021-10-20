@@ -1,6 +1,6 @@
-import { Party } from '../../models/Party';
+import { Party } from '../../src/models/Party';
 import { generateUUID } from '../../util/uuid_generator';
-import { IActivityPack } from './../../models/IActivityPack';
+import { IActivityPack } from '../../src/models/IActivityPack';
 
 const hostId = generateUUID();
 const activityPackId = generateUUID();

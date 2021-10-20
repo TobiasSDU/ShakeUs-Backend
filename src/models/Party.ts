@@ -1,5 +1,5 @@
-import { generateUUID } from '../util/uuid_generator';
-import { removeArrayElement } from './../util/remove_array_element';
+import { generateUUID } from '../../util/uuid_generator';
+import { removeArrayElement } from '../../util/remove_array_element';
 import { IActivityPack } from './IActivityPack';
 
 export class Party {
