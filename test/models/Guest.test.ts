@@ -3,7 +3,7 @@ import { Guest } from './../../src/models/Guest';
 const testName = 'TestGuest';
 const originalGuest = new Guest(testName);
 
-describe('party model methods return expected values', () => {
+describe('guest model methods return expected values', () => {
     let testGuest: Guest;
 
     beforeEach(() => {
