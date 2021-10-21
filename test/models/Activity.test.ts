@@ -1,4 +1,4 @@
-import { Activity } from '../../src/models/Activity';
+import { Activity } from '../../src/models/activity';
 
 const testTitle = 'TestActivity';
 const testDescription = 'TestActivityDescription';

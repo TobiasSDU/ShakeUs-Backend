@@ -1,4 +1,4 @@
-import { Guest } from './../../src/models/Guest';
+import { Guest } from '../../src/models/guest';
 
 const testName = 'TestGuest';
 const originalGuest = new Guest(testName);

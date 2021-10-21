@@ -1,4 +1,4 @@
-import { ActivityPack } from '../../src/models/ActivityPack';
+import { ActivityPack } from '../../src/models/activity_pack';
 
 const testTitle = 'TestTitle';
 const testDescription = 'TestDescription';

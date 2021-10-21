@@ -1,3 +1,3 @@
-import { ActivityPack } from '../models/ActivityPack';
+import { ActivityPack } from '../models/activity_pack';
 
 export const defaultActivityPacks: ActivityPack[] = [];

@@ -1,3 +1,3 @@
-import { Activity } from '../models/Activity';
+import { Activity } from '../models/activity';
 
 export const defaultActivities: Activity[] = [];

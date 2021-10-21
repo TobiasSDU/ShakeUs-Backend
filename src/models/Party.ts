@@ -1,6 +1,6 @@
 import { generateUUID } from '../../util/uuid_generator';
 import { removeArrayElement } from '../../util/remove_array_element';
-import { ActivityPack } from './ActivityPack';
+import { ActivityPack } from './activity_pack';
 
 export class Party {
     private _id: string;

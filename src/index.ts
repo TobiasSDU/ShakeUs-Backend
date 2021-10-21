@@ -4,11 +4,14 @@ import { Server, Socket } from 'socket.io';
 
 const app = express();
 const server = createServer(app);
+const router = express.Router();
 const io = new Server(server);
 const port = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
-    res.send('Hello World');
+    const test = { test: 'test' };
+    console.log(test);
+    res.json(test);
 });
 
 io.on('connection', (socket: Socket) => {
