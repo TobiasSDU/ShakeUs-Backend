@@ -80,6 +80,57 @@ describe('party model methods return expected values', () => {
         expect(testParty.primaryHost).toEqual(testString);
     });
 
+    test('the list of guests is initially empty', () => {
+        expect(testParty.guests.length).toBe(0);
+    });
+
+    test('a list of guest ids can be set and retreived', () => {
+        const testGuests = ['guest1', 'guest2', 'guest3'];
+        testParty.guests = testGuests;
+
+        expect(testParty.guests).toEqual(testGuests);
+    });
+
+    test('a guest id can be added to the guests-array', () => {
+        const testGuests = ['guest1', 'guest2', 'guest3'];
+        testParty.guests = testGuests;
+
+        testParty.addGuest('guest4');
+
+        expect(testParty.guests).toEqual(expect.arrayContaining(['guest4']));
+    });
+
+    test('multipe guest ids can be added to the guests-array', () => {
+        const testGuests = ['guest1', 'guest2', 'guest3'];
+        testParty.guests = testGuests;
+
+        testParty.addGuests(['guest4', 'guest5', 'guest6']);
+
+        expect(testParty.guests).toEqual(
+            expect.arrayContaining(['guest4', 'guest5', 'guest6'])
+        );
+    });
+
+    it('removes the specified guest from the guests-array', () => {
+        const testGuests = ['guest1', 'guest2', 'guest3'];
+        testParty.guests = testGuests;
+
+        testParty.removeGuest('guest3');
+
+        expect(testParty.guests).toEqual(
+            expect.not.arrayContaining(['guest3'])
+        );
+    });
+
+    it('removes all guests', () => {
+        const testGuests = ['guest1', 'guest2', 'guest3'];
+        testParty.guests = testGuests;
+
+        testParty.removeAllGuests();
+
+        expect(testParty.guests).toEqual([]);
+    });
+
     it('has an activity pack', () => {
         expect(testParty.activityPack).toEqual(activityPack);
     });

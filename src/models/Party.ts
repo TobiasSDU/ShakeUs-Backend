@@ -6,12 +6,14 @@ export class Party {
     private _id: string;
     private _hosts: string[];
     private _primaryHost: string;
+    private _guests: string[];
     private _activityPack: IActivityPack;
 
     constructor(hostId: string, activityPack: IActivityPack) {
         this._id = generateUUID();
         this._hosts = [hostId];
         this._primaryHost = hostId;
+        this._guests = [];
         this._activityPack = activityPack;
     }
 
@@ -41,6 +43,32 @@ export class Party {
 
     public set primaryHost(primaryHost: string) {
         this._primaryHost = primaryHost;
+    }
+
+    public get guests() {
+        return this._guests;
+    }
+
+    public set guests(guests: string[]) {
+        this._guests = guests;
+    }
+
+    public addGuest(guestId: string) {
+        this._guests.push(guestId);
+    }
+
+    public addGuests(guests: string[]) {
+        guests.forEach((guest: string) => {
+            this.addGuest(guest);
+        });
+    }
+
+    public removeGuest(guestId: string) {
+        removeArrayElement(this._guests, guestId);
+    }
+
+    public removeAllGuests() {
+        this._guests = [];
     }
 
     public get activityPack() {
