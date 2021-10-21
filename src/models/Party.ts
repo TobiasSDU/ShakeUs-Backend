@@ -1,15 +1,15 @@
 import { generateUUID } from '../../util/uuid_generator';
 import { removeArrayElement } from '../../util/remove_array_element';
-import { IActivityPack } from './IActivityPack';
+import { ActivityPack } from './ActivityPack';
 
 export class Party {
     private _id: string;
     private _hosts: string[];
     private _primaryHost: string;
     private _guests: string[];
-    private _activityPack: IActivityPack;
+    private _activityPack: ActivityPack;
 
-    constructor(hostId: string, activityPack: IActivityPack) {
+    constructor(hostId: string, activityPack: ActivityPack) {
         this._id = generateUUID();
         this._hosts = [hostId];
         this._primaryHost = hostId;
@@ -75,7 +75,7 @@ export class Party {
         return this._activityPack;
     }
 
-    public set activityPack(activityPack: IActivityPack) {
+    public set activityPack(activityPack: ActivityPack) {
         this._activityPack = activityPack;
     }
 }
