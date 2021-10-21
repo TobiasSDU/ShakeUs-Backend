@@ -32,26 +32,42 @@ export const showParty = async (req: Request, res: Response) => {
     }
 };
 
-export const updateParty = (req: Request, res: Response) => {
+export const updateActivityPack = async (req: Request, res: Response) => {
+    const partyId = req.body.partyId;
+    const activityPackId = req.body.activityPackId;
+
+    const updateResult = await PartyService.updateActivityPack(
+        partyId,
+        activityPackId
+    );
+
+    if (updateResult) {
+        res.sendStatus(200);
+    } else {
+        res.sendStatus(500);
+    }
+};
+
+export const updatePrimaryHost = async (req: Request, res: Response) => {
     res.sendStatus(200);
 };
 
-export const addHost = (req: Request, res: Response) => {
+export const addHost = async (req: Request, res: Response) => {
     res.sendStatus(200);
 };
 
-export const removeHost = (req: Request, res: Response) => {
+export const removeHost = async (req: Request, res: Response) => {
     res.sendStatus(200);
 };
 
-export const removeGuest = (req: Request, res: Response) => {
+export const removeGuest = async (req: Request, res: Response) => {
     res.sendStatus(200);
 };
 
-export const joinParty = (req: Request, res: Response) => {
+export const joinParty = async (req: Request, res: Response) => {
     res.sendStatus(200);
 };
 
-export const leaveParty = (req: Request, res: Response) => {
+export const leaveParty = async (req: Request, res: Response) => {
     res.sendStatus(200);
 };

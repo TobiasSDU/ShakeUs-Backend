@@ -31,6 +31,19 @@ export class PartyService {
         }
     }
 
+    public static async updateActivityPack(
+        partyId: string,
+        activityPackId: string
+    ) {
+        const collection = await this.getPartiesCollection();
+        const updateResult = await collection.updateOne(
+            { _id: partyId },
+            { $set: { _activityPackId: activityPackId } }
+        );
+
+        return updateResult.acknowledged;
+    }
+
     private static async getPartiesCollection(): Promise<Collection> {
         const db: Db = await getDatabase();
         return db.collection('parties');
