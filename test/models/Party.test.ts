@@ -10,7 +10,13 @@ const activityPack: ActivityPack = new ActivityPack(
     []
 );
 
-const originalParty: Party = new Party(hostId, activityPack);
+const originalParty: Party = new Party(
+    generateUUID(),
+    [hostId],
+    hostId,
+    [],
+    activityPack.id
+);
 
 describe('party model methods return expected values', () => {
     let testParty: Party;
@@ -130,7 +136,7 @@ describe('party model methods return expected values', () => {
     });
 
     it('has an activity pack', () => {
-        expect(testParty.activityPack).toEqual(activityPack);
+        expect(testParty.activityPackId).toEqual(activityPack.id);
     });
 
     test('the activity pack can be changed', () => {
@@ -140,7 +146,7 @@ describe('party model methods return expected values', () => {
             []
         );
 
-        testParty.activityPack = newActivityPack;
-        expect(testParty.activityPack).toEqual(newActivityPack);
+        testParty.activityPackId = newActivityPack.id;
+        expect(testParty.activityPackId).toEqual(newActivityPack.id);
     });
 });
