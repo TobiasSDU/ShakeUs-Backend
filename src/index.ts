@@ -1,17 +1,20 @@
 import express from 'express';
 import { createServer } from 'http';
 import { Server, Socket } from 'socket.io';
+import cors from 'cors';
+
+import { partyRoutes } from './routes/party_routes';
 
 const app = express();
 const server = createServer(app);
-const router = express.Router();
 const io = new Server(server);
 const port = process.env.PORT || 3000;
 
+app.use(express.json());
+app.use(cors());
+
 app.get('/', (req, res) => {
-    const test = { test: 'test' };
-    console.log(test);
-    res.json(test);
+    res.json({ test: 'test' });
 });
 
 io.on('connection', (socket: Socket) => {
@@ -24,3 +27,5 @@ io.on('connection', (socket: Socket) => {
 server.listen(3000, () => {
     console.log(`listening on port ${port}`);
 });
+
+app.use('/party', partyRoutes);
