@@ -1,6 +1,9 @@
 import { Collection, Db } from 'mongodb';
+import {
+    getDatabase,
+    getDbConnectionString,
+} from '../config/database_connection';
 import { Guest } from '../models/guest';
-import { getDatabase } from './database_service';
 
 export class GuestService {
     public static async createGuest(guest: Guest) {
@@ -41,7 +44,7 @@ export class GuestService {
     }
 
     private static async getGuestsCollection(): Promise<Collection> {
-        const db: Db = await getDatabase();
+        const db: Db = await getDatabase(getDbConnectionString('prod'));
         return db.collection('guests');
     }
 }

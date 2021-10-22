@@ -1,7 +1,10 @@
 import { Collection, Db } from 'mongodb';
+import {
+    getDatabase,
+    getDbConnectionString,
+} from '../config/database_connection';
 import { Guest } from '../models/guest';
 import { Party } from '../models/party';
-import { getDatabase } from './database_service';
 import { GuestService } from './guest_service';
 
 export class PartyService {
@@ -233,7 +236,7 @@ export class PartyService {
     }
 
     private static async getPartiesCollection(): Promise<Collection> {
-        const db: Db = await getDatabase();
+        const db: Db = await getDatabase(getDbConnectionString('prod'));
         return db.collection('parties');
     }
 
