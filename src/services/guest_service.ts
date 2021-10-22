@@ -2,7 +2,7 @@ import { Collection, Db } from 'mongodb';
 import {
     getDatabase,
     getDbConnectionString,
-} from '../config/database_connection';
+} from '../../config/database_connection';
 import { Guest } from '../models/guest';
 
 export class GuestService {
