@@ -1,4 +1,4 @@
-import { generateUUID } from '../../util/uuid_generator';
+import { generateUUID } from '../util/uuid_generator';
 
 export class Activity {
     private _id: string;

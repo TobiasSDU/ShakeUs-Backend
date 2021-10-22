@@ -1,4 +1,4 @@
-import { removeArrayElement } from '../../util/remove_array_element';
+import { removeArrayElement } from '../../src/util/remove_array_element';
 
 const originalTestNumbers = [1, 2, 3, 4, 5];
 const originalTestStrings = ['teststring1', 'teststring2', 'teststring3'];

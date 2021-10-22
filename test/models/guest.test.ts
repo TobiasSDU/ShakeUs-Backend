@@ -1,5 +1,5 @@
 import { Guest } from '../../src/models/guest';
-import { generateUUID } from '../../util/uuid_generator';
+import { generateUUID } from '../../src/util/uuid_generator';
 
 const testName = 'TestGuest';
 const originalGuest = new Guest(generateUUID(), testName);

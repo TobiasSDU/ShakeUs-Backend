@@ -1,4 +1,4 @@
-import { removeArrayElement } from '../../util/remove_array_element';
+import { removeArrayElement } from '../util/remove_array_element';
 
 export class Party {
     private _id: string;

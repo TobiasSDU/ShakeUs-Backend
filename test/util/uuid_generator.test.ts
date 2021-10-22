@@ -1,4 +1,4 @@
-import { generateUUID } from '../../util/uuid_generator';
+import { generateUUID } from '../../src/util/uuid_generator';
 
 describe('valid uuids are generated', () => {
     let generatedUUID: string;

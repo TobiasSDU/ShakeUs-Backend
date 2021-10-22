@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { generateUUID } from '../../util/uuid_generator';
+import { generateUUID } from '../util/uuid_generator';
 import { Guest } from '../models/guest';
 import { Party } from '../models/party';
 import { PartyService } from '../services/party_service';
