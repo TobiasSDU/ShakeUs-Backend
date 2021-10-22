@@ -4,6 +4,7 @@ import { Server, Socket } from 'socket.io';
 import cors from 'cors';
 
 import { partyRoutes } from './routes/party_routes';
+import { guestRoutes } from './routes/guest_routes';
 
 const app = express();
 const server = createServer(app);
@@ -29,3 +30,4 @@ server.listen(3000, () => {
 });
 
 app.use('/party', partyRoutes);
+app.use('/guest', guestRoutes);
