@@ -15,7 +15,21 @@ declare global {
 
 type DbMode = 'prod' | 'testFile1' | 'testFile2' | 'testFile3' | 'testFile4';
 
-export function getDbConnectionString(dbMode: DbMode) {
+let currentDbMode: DbMode;
+
+export const getCurrentDbMode = () => {
+    if (!currentDbMode) {
+        currentDbMode = 'prod';
+    }
+
+    return currentDbMode;
+};
+
+export const setCurrentDbMode = (dbMode: DbMode) => {
+    currentDbMode = dbMode;
+};
+
+export const getDbConnectionString = (dbMode: DbMode) => {
     let connectionString;
 
     switch (dbMode) {
@@ -37,11 +51,11 @@ export function getDbConnectionString(dbMode: DbMode) {
     }
 
     return connectionString;
-}
+};
 
-export async function getDatabase(connectionString: string): Promise<Db> {
+export const getDatabase = async (connectionString: string): Promise<Db> => {
     const client: MongoClient = new MongoClient(connectionString);
     await client.connect();
 
-    return client.db('shake-us');
-}
+    return client.db();
+};

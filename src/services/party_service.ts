@@ -1,5 +1,6 @@
 import { Collection, Db } from 'mongodb';
 import {
+    getCurrentDbMode,
     getDatabase,
     getDbConnectionString,
 } from '../../config/database_connection';
@@ -236,7 +237,9 @@ export class PartyService {
     }
 
     private static async getPartiesCollection(): Promise<Collection> {
-        const db: Db = await getDatabase(getDbConnectionString('prod'));
+        const db: Db = await getDatabase(
+            getDbConnectionString(getCurrentDbMode())
+        );
         return db.collection('parties');
     }
 

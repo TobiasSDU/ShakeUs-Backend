@@ -1,20 +1,21 @@
 import { app } from '../../src/index';
 import request from 'supertest';
-import { Db } from 'mongodb';
-import {
-    getDatabase,
-    getDbConnectionString,
-} from '../../config/database_connection';
+import { setCurrentDbMode } from '../../config/database_connection';
 
 describe('GET / - a simple api endpoint', () => {
-    beforeAll(async () => {
-        const db: Db = await getDatabase(getDbConnectionString('testFile1'));
+    beforeEach(() => {
+        setCurrentDbMode('testFile1');
     });
 
     it('Hello API Request', async () => {
-        const res = await request(app).get('/');
+        const res = await request(app).get('/guest/show').send({
+            guestId: 'TestId',
+        });
 
-        expect(res.body.test).toEqual('test');
-        expect(res.statusCode).toEqual(200);
+        expect(res.body._name).toEqual('TestUser');
+    });
+
+    afterAll(() => {
+        setCurrentDbMode('prod');
     });
 });
