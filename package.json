@@ -7,7 +7,8 @@
     "start": "nodemon ./src/index.ts",
     "build": "tsc --project ./",
     "lint": "npx eslint . --ext .js,.ts",
-    "test": "jest --config jest.config.ts"
+    "test": "jest --config jest.config.ts",
+    "test:watch": "jest --config jest.config.ts --watch"
   },
   "repository": {
     "type": "git",
