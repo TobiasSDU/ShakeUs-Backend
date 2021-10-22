@@ -2,13 +2,20 @@ import { Collection, Db } from 'mongodb';
 import { Guest } from '../models/guest';
 import { Party } from '../models/party';
 import { getDatabase } from './database_service';
+import { GuestService } from './guest_service';
 
 export class PartyService {
-    public static async createParty(party: Party) {
+    public static async createParty(party: Party, host: Guest) {
         const collection = await this.getPartiesCollection();
-        const insertResult = await collection.insertOne({ ...party });
 
-        return insertResult.acknowledged;
+        const createHostResult = await GuestService.createGuest(host);
+
+        if (createHostResult) {
+            const insertResult = await collection.insertOne({ ...party });
+            return insertResult.acknowledged;
+        } else {
+            return false;
+        }
     }
 
     public static async getPartyInfo(partyId: string, guestId: string) {
@@ -28,7 +35,11 @@ export class PartyService {
 
             if (this.isUserInParty(guestId, party)) {
                 return party;
+            } else {
+                return null;
             }
+        } else {
+            return null;
         }
     }
 
@@ -87,9 +98,9 @@ export class PartyService {
             } else {
                 return false;
             }
+        } else {
+            return false;
         }
-
-        return false;
     }
 
     public static async removeHost(
@@ -105,9 +116,18 @@ export class PartyService {
                 { $pull: { _hosts: removedHostId } }
             );
 
-            return removeResult.modifiedCount;
+            if (removeResult.modifiedCount == 1) {
+                const insertResult = await collection.updateOne(
+                    { _id: partyId },
+                    { $push: { _guests: removedHostId } }
+                );
+
+                return insertResult.acknowledged;
+            } else {
+                return false;
+            }
         } else {
-            return 0;
+            return false;
         }
     }
 
@@ -124,9 +144,16 @@ export class PartyService {
                 { $pull: { _guests: removedGuestId } }
             );
 
-            return removeResult.modifiedCount;
+            if (removeResult.modifiedCount == 1) {
+                const deleteResult = await GuestService.deleteGuest(
+                    removedGuestId
+                );
+                return deleteResult;
+            } else {
+                return false;
+            }
         } else {
-            return 0;
+            return false;
         }
     }
 
@@ -138,30 +165,41 @@ export class PartyService {
             { $push: { _guests: newGuest.id } }
         );
 
-        /* TODO: Create guest in database */
-        return updateResult.acknowledged;
+        if (updateResult.modifiedCount > 0) {
+            const insertResult = await GuestService.createGuest(newGuest);
+            return insertResult;
+        } else {
+            return false;
+        }
     }
 
     public static async leaveParty(partyId: string, userId: string) {
         const collection = await this.getPartiesCollection();
+        const party = await this.getPartyInfo(partyId, userId); // Not null if user is in party
         const isHost = await this.isUserAHost(userId, partyId);
         const isPrimaryHost = await this.isUserPrimaryHost(userId, partyId);
 
-        if (!isPrimaryHost) {
-            if (isHost) {
-                const removeResult = await collection.updateOne(
-                    { _id: partyId },
-                    { $pull: { _hosts: userId } }
-                );
+        if (!isPrimaryHost && party) {
+            const deleteResult = await GuestService.deleteGuest(userId);
 
-                return removeResult.modifiedCount;
+            if (deleteResult) {
+                if (isHost) {
+                    const removeResult = await collection.updateOne(
+                        { _id: partyId },
+                        { $pull: { _hosts: userId } }
+                    );
+
+                    return removeResult.modifiedCount;
+                } else {
+                    const removeResult = await collection.updateOne(
+                        { _id: partyId },
+                        { $pull: { _guests: userId } }
+                    );
+
+                    return removeResult.modifiedCount;
+                }
             } else {
-                const removeResult = await collection.updateOne(
-                    { _id: partyId },
-                    { $pull: { _guests: userId } }
-                );
-
-                return removeResult.modifiedCount;
+                return 0;
             }
         } else {
             return 0;
@@ -176,9 +214,19 @@ export class PartyService {
         );
 
         if (isPrimaryHost) {
-            const deleteResult = await collection.deleteOne({ _id: partyId });
+            const deleteUsersResult = await this.deleteAllGuestsAndHosts(
+                partyId
+            );
 
-            return deleteResult.acknowledged;
+            if (deleteUsersResult) {
+                const deleteResult = await collection.deleteOne({
+                    _id: partyId,
+                });
+
+                return deleteResult.acknowledged;
+            } else {
+                return false;
+            }
         }
 
         return false;
@@ -236,6 +284,36 @@ export class PartyService {
 
         if (party) {
             return this.isUserInHosts(hostId, party._hosts);
+        } else {
+            return false;
+        }
+    }
+
+    private static async deleteAllGuestsAndHosts(partyId: string) {
+        const collection = await this.getPartiesCollection();
+        const party = await collection.findOne({ _id: partyId });
+
+        if (party) {
+            const guests = party._guests;
+            const hosts = party._hosts;
+
+            guests.forEach(async (guest: string) => {
+                const deleteStatus = await GuestService.deleteGuest(guest);
+
+                if (!deleteStatus) {
+                    return false;
+                }
+            });
+
+            hosts.forEach(async (host: string) => {
+                const deleteStatus = await GuestService.deleteGuest(host);
+
+                if (!deleteStatus) {
+                    return false;
+                }
+            });
+
+            return true;
         } else {
             return false;
         }

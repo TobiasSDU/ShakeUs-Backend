@@ -6,16 +6,23 @@ import { PartyService } from '../services/party_service';
 
 export const createParty = async (req: Request, res: Response) => {
     const partyId = generateUUID();
-    const hostId = generateUUID();
     const activityPackId = req.body.activityPackId;
+    const hostName = req.body.hostName;
+    const host = new Guest(generateUUID(), hostName);
 
-    if (partyId && hostId && activityPackId) {
-        const party = new Party(partyId, [hostId], hostId, [], activityPackId);
+    if (partyId && host && activityPackId) {
+        const party = new Party(
+            partyId,
+            [host.id],
+            host.id,
+            [],
+            activityPackId
+        );
 
-        const insertResult = await PartyService.createParty(party);
+        const insertResult = await PartyService.createParty(party, host);
 
         if (insertResult) {
-            res.json({ hostId: hostId });
+            res.json({ hostId: host.id });
         } else {
             res.sendStatus(400);
         }
@@ -121,7 +128,7 @@ export const removeHost = async (req: Request, res: Response) => {
             removedHostId
         );
 
-        if (updateResult > 0) {
+        if (updateResult) {
             res.sendStatus(200);
         } else {
             res.sendStatus(400);
@@ -143,7 +150,7 @@ export const removeGuest = async (req: Request, res: Response) => {
             removedGuestId
         );
 
-        if (updateResult > 0) {
+        if (updateResult) {
             res.sendStatus(200);
         } else {
             res.sendStatus(400);
@@ -158,7 +165,7 @@ export const joinParty = async (req: Request, res: Response) => {
     const guestName = req.body.guestName;
 
     if (partyId && guestName) {
-        const newGuest = new Guest(guestName);
+        const newGuest = new Guest(generateUUID(), guestName);
         const updateResult = await PartyService.joinParty(partyId, newGuest);
 
         if (updateResult) {

@@ -1,11 +1,9 @@
-import { generateUUID } from '../../util/uuid_generator';
-
 export class Guest {
     private _id: string;
     private _name: string;
 
-    constructor(name: string) {
-        this._id = generateUUID();
+    constructor(id: string, name: string) {
+        this._id = id;
         this._name = name;
     }
 

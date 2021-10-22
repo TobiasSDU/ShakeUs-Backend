@@ -1,7 +1,8 @@
 import { Guest } from '../../src/models/guest';
+import { generateUUID } from '../../util/uuid_generator';
 
 const testName = 'TestGuest';
-const originalGuest = new Guest(testName);
+const originalGuest = new Guest(generateUUID(), testName);
 
 describe('guest model methods return expected values', () => {
     let testGuest: Guest;
