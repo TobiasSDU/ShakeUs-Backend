@@ -22,7 +22,7 @@ export const createParty = async (req: Request, res: Response) => {
         const insertResult = await PartyService.createParty(party, host);
 
         if (insertResult) {
-            res.json({ hostId: host.id });
+            res.json({ hostId: host.id, partyId: partyId });
         } else {
             res.sendStatus(400);
         }

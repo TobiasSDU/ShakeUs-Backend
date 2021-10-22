@@ -54,7 +54,7 @@ export const getDbConnectionString = (dbMode: DbMode) => {
 };
 
 export const getDatabase = async (connectionString: string): Promise<Db> => {
-    const client: MongoClient = new MongoClient(connectionString);
+    const client = new MongoClient(connectionString);
     await client.connect();
 
     return client.db();
