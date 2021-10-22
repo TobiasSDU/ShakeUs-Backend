@@ -1,7 +1,7 @@
 import { Collection, Db } from 'mongodb';
 import { Guest } from '../models/guest';
 import { Party } from '../models/party';
-import { getDatabase } from './database.service';
+import { getDatabase } from './database_service';
 
 export class PartyService {
     public static async createParty(party: Party) {

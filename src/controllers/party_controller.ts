@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { generateUUID } from '../../util/uuid_generator';
 import { Guest } from '../models/guest';
 import { Party } from '../models/party';
-import { PartyService } from './../services/party.service';
+import { PartyService } from '../services/party_service';
 
 export const createParty = async (req: Request, res: Response) => {
     const partyId = generateUUID();
