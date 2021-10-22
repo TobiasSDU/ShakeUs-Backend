@@ -2,6 +2,7 @@ import express from 'express';
 import {
     addHost,
     createParty,
+    deleteParty,
     joinParty,
     leaveParty,
     removeGuest,
@@ -16,9 +17,10 @@ export const partyRoutes = express.Router();
 partyRoutes.post('/create', createParty);
 partyRoutes.get('/show', showParty);
 partyRoutes.patch('/activity-pack/update', updateActivityPack);
-partyRoutes.get('/hosts/primary/update', updatePrimaryHost);
-partyRoutes.get('/hosts/add', addHost);
-partyRoutes.get('/hosts/remove', removeHost);
-partyRoutes.get('/guests/remove', removeGuest);
-partyRoutes.get('/join', joinParty);
-partyRoutes.get('/leave', leaveParty);
+partyRoutes.patch('/hosts/primary/update', updatePrimaryHost);
+partyRoutes.patch('/hosts/add', addHost);
+partyRoutes.patch('/hosts/remove', removeHost);
+partyRoutes.patch('/guests/remove', removeGuest);
+partyRoutes.patch('/join', joinParty);
+partyRoutes.patch('/leave', leaveParty);
+partyRoutes.delete('/delete', deleteParty);
