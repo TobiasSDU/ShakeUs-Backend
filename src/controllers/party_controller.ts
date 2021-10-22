@@ -7,7 +7,7 @@ import { PartyService } from './../services/party.service';
 export const createParty = async (req: Request, res: Response) => {
     const partyId = generateUUID();
     const hostId = generateUUID();
-    const activityPackId = generateUUID(); /* TODO: Get from request body */
+    const activityPackId = req.body.activityPackId;
 
     if (partyId && hostId && activityPackId) {
         const party = new Party(partyId, [hostId], hostId, [], activityPackId);
