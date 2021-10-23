@@ -3,12 +3,10 @@ import { getCollection, req } from '../controllers/endpoint_tests_setup';
 const partiesCollectionName = 'parties';
 
 export const getTestParty = async (partyId: string, guestId: string) => {
-    const res = await req.get('/party/show').send({
-        partyId: `TestParty${partyId}`,
-        guestId: `TestGuest${guestId}`,
+    return await req.get('/party/show').send({
+        partyId: partyId,
+        guestId: guestId,
     });
-
-    return res.body;
 };
 
 export const testParty = async (

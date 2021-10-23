@@ -12,9 +12,9 @@ export const testParty1 = new Party(
 
 export const testParty2 = new Party(
     'TestParty2',
-    ['TestHost1', 'TestHost2'],
+    ['TestHost2', 'TestHost3'],
     'TestHost2',
-    ['TestGuest1', 'TestGuest2', 'TestGuest3'],
+    ['TestGuest2', 'TestGuest3'],
     'TestPack2'
 );
 
