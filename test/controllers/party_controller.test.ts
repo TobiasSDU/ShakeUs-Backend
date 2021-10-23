@@ -1,5 +1,4 @@
 import { generateUUID } from '../../src/util/uuid_generator';
-import { fail } from 'assert';
 import { dropDatabase, getCollection, req } from './endpoint_tests_setup';
 import { setCurrentDbMode } from '../../config/database_connection';
 import { seedPartiesCollection } from './../seed/party.seed';
@@ -74,7 +73,7 @@ describe('endpoint tests for Party routes using POST', () => {
             expect(party._guests).toEqual([]);
             expect(party._activityPackId).toEqual(activityPackId);
         } else {
-            fail('party not found');
+            throw new Error('party not found');
         }
     };
 
@@ -91,7 +90,7 @@ describe('endpoint tests for Party routes using POST', () => {
             expect(host._id).toEqual(hostId);
             expect(host._name).toEqual(hostName);
         } else {
-            fail('host not found');
+            throw new Error('host not found');
         }
     };
 
