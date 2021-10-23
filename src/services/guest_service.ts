@@ -34,7 +34,9 @@ export class GuestService {
             { $set: { _name: newName } }
         );
 
-        return updateResult.acknowledged;
+        const modCount = updateResult.modifiedCount;
+
+        return modCount > 0;
     }
 
     public static async deleteGuest(guestId: string) {
