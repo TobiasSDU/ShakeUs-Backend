@@ -46,10 +46,6 @@ describe('endpoint tests for Party routes using GET', () => {
     afterEach(async () => {
         await dropDatabase();
     });
-
-    afterAll(() => {
-        setCurrentDbMode('prod');
-    });
 });
 
 describe('endpoint tests for Party routes using POST', () => {
@@ -79,10 +75,6 @@ describe('endpoint tests for Party routes using POST', () => {
 
     afterEach(async () => {
         await dropDatabase();
-    });
-
-    afterAll(() => {
-        setCurrentDbMode('prod');
     });
 });
 
@@ -277,10 +269,6 @@ describe('endpoint tests for Party routes using PATCH', () => {
     afterEach(async () => {
         await dropDatabase();
     });
-
-    afterAll(() => {
-        setCurrentDbMode('prod');
-    });
 });
 
 describe('endpoint tests for Party routes using DELETE', () => {
@@ -342,9 +330,5 @@ describe('endpoint tests for Party routes using DELETE', () => {
 
     afterEach(async () => {
         await dropDatabase();
-    });
-
-    afterAll(() => {
-        setCurrentDbMode('prod');
     });
 });

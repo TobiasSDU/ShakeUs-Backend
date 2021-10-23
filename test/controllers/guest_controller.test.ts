@@ -39,10 +39,6 @@ describe('endpoint tests for Guest routes using GET', () => {
     afterEach(async () => {
         await dropDatabase();
     });
-
-    afterAll(() => {
-        setCurrentDbMode('prod');
-    });
 });
 
 describe('endpoint tests for Guest routes using PATCH', () => {
@@ -85,9 +81,5 @@ describe('endpoint tests for Guest routes using PATCH', () => {
 
     afterEach(async () => {
         await dropDatabase();
-    });
-
-    afterAll(() => {
-        setCurrentDbMode('prod');
     });
 });
