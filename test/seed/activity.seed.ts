@@ -16,9 +16,11 @@ export const testActivity2 = new Activity(
 export const seedActivityCollection = async () => {
     const activitiesCollection = await getCollection('activities');
 
-    const activitySeed = [testActivity1, testActivity2];
+    const activitySeed = [{ ...testActivity1 }, { ...testActivity2 }];
 
-    activitySeed.forEach(async (seed) => {
-        activitiesCollection.insertOne({ ...seed });
-    });
+    return await activitiesCollection
+        .insertMany(activitySeed)
+        .then((result) => {
+            return result.acknowledged;
+        });
 };

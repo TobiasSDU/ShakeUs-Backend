@@ -16,9 +16,14 @@ export const testActivityPack2 = new ActivityPack(
 export const seedActivityPackCollection = async () => {
     const activityPackCollection = await getCollection('activity-packs');
 
-    const activityPackSeed = [testActivityPack1, testActivityPack2];
+    const activityPackSeed = [
+        { ...testActivityPack1 },
+        { ...testActivityPack2 },
+    ];
 
-    activityPackSeed.forEach(async (seed) => {
-        activityPackCollection.insertOne({ ...seed });
-    });
+    return await activityPackCollection
+        .insertMany(activityPackSeed)
+        .then((result) => {
+            return result.acknowledged;
+        });
 };

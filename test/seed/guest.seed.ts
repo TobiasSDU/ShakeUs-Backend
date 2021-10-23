@@ -7,9 +7,9 @@ export const testGuest2 = new Guest('TestGuest2', 'TestGuest2Name');
 export const seedGuestsCollection = async () => {
     const guestsCollection = await getCollection('guests');
 
-    const guestSeed = [testGuest1, testGuest2];
+    const guestSeed = [{ ...testGuest1 }, { ...testGuest2 }];
 
-    guestSeed.forEach(async (seed) => {
-        guestsCollection.insertOne({ ...seed });
+    return await guestsCollection.insertMany(guestSeed).then((result) => {
+        return result.acknowledged;
     });
 };
