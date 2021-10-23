@@ -50,12 +50,14 @@ export const showParty = async (req: Request, res: Response) => {
 
 export const updateActivityPack = async (req: Request, res: Response) => {
     const partyId = req.body.partyId;
-    const activityPackId = req.body.activityPackId;
+    const primaryHostId = req.body.primaryHostId;
+    const newActivityPackId = req.body.newActivityPackId;
 
-    if (partyId && activityPackId) {
+    if (partyId && primaryHostId && newActivityPackId) {
         const updateResult = await PartyService.updateActivityPack(
             partyId,
-            activityPackId
+            primaryHostId,
+            newActivityPackId
         );
 
         if (updateResult) {

@@ -1,10 +1,9 @@
 import { generateUUID } from '../../src/util/uuid_generator';
-import { dropDatabase, getCollection, req } from './endpoint_tests_setup';
+import { dropDatabase, req } from './endpoint_tests_setup';
 import { setCurrentDbMode } from '../../config/database_connection';
-import { seedPartiesCollection } from './../seed/party.seed';
-
-const partiesCollectionName = 'parties';
-const guestsCollectionName = 'guests';
+import { seedPartiesCollection, testParty1 } from './../seed/party.seed';
+import { testParty } from '../helpers/party_test_helpers';
+import { testHostOrGuest } from '../helpers/guest_test_helpers';
 
 /* describe('endpoint tests for Party routes using GET', () => {
     beforeEach(() => {
@@ -34,7 +33,7 @@ describe('endpoint tests for Party routes using POST', () => {
     });
 
     beforeEach(async () => {
-        seedPartiesCollection();
+        await seedPartiesCollection();
     });
 
     test('request to /party/create creates a party and a guest/host', async () => {
@@ -49,50 +48,9 @@ describe('endpoint tests for Party routes using POST', () => {
         const partyId = res.body.partyId;
         const hostId = res.body.hostId;
 
-        await testParty(partyId, hostId, activityPackId);
-        await testHost(hostId, hostName);
+        await testParty(partyId, [hostId], hostId, [], activityPackId);
+        await testHostOrGuest(hostId, hostName);
     });
-
-    const testParty = async (
-        partyId: string,
-        hostId: string,
-        activityPackId: string
-    ) => {
-        const party = await (
-            await getCollection(partiesCollectionName)
-        ).findOne({
-            _id: partyId,
-        });
-
-        if (party) {
-            expect(partyId).toBeTruthy();
-            expect(hostId).toBeTruthy();
-            expect(party._id).toEqual(partyId);
-            expect(party._hosts).toEqual(expect.arrayContaining([hostId]));
-            expect(party._primaryHost).toEqual(hostId);
-            expect(party._guests).toEqual([]);
-            expect(party._activityPackId).toEqual(activityPackId);
-        } else {
-            throw new Error('party not found');
-        }
-    };
-
-    const testHost = async (hostId: string, hostName: string) => {
-        const host = await (
-            await getCollection(guestsCollectionName)
-        ).findOne({
-            _id: hostId,
-        });
-
-        if (host) {
-            expect(hostId).toBeTruthy();
-            expect(hostName).toBeTruthy();
-            expect(host._id).toEqual(hostId);
-            expect(host._name).toEqual(hostName);
-        } else {
-            throw new Error('host not found');
-        }
-    };
 
     afterEach(() => {
         dropDatabase();
@@ -103,16 +61,46 @@ describe('endpoint tests for Party routes using POST', () => {
     });
 });
 
-/* describe('endpoint tests for Party routes using PATCH', () => {
-    beforeEach(() => {
+describe('endpoint tests for Party routes using PATCH', () => {
+    beforeAll(() => {
         setCurrentDbMode('testFile1');
     });
 
-    afterAll(() => {
+    beforeEach(async () => {
+        await seedPartiesCollection();
+    });
+
+    test('request to /party/create creates a party and a guest/host', async () => {
+        const partyId = testParty1.id;
+        const primaryHostId = testParty1.primaryHost;
+        const newActivityPackId = generateUUID();
+
+        const res = await req.patch('/party/activity-pack/update').send({
+            partyId: partyId,
+            primaryHostId: primaryHostId,
+            newActivityPackId: newActivityPackId,
+        });
+
+        expect(res.statusCode).toEqual(200);
+
+        const party = await req.get('/party/show').send({
+            partyId: partyId,
+            guestId: primaryHostId,
+        });
+
+        expect(party.body._activityPackId).toEqual(newActivityPackId);
+    });
+
+    afterEach(() => {
+        dropDatabase();
+    });
+
+    afterAll(async () => {
         setCurrentDbMode('prod');
     });
 });
 
+/*
 describe('endpoint tests for Party routes using DELETE', () => {
     beforeEach(() => {
         setCurrentDbMode('testFile1');

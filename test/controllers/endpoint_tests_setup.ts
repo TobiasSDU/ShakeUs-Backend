@@ -11,7 +11,7 @@ export const req = request(app);
 
 export const dropDatabase = async () => {
     const db: Db = await getDatabase(getDbConnectionString(getCurrentDbMode()));
-    db.dropDatabase();
+    return await db.dropDatabase();
 };
 
 export const getCollection = async (collectionName: string) => {

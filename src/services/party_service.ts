@@ -49,15 +49,20 @@ export class PartyService {
 
     public static async updateActivityPack(
         partyId: string,
+        primaryHostId: string,
         activityPackId: string
     ) {
-        const collection = await this.getPartiesCollection();
-        const updateResult = await collection.updateOne(
-            { _id: partyId },
-            { $set: { _activityPackId: activityPackId } }
-        );
+        if (await this.isUserPrimaryHost(primaryHostId, partyId)) {
+            const collection = await this.getPartiesCollection();
+            const updateResult = await collection.updateOne(
+                { _id: partyId },
+                { $set: { _activityPackId: activityPackId } }
+            );
 
-        return updateResult.acknowledged;
+            return updateResult.acknowledged;
+        } else {
+            return false;
+        }
     }
 
     public static async updatePrimaryHost(
