@@ -22,13 +22,13 @@ export const createParty = async (req: Request, res: Response) => {
         const insertResult = await PartyService.createParty(party, host);
 
         if (insertResult) {
-            res.json({ hostId: host.id, partyId: partyId });
-        } else {
-            res.sendStatus(400);
+            return res.json({ hostId: host.id, partyId: partyId });
         }
-    } else {
-        res.sendStatus(400);
+
+        return res.sendStatus(400);
     }
+
+    return res.sendStatus(400);
 };
 
 export const showParty = async (req: Request, res: Response) => {
@@ -39,13 +39,13 @@ export const showParty = async (req: Request, res: Response) => {
         const party = await PartyService.getPartyInfo(partyId, guestId);
 
         if (party) {
-            res.json(party);
-        } else {
-            res.sendStatus(400);
+            return res.json(party);
         }
-    } else {
-        res.sendStatus(400);
+
+        return res.sendStatus(400);
     }
+
+    return res.sendStatus(400);
 };
 
 export const updateActivityPack = async (req: Request, res: Response) => {
@@ -61,13 +61,13 @@ export const updateActivityPack = async (req: Request, res: Response) => {
         );
 
         if (updateResult) {
-            res.sendStatus(200);
-        } else {
-            res.sendStatus(400);
+            return res.sendStatus(200);
         }
-    } else {
-        res.sendStatus(400);
+
+        return res.sendStatus(400);
     }
+
+    return res.sendStatus(400);
 };
 
 export const updatePrimaryHost = async (req: Request, res: Response) => {
@@ -83,13 +83,13 @@ export const updatePrimaryHost = async (req: Request, res: Response) => {
         );
 
         if (updateResult) {
-            res.sendStatus(200);
-        } else {
-            res.sendStatus(400);
+            return res.sendStatus(200);
         }
-    } else {
-        res.sendStatus(400);
+
+        return res.sendStatus(400);
     }
+
+    return res.sendStatus(400);
 };
 
 export const addHost = async (req: Request, res: Response) => {
@@ -105,13 +105,13 @@ export const addHost = async (req: Request, res: Response) => {
         );
 
         if (updateResult) {
-            res.sendStatus(200);
-        } else {
-            res.sendStatus(400);
+            return res.sendStatus(200);
         }
-    } else {
-        res.sendStatus(400);
+
+        return res.sendStatus(400);
     }
+
+    return res.sendStatus(400);
 };
 
 export const removeHost = async (req: Request, res: Response) => {
@@ -121,7 +121,7 @@ export const removeHost = async (req: Request, res: Response) => {
 
     if (partyId && primaryHostId && removedHostId) {
         if (primaryHostId == removedHostId) {
-            res.sendStatus(403);
+            return res.sendStatus(403);
         }
 
         const updateResult = await PartyService.removeHost(
@@ -131,13 +131,13 @@ export const removeHost = async (req: Request, res: Response) => {
         );
 
         if (updateResult) {
-            res.sendStatus(200);
-        } else {
-            res.sendStatus(400);
+            return res.sendStatus(200);
         }
-    } else {
-        res.sendStatus(400);
+
+        return res.sendStatus(400);
     }
+
+    return res.sendStatus(400);
 };
 
 export const removeGuest = async (req: Request, res: Response) => {
@@ -153,13 +153,13 @@ export const removeGuest = async (req: Request, res: Response) => {
         );
 
         if (updateResult) {
-            res.sendStatus(200);
-        } else {
-            res.sendStatus(400);
+            return res.sendStatus(200);
         }
-    } else {
-        res.sendStatus(400);
+
+        return res.sendStatus(400);
     }
+
+    return res.sendStatus(400);
 };
 
 export const joinParty = async (req: Request, res: Response) => {
@@ -171,13 +171,13 @@ export const joinParty = async (req: Request, res: Response) => {
         const updateResult = await PartyService.joinParty(partyId, newGuest);
 
         if (updateResult) {
-            res.json(newGuest);
-        } else {
-            res.sendStatus(400);
+            return res.json(newGuest);
         }
-    } else {
-        res.sendStatus(400);
+
+        return res.sendStatus(400);
     }
+
+    return res.sendStatus(400);
 };
 
 export const leaveParty = async (req: Request, res: Response) => {
@@ -188,13 +188,13 @@ export const leaveParty = async (req: Request, res: Response) => {
         const updateResult = await PartyService.leaveParty(partyId, userId);
 
         if (updateResult > 0) {
-            res.sendStatus(200);
-        } else {
-            res.sendStatus(400);
+            return res.sendStatus(200);
         }
-    } else {
-        res.sendStatus(400);
+
+        return res.sendStatus(400);
     }
+
+    return res.sendStatus(400);
 };
 
 export const deleteParty = async (req: Request, res: Response) => {
@@ -208,11 +208,11 @@ export const deleteParty = async (req: Request, res: Response) => {
         );
 
         if (deleteResult) {
-            res.sendStatus(200);
-        } else {
-            res.sendStatus(400);
+            return res.sendStatus(200);
         }
-    } else {
-        res.sendStatus(400);
+
+        return res.sendStatus(400);
     }
+
+    return res.sendStatus(400);
 };

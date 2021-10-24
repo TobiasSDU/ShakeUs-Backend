@@ -8,13 +8,13 @@ export const showGuest = async (req: Request, res: Response) => {
         const guest = await GuestService.getGuestInfo(guestId);
 
         if (guest) {
-            res.json(guest);
-        } else {
-            res.sendStatus(400);
+            return res.json(guest);
         }
-    } else {
-        res.sendStatus(400);
+
+        return res.sendStatus(400);
     }
+
+    return res.sendStatus(400);
 };
 
 export const updateGuestName = async (req: Request, res: Response) => {
@@ -28,11 +28,11 @@ export const updateGuestName = async (req: Request, res: Response) => {
         );
 
         if (updateResult) {
-            res.sendStatus(200);
-        } else {
-            res.sendStatus(400);
+            return res.sendStatus(200);
         }
-    } else {
-        res.sendStatus(400);
+
+        return res.sendStatus(400);
     }
+
+    return res.sendStatus(400);
 };
