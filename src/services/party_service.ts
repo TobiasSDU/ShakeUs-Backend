@@ -33,7 +33,7 @@ export class PartyService {
                 queryResult.hosts,
                 queryResult.primaryHost,
                 queryResult.guests,
-                queryResult._activityPackId
+                queryResult.activityPackId
             );
 
             if (this.isUserInParty(guestId, party)) {
@@ -55,7 +55,7 @@ export class PartyService {
             const collection = await this.getPartiesCollection();
             const updateResult = await collection.updateOne(
                 { _id: partyId },
-                { $set: { _activityPackId: activityPackId } }
+                { $set: { activityPackId: activityPackId } }
             );
 
             return updateResult.acknowledged;

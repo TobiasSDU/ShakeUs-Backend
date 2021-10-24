@@ -140,13 +140,13 @@ describe('party model methods return expected values', () => {
     });
 
     it('has an activity pack', () => {
-        expect(testParty.activityPackId).toEqual(activityPack.id);
+        expect(testParty.getActivityPackId).toEqual(activityPack.id);
     });
 
     test('the activity pack can be changed', () => {
         const newActivityPack: ActivityPack = testActivityPack2;
 
-        testParty.activityPackId = newActivityPack.id;
-        expect(testParty.activityPackId).toEqual(newActivityPack.id);
+        testParty.setActivityPackId = newActivityPack.id;
+        expect(testParty.getActivityPackId).toEqual(newActivityPack.id);
     });
 });

@@ -105,7 +105,7 @@ describe('endpoint tests for Party routes using PATCH', () => {
             guestId: primaryHostId,
         });
 
-        expect(party.body._activityPackId).toEqual(newActivityPackId);
+        expect(party.body.activityPackId).toEqual(newActivityPackId);
     });
 
     test('PATCH request to /party/hosts/primary/update updates the primaryHost field', async () => {

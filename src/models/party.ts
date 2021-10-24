@@ -5,7 +5,7 @@ export class Party {
     private hosts: string[];
     private primaryHost: string;
     private guests: string[];
-    private _activityPackId: string;
+    private activityPackId: string;
 
     constructor(
         id: string,
@@ -18,7 +18,7 @@ export class Party {
         this.hosts = hosts;
         this.primaryHost = primaryHost;
         this.guests = guests;
-        this._activityPackId = activityPackId;
+        this.activityPackId = activityPackId;
     }
 
     public get id() {
@@ -75,11 +75,11 @@ export class Party {
         this.guests = [];
     }
 
-    public get activityPackId() {
-        return this._activityPackId;
+    public get getActivityPackId() {
+        return this.activityPackId;
     }
 
-    public set activityPackId(activityPackId: string) {
-        this._activityPackId = activityPackId;
+    public set setActivityPackId(activityPackId: string) {
+        this.activityPackId = activityPackId;
     }
 }
