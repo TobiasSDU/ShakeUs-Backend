@@ -29,7 +29,7 @@ export const testParty = async (
         expect(guestsArray).toBeTruthy();
         expect(activityPackId).toBeTruthy();
         expect(party._id).toEqual(partyId);
-        expect(party._hosts).toEqual(hostsArray);
+        expect(party.hosts).toEqual(hostsArray);
         expect(party._primaryHost).toEqual(primaryHostId);
         expect(party._guests).toEqual(guestsArray);
         expect(party._activityPackId).toEqual(activityPackId);

@@ -2,7 +2,7 @@ import { removeArrayElement } from '../util/remove_array_element';
 
 export class Party {
     private _id: string;
-    private _hosts: string[];
+    private hosts: string[];
     private _primaryHost: string;
     private _guests: string[];
     private _activityPackId: string;
@@ -15,7 +15,7 @@ export class Party {
         activityPackId: string
     ) {
         this._id = id;
-        this._hosts = hosts;
+        this.hosts = hosts;
         this._primaryHost = primaryHost;
         this._guests = guests;
         this._activityPackId = activityPackId;
@@ -25,20 +25,20 @@ export class Party {
         return this._id;
     }
 
-    public get hosts() {
-        return this._hosts;
+    public get getHosts() {
+        return this.hosts;
     }
 
-    public set hosts(hosts: string[]) {
-        this._hosts = hosts;
+    public set setHosts(hosts: string[]) {
+        this.hosts = hosts;
     }
 
     public addHost(hostId: string) {
-        this._hosts.push(hostId);
+        this.hosts.push(hostId);
     }
 
     public removeHost(hostId: string) {
-        removeArrayElement(this._hosts, hostId);
+        removeArrayElement(this.hosts, hostId);
     }
 
     public get primaryHost() {

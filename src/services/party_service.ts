@@ -30,7 +30,7 @@ export class PartyService {
         if (queryResult) {
             party = new Party(
                 queryResult._id,
-                queryResult._hosts,
+                queryResult.hosts,
                 queryResult._primaryHost,
                 queryResult._guests,
                 queryResult._activityPackId
@@ -99,7 +99,7 @@ export class PartyService {
             if (removeResult.acknowledged) {
                 const addResult = await collection.updateOne(
                     { _id: partyId },
-                    { $push: { _hosts: newHostId } }
+                    { $push: { hosts: newHostId } }
                 );
 
                 return addResult.acknowledged;
@@ -121,7 +121,7 @@ export class PartyService {
         if (await this.isUserPrimaryHost(primaryHostId, partyId)) {
             const removeResult = await collection.updateOne(
                 { _id: partyId },
-                { $pull: { _hosts: removedHostId } }
+                { $pull: { hosts: removedHostId } }
             );
 
             if (removeResult.modifiedCount == 1) {
@@ -194,7 +194,7 @@ export class PartyService {
                 if (isHost) {
                     const removeResult = await collection.updateOne(
                         { _id: partyId },
-                        { $pull: { _hosts: userId } }
+                        { $pull: { hosts: userId } }
                     );
 
                     return removeResult.modifiedCount;
@@ -254,7 +254,7 @@ export class PartyService {
             }
         });
 
-        party.hosts.forEach((host) => {
+        party.getHosts.forEach((host) => {
             if (host == userId) {
                 isUserInParty = true;
             }
@@ -291,7 +291,7 @@ export class PartyService {
         const party = await collection.findOne({ _id: partyId });
 
         if (party) {
-            return this.isUserInHosts(hostId, party._hosts);
+            return this.isUserInHosts(hostId, party.hosts);
         } else {
             return false;
         }
@@ -303,7 +303,7 @@ export class PartyService {
 
         if (party) {
             const guests = party._guests;
-            const hosts = party._hosts;
+            const hosts = party.hosts;
 
             guests.forEach(async (guest: string) => {
                 const deleteStatus = await GuestService.deleteGuest(guest);
