@@ -4,6 +4,7 @@ import cors from 'cors';
 import { partyRoutes } from './routes/party_routes';
 import { guestRoutes } from './routes/guest_routes';
 import { activityPackRoutes } from './routes/activity_pack_routes';
+import { activityRoutes } from './routes/activity_routes';
 
 export const app = express();
 
@@ -17,3 +18,4 @@ app.get('/', (req, res) => {
 app.use('/party', partyRoutes);
 app.use('/guest', guestRoutes);
 app.use('/activity-pack', activityPackRoutes);
+app.use('/activity', activityRoutes);

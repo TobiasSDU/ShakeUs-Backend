@@ -1,13 +1,16 @@
-import { generateUUID } from '../util/uuid_generator';
-
 export class Activity {
     private _id: string;
     private _title: string;
     private _description: string;
     private _startTime: number;
 
-    constructor(title: string, description: string, startTime: number) {
-        this._id = generateUUID();
+    constructor(
+        id: string,
+        title: string,
+        description: string,
+        startTime: number
+    ) {
+        this._id = id;
         this._title = title;
         this._description = description;
         this._startTime = startTime;

@@ -2,14 +2,16 @@ import { getCollection } from '../controllers/endpoint_tests_setup';
 import { Activity } from './../../src/models/activity';
 
 export const testActivity1 = new Activity(
+    'Activity1Id',
     'Activity1',
     'Activity1Desc',
     Date.now()
 );
 
 export const testActivity2 = new Activity(
-    'Activity1',
-    'Activity1Desc',
+    'Activity2Id',
+    'Activity2',
+    'Activity2Desc',
     Date.now() + 1
 );
 

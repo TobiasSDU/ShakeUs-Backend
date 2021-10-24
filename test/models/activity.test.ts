@@ -1,8 +1,15 @@
 import { Activity } from '../../src/models/activity';
+import { generateUUID } from '../../src/util/uuid_generator';
 
+const testId = generateUUID();
 const testTitle = 'TestActivity';
 const testDescription = 'TestActivityDescription';
-const originalActivity = new Activity(testTitle, testDescription, Date.now());
+const originalActivity = new Activity(
+    testId,
+    testTitle,
+    testDescription,
+    Date.now()
+);
 
 describe('activity model methods return expected values', () => {
     let testActivity: Activity;
