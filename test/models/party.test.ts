@@ -89,54 +89,54 @@ describe('party model methods return expected values', () => {
     });
 
     test('the list of guests is initially empty', () => {
-        expect(testParty.guests.length).toBe(0);
+        expect(testParty.getGuests.length).toBe(0);
     });
 
     test('a list of guest ids can be set and retreived', () => {
         const testGuests = ['guest1', 'guest2', 'guest3'];
-        testParty.guests = testGuests;
+        testParty.setGuests = testGuests;
 
-        expect(testParty.guests).toEqual(testGuests);
+        expect(testParty.getGuests).toEqual(testGuests);
     });
 
     test('a guest id can be added to the guests-array', () => {
         const testGuests = ['guest1', 'guest2', 'guest3'];
-        testParty.guests = testGuests;
+        testParty.setGuests = testGuests;
 
         testParty.addGuest('guest4');
 
-        expect(testParty.guests).toEqual(expect.arrayContaining(['guest4']));
+        expect(testParty.getGuests).toEqual(expect.arrayContaining(['guest4']));
     });
 
     test('multipe guest ids can be added to the guests-array', () => {
         const testGuests = ['guest1', 'guest2', 'guest3'];
-        testParty.guests = testGuests;
+        testParty.setGuests = testGuests;
 
         testParty.addGuests(['guest4', 'guest5', 'guest6']);
 
-        expect(testParty.guests).toEqual(
+        expect(testParty.getGuests).toEqual(
             expect.arrayContaining(['guest4', 'guest5', 'guest6'])
         );
     });
 
     it('removes the specified guest from the guests-array', () => {
         const testGuests = ['guest1', 'guest2', 'guest3'];
-        testParty.guests = testGuests;
+        testParty.setGuests = testGuests;
 
         testParty.removeGuest('guest3');
 
-        expect(testParty.guests).toEqual(
+        expect(testParty.getGuests).toEqual(
             expect.not.arrayContaining(['guest3'])
         );
     });
 
     it('removes all guests', () => {
         const testGuests = ['guest1', 'guest2', 'guest3'];
-        testParty.guests = testGuests;
+        testParty.setGuests = testGuests;
 
         testParty.removeAllGuests();
 
-        expect(testParty.guests).toEqual([]);
+        expect(testParty.getGuests).toEqual([]);
     });
 
     it('has an activity pack', () => {

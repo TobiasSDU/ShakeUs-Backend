@@ -31,7 +31,7 @@ export const testParty = async (
         expect(party._id).toEqual(partyId);
         expect(party.hosts).toEqual(hostsArray);
         expect(party.primaryHost).toEqual(primaryHostId);
-        expect(party._guests).toEqual(guestsArray);
+        expect(party.guests).toEqual(guestsArray);
         expect(party._activityPackId).toEqual(activityPackId);
     } else {
         throw new Error('party not found');

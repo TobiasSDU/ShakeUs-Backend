@@ -32,7 +32,7 @@ export class PartyService {
                 queryResult._id,
                 queryResult.hosts,
                 queryResult.primaryHost,
-                queryResult._guests,
+                queryResult.guests,
                 queryResult._activityPackId
             );
 
@@ -93,7 +93,7 @@ export class PartyService {
         if (await this.isUserAHost(hostId, partyId)) {
             const removeResult = await collection.updateOne(
                 { _id: partyId },
-                { $pull: { _guests: newHostId } }
+                { $pull: { guests: newHostId } }
             );
 
             if (removeResult.acknowledged) {
@@ -127,7 +127,7 @@ export class PartyService {
             if (removeResult.modifiedCount == 1) {
                 const insertResult = await collection.updateOne(
                     { _id: partyId },
-                    { $push: { _guests: removedHostId } }
+                    { $push: { guests: removedHostId } }
                 );
 
                 return insertResult.acknowledged;
@@ -149,7 +149,7 @@ export class PartyService {
         if (await this.isUserAHost(hostId, partyId)) {
             const removeResult = await collection.updateOne(
                 { _id: partyId },
-                { $pull: { _guests: removedGuestId } }
+                { $pull: { guests: removedGuestId } }
             );
 
             if (removeResult.modifiedCount == 1) {
@@ -170,7 +170,7 @@ export class PartyService {
 
         const updateResult = await collection.updateOne(
             { _id: partyId },
-            { $push: { _guests: newGuest.id } }
+            { $push: { guests: newGuest.id } }
         );
 
         if (updateResult.modifiedCount > 0) {
@@ -201,7 +201,7 @@ export class PartyService {
                 } else {
                     const removeResult = await collection.updateOne(
                         { _id: partyId },
-                        { $pull: { _guests: userId } }
+                        { $pull: { guests: userId } }
                     );
 
                     return removeResult.modifiedCount;
@@ -248,7 +248,7 @@ export class PartyService {
     private static isUserInParty(userId: string, party: Party) {
         let isUserInParty = false;
 
-        party.guests.forEach((guest) => {
+        party.getGuests.forEach((guest) => {
             if (guest == userId) {
                 isUserInParty = true;
             }
@@ -302,7 +302,7 @@ export class PartyService {
         const party = await collection.findOne({ _id: partyId });
 
         if (party) {
-            const guests = party._guests;
+            const guests = party.guests;
             const hosts = party.hosts;
 
             guests.forEach(async (guest: string) => {

@@ -4,7 +4,7 @@ export class Party {
     private _id: string;
     private hosts: string[];
     private primaryHost: string;
-    private _guests: string[];
+    private guests: string[];
     private _activityPackId: string;
 
     constructor(
@@ -17,7 +17,7 @@ export class Party {
         this._id = id;
         this.hosts = hosts;
         this.primaryHost = primaryHost;
-        this._guests = guests;
+        this.guests = guests;
         this._activityPackId = activityPackId;
     }
 
@@ -49,16 +49,16 @@ export class Party {
         this.primaryHost = primaryHost;
     }
 
-    public get guests() {
-        return this._guests;
+    public get getGuests() {
+        return this.guests;
     }
 
-    public set guests(guests: string[]) {
-        this._guests = guests;
+    public set setGuests(guests: string[]) {
+        this.guests = guests;
     }
 
     public addGuest(guestId: string) {
-        this._guests.push(guestId);
+        this.guests.push(guestId);
     }
 
     public addGuests(guests: string[]) {
@@ -68,11 +68,11 @@ export class Party {
     }
 
     public removeGuest(guestId: string) {
-        removeArrayElement(this._guests, guestId);
+        removeArrayElement(this.guests, guestId);
     }
 
     public removeAllGuests() {
-        this._guests = [];
+        this.guests = [];
     }
 
     public get activityPackId() {
