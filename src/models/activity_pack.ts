@@ -3,7 +3,7 @@ import { removeArrayElement } from '../util/remove_array_element';
 export class ActivityPack {
     private _id: string;
     private title: string;
-    private _description: string;
+    private description: string;
     private _activities: string[];
 
     constructor(
@@ -14,7 +14,7 @@ export class ActivityPack {
     ) {
         this._id = id;
         this.title = title;
-        this._description = description;
+        this.description = description;
         this._activities = activities;
     }
 
@@ -30,12 +30,12 @@ export class ActivityPack {
         this.title = title;
     }
 
-    public get description() {
-        return this._description;
+    public get getDescription() {
+        return this.description;
     }
 
-    public set description(description: string) {
-        this._description = description;
+    public set setDescription(description: string) {
+        this.description = description;
     }
 
     public get activities() {

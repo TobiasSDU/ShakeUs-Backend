@@ -40,15 +40,15 @@ describe('activity pack model methods return expected values', () => {
     });
 
     it('returns the expected description', () => {
-        expect(testPack.description).toEqual(testDescription);
+        expect(testPack.getDescription).toEqual(testDescription);
     });
 
     test('it is possible to update the description', () => {
         const newDescription = 'NewDescription';
 
-        testPack.description = newDescription;
+        testPack.setDescription = newDescription;
 
-        expect(testPack.description).toEqual(newDescription);
+        expect(testPack.getDescription).toEqual(newDescription);
     });
 
     test('the activities array is empty initially', () => {

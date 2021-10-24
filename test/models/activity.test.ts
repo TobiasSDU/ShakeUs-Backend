@@ -40,15 +40,15 @@ describe('activity model methods return expected values', () => {
     });
 
     it('returns the expected description', () => {
-        expect(testActivity.description).toEqual(testDescription);
+        expect(testActivity.getDescription).toEqual(testDescription);
     });
 
     test('it is possible to update the description', () => {
         const newDescription = 'NewDescription';
 
-        testActivity.description = newDescription;
+        testActivity.setDescription = newDescription;
 
-        expect(testActivity.description).toEqual(newDescription);
+        expect(testActivity.getDescription).toEqual(newDescription);
     });
 
     it('returns start time in miliseconds', () => {

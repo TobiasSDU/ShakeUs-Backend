@@ -22,11 +22,11 @@ describe('endpoint tests for Activity routes using GET', () => {
         expect(res.statusCode).toEqual(200);
         expect(res.body._id).toBeTruthy();
         expect(res.body.title).toBeTruthy();
-        expect(res.body._description).toBeTruthy();
+        expect(res.body.description).toBeTruthy();
         expect(res.body.startTime).toBeTruthy();
         expect(res.body._id).toEqual(testActivity1.id);
         expect(res.body.title).toEqual(testActivity1.getTitle);
-        expect(res.body._description).toEqual(testActivity1.description);
+        expect(res.body.description).toEqual(testActivity1.getDescription);
         expect(res.body.startTime).toEqual(testActivity1.getStartTime);
     });
 
@@ -74,7 +74,7 @@ describe('endpoint tests for Activity routes using POST', () => {
         const activity = await getTestActivity(id);
 
         expect(activity.body.title).toEqual(title);
-        expect(activity.body._description).toEqual(description);
+        expect(activity.body.description).toEqual(description);
         expect(activity.body.startTime).toEqual(startTime);
     });
 
@@ -121,7 +121,7 @@ describe('endpoint tests for Activity routes using PATCH', () => {
 
         const activity = await getTestActivity(id);
 
-        expect(activity.body._description).toEqual(newDescription);
+        expect(activity.body.description).toEqual(newDescription);
     });
 
     test('PATCH request to /activity/start-time/update updates the startTime field', async () => {

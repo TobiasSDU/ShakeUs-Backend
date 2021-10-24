@@ -21,7 +21,7 @@ export class ActivityService {
             const activity = new Activity(
                 id,
                 queryResult.title,
-                queryResult._description,
+                queryResult.description,
                 queryResult.startTime
             );
 
@@ -52,7 +52,7 @@ export class ActivityService {
         const collection = await this.getActivitiesCollection();
         const updateResult = await collection.updateOne(
             { _id: id },
-            { $set: { _description: newDescription } }
+            { $set: { description: newDescription } }
         );
 
         if (updateResult.modifiedCount == 1) {
