@@ -1,8 +1,15 @@
 import { ActivityPack } from '../../src/models/activity_pack';
+import { generateUUID } from '../../src/util/uuid_generator';
 
+const testId = generateUUID();
 const testTitle = 'TestTitle';
 const testDescription = 'TestDescription';
-const originalActivityPack = new ActivityPack(testTitle, testDescription, []);
+const originalActivityPack = new ActivityPack(
+    testId,
+    testTitle,
+    testDescription,
+    []
+);
 
 describe('activity pack model methods return expected values', () => {
     let testPack: ActivityPack;

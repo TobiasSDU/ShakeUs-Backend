@@ -1,5 +1,4 @@
 import { removeArrayElement } from '../util/remove_array_element';
-import { generateUUID } from '../util/uuid_generator';
 
 export class ActivityPack {
     private _id: string;
@@ -7,8 +6,13 @@ export class ActivityPack {
     private _description: string;
     private _activities: string[];
 
-    constructor(title: string, description: string, activities: string[]) {
-        this._id = generateUUID();
+    constructor(
+        id: string,
+        title: string,
+        description: string,
+        activities: string[]
+    ) {
+        this._id = id;
         this._title = title;
         this._description = description;
         this._activities = activities;

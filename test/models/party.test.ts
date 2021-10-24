@@ -1,10 +1,12 @@
 import { Party } from '../../src/models/party';
 import { generateUUID } from '../../src/util/uuid_generator';
 import { ActivityPack } from '../../src/models/activity_pack';
+import { testActivityPack2 } from '../seed/activity_pack.seed';
 
 const hostId = generateUUID();
 
 const activityPack: ActivityPack = new ActivityPack(
+    'TestId',
     'TestPack',
     'TestDescription',
     []
@@ -140,11 +142,7 @@ describe('party model methods return expected values', () => {
     });
 
     test('the activity pack can be changed', () => {
-        const newActivityPack: ActivityPack = new ActivityPack(
-            'TestPack2',
-            'TestDescription2',
-            []
-        );
+        const newActivityPack: ActivityPack = testActivityPack2;
 
         testParty.activityPackId = newActivityPack.id;
         expect(testParty.activityPackId).toEqual(newActivityPack.id);
