@@ -89,7 +89,7 @@ describe('endpoint tests for Party routes using PATCH', () => {
 
     test('PATCH request to /party/activity-pack/update updates the activityPackId field', async () => {
         const partyId = testParty2.id;
-        const primaryHostId = testParty2.primaryHost;
+        const primaryHostId = testParty2.getPrimaryHost;
         const newActivityPackId = generateUUID();
 
         const res = await req.patch('/party/activity-pack/update').send({
@@ -110,7 +110,7 @@ describe('endpoint tests for Party routes using PATCH', () => {
 
     test('PATCH request to /party/hosts/primary/update updates the primaryHost field', async () => {
         const partyId = testParty1.id;
-        const currentPrimary = testParty1.primaryHost;
+        const currentPrimary = testParty1.getPrimaryHost;
         const newPrimary = 'NewPrimaryHostId';
 
         const res = await req.patch('/party/hosts/primary/update').send({
@@ -123,7 +123,7 @@ describe('endpoint tests for Party routes using PATCH', () => {
 
         const party = await getTestParty(partyId, testParty1.guests[0]);
 
-        expect(party.body._primaryHost).toEqual(newPrimary);
+        expect(party.body.primaryHost).toEqual(newPrimary);
     });
 
     test('PATCH request to /party/hosts/add adds a new host to the hosts array', async () => {
@@ -152,7 +152,7 @@ describe('endpoint tests for Party routes using PATCH', () => {
 
     test('PATCH request to /party/hosts/remove removes a host from the hosts array', async () => {
         const partyId = testParty2.id;
-        const primaryHostId = testParty2.primaryHost;
+        const primaryHostId = testParty2.getPrimaryHost;
         const removedHostId = testParty2.getHosts[1];
 
         let party = await getTestParty(partyId, testParty2.guests[0]);
@@ -178,10 +178,10 @@ describe('endpoint tests for Party routes using PATCH', () => {
 
     test('PATCH request to /party/guests/remove removes a guest from the guests array', async () => {
         const partyId = testParty2.id;
-        const hostId = testParty2.primaryHost;
+        const hostId = testParty2.getPrimaryHost;
         const removedGuestId = testParty2.guests[1];
 
-        let party = await getTestParty(partyId, testParty2.primaryHost);
+        let party = await getTestParty(partyId, testParty2.getPrimaryHost);
 
         expect(party.body._guests).toEqual(
             expect.arrayContaining([removedGuestId])
@@ -195,7 +195,7 @@ describe('endpoint tests for Party routes using PATCH', () => {
 
         expect(res.statusCode).toEqual(200);
 
-        party = await getTestParty(partyId, testParty2.primaryHost);
+        party = await getTestParty(partyId, testParty2.getPrimaryHost);
 
         expect(party.body._guests).toEqual(
             expect.not.arrayContaining([removedGuestId])
@@ -218,7 +218,7 @@ describe('endpoint tests for Party routes using PATCH', () => {
 
     test('PATCH request to /party/leave returns 400 if primary host attempts to leave', async () => {
         const partyId = testParty2.id;
-        const userId = testParty2.primaryHost;
+        const userId = testParty2.getPrimaryHost;
 
         const res = await req.patch('/party/leave').send({
             partyId: partyId,
@@ -229,7 +229,7 @@ describe('endpoint tests for Party routes using PATCH', () => {
 
         const party = await getTestParty(partyId, testParty2.guests[0]);
 
-        expect(party.body._primaryHost).toEqual(userId);
+        expect(party.body.primaryHost).toEqual(userId);
     });
 
     test('PATCH request to /party/leave returns 200 if a non-primary host attempts to leave', async () => {
@@ -282,7 +282,7 @@ describe('endpoint tests for Party routes using DELETE', () => {
 
     test('DELETE request to /party/delete deletes the requested party', async () => {
         const partyId = testParty2.id;
-        const primaryHostId = testParty2.primaryHost;
+        const primaryHostId = testParty2.getPrimaryHost;
 
         const res = await req.delete('/party/delete').send({
             partyId: partyId,

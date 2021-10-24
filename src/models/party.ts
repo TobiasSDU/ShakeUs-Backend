@@ -3,7 +3,7 @@ import { removeArrayElement } from '../util/remove_array_element';
 export class Party {
     private _id: string;
     private hosts: string[];
-    private _primaryHost: string;
+    private primaryHost: string;
     private _guests: string[];
     private _activityPackId: string;
 
@@ -16,7 +16,7 @@ export class Party {
     ) {
         this._id = id;
         this.hosts = hosts;
-        this._primaryHost = primaryHost;
+        this.primaryHost = primaryHost;
         this._guests = guests;
         this._activityPackId = activityPackId;
     }
@@ -41,12 +41,12 @@ export class Party {
         removeArrayElement(this.hosts, hostId);
     }
 
-    public get primaryHost() {
-        return this._primaryHost;
+    public get getPrimaryHost() {
+        return this.primaryHost;
     }
 
-    public set primaryHost(primaryHost: string) {
-        this._primaryHost = primaryHost;
+    public set setPrimaryHost(primaryHost: string) {
+        this.primaryHost = primaryHost;
     }
 
     public get guests() {

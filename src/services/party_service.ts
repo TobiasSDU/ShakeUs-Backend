@@ -31,7 +31,7 @@ export class PartyService {
             party = new Party(
                 queryResult._id,
                 queryResult.hosts,
-                queryResult._primaryHost,
+                queryResult.primaryHost,
                 queryResult._guests,
                 queryResult._activityPackId
             );
@@ -74,7 +74,7 @@ export class PartyService {
         if (await this.isUserPrimaryHost(currentPrimary, partyId)) {
             const updateResult = await collection.updateOne(
                 { _id: partyId },
-                { $set: { _primaryHost: newPrimary } }
+                { $set: { primaryHost: newPrimary } }
             );
 
             return updateResult.acknowledged;
@@ -280,7 +280,7 @@ export class PartyService {
         const party = await collection.findOne({ _id: partyId });
 
         if (party) {
-            return party._primaryHost == hostId;
+            return party.primaryHost == hostId;
         } else {
             return false;
         }

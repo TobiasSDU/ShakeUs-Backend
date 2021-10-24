@@ -72,20 +72,20 @@ describe('party model methods return expected values', () => {
     test('primary host is set to the first element of the hosts-array when a party is created', () => {
         const firstHost: string = testParty.getHosts[0];
 
-        expect(testParty.primaryHost).toEqual(firstHost);
+        expect(testParty.getPrimaryHost).toEqual(firstHost);
     });
 
     test('primary host is a uuid', () => {
         const uuidFormat =
             /\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b/;
 
-        expect(testParty.primaryHost).toMatch(uuidFormat);
+        expect(testParty.getPrimaryHost).toMatch(uuidFormat);
     });
 
     test('the value of primary host can be changed', () => {
         const testString = 'new-host';
-        testParty.primaryHost = testString;
-        expect(testParty.primaryHost).toEqual(testString);
+        testParty.setPrimaryHost = testString;
+        expect(testParty.getPrimaryHost).toEqual(testString);
     });
 
     test('the list of guests is initially empty', () => {
