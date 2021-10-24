@@ -22,7 +22,7 @@ describe('endpoint tests for Guest routes using GET', () => {
         expect(res.statusCode).toEqual(200);
         expect(res.body._id).toBeTruthy();
         expect(res.body._id).toEqual(guestId);
-        expect(res.body._name).toBeTruthy();
+        expect(res.body.name).toBeTruthy();
     });
 
     test('GET request to /guest/show with an invalid guestId returns 400', async () => {
@@ -64,7 +64,7 @@ describe('endpoint tests for Guest routes using PATCH', () => {
         const guest = await getTestGuest(guestId);
 
         expect(guest.body._id).toEqual(guestId);
-        expect(guest.body._name).toEqual(newName);
+        expect(guest.body.name).toEqual(newName);
     });
 
     test('PATCH request to /guest/name/update with an invalid guestId returns 400', async () => {

@@ -22,6 +22,6 @@ describe('guest model methods return expected values', () => {
     });
 
     it('returns the correct test name', () => {
-        expect(testGuest.name).toEqual(testName);
+        expect(testGuest.getName).toEqual(testName);
     });
 });

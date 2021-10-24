@@ -213,7 +213,7 @@ describe('endpoint tests for Party routes using PATCH', () => {
 
         expect(res.statusCode).toEqual(200);
         expect(res.body._id).toBeTruthy();
-        expect(res.body._name).toEqual(guestName);
+        expect(res.body.name).toEqual(guestName);
     });
 
     test('PATCH request to /party/leave returns 400 if primary host attempts to leave', async () => {

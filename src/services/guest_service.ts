@@ -20,7 +20,7 @@ export class GuestService {
         const queryResult = await collection.findOne({ _id: guestId });
 
         if (queryResult) {
-            guest = new Guest(queryResult._id, queryResult._name);
+            guest = new Guest(queryResult._id, queryResult.name);
 
             return guest;
         }
@@ -30,7 +30,7 @@ export class GuestService {
         const collection = await this.getGuestsCollection();
         const updateResult = await collection.updateOne(
             { _id: guestId },
-            { $set: { _name: newName } }
+            { $set: { name: newName } }
         );
 
         const modCount = updateResult.modifiedCount;
