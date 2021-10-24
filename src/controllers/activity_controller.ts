@@ -15,7 +15,7 @@ export const createActivity = async (req: Request, res: Response) => {
         const insertResult = await ActivityService.createActivity(activity);
 
         if (insertResult) {
-            return res.json({ id: activity.id });
+            return res.json({ activityId: activity.id });
         }
 
         return res.sendStatus(400);
@@ -25,7 +25,7 @@ export const createActivity = async (req: Request, res: Response) => {
 };
 
 export const showActivity = async (req: Request, res: Response) => {
-    const id = req.body.id;
+    const id = req.body.activityId;
 
     if (id) {
         const activity = await ActivityService.showActivity(id);
@@ -41,7 +41,7 @@ export const showActivity = async (req: Request, res: Response) => {
 };
 
 export const updateActivityTitle = async (req: Request, res: Response) => {
-    const id = req.body.id;
+    const id = req.body.activityId;
     const newTitle = req.body.newTitle;
 
     if (id && newTitle) {
@@ -64,7 +64,7 @@ export const updateActivityDescription = async (
     req: Request,
     res: Response
 ) => {
-    const id = req.body.id;
+    const id = req.body.activityId;
     const newDescription = req.body.newDescription;
 
     if (id && newDescription) {
@@ -84,7 +84,7 @@ export const updateActivityDescription = async (
 };
 
 export const updateActivityStartTime = async (req: Request, res: Response) => {
-    const id = req.body.id;
+    const id = req.body.activityId;
     const newStartTime = req.body.newStartTime;
 
     if (id && newStartTime) {
@@ -104,7 +104,7 @@ export const updateActivityStartTime = async (req: Request, res: Response) => {
 };
 
 export const deleteActivity = async (req: Request, res: Response) => {
-    const id = req.body.id;
+    const id = req.body.activityId;
 
     if (id) {
         const deleteResult = await ActivityService.deleteActivity(id);

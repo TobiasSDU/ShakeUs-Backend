@@ -21,7 +21,7 @@ export const createActivityPack = async (req: Request, res: Response) => {
         );
 
         if (insertResult) {
-            return res.json({ id: activityPackId });
+            return res.json({ activityPackId: activityPackId });
         }
 
         return res.sendStatus(400);
@@ -31,7 +31,7 @@ export const createActivityPack = async (req: Request, res: Response) => {
 };
 
 export const showActivityPack = async (req: Request, res: Response) => {
-    const activityPackId = req.body.id;
+    const activityPackId = req.body.activityPackId;
 
     if (activityPackId) {
         const activityPack = await ActivityPackService.showActivityPack(
@@ -49,7 +49,7 @@ export const showActivityPack = async (req: Request, res: Response) => {
 };
 
 export const updateActivityPackTitle = async (req: Request, res: Response) => {
-    const activityPackId = req.body.id;
+    const activityPackId = req.body.activityPackId;
     const newTitle = req.body.newTitle;
 
     if (activityPackId && newTitle) {
@@ -72,7 +72,7 @@ export const updateActivityPackDescription = async (
     req: Request,
     res: Response
 ) => {
-    const activityPackId = req.body.id;
+    const activityPackId = req.body.activityPackId;
     const newDescription = req.body.newDescription;
 
     if (activityPackId && newDescription) {
@@ -93,7 +93,7 @@ export const updateActivityPackDescription = async (
 };
 
 export const addActivityPackActivity = async (req: Request, res: Response) => {
-    const activityPackId = req.body.id;
+    const activityPackId = req.body.activityPackId;
     const activityId = req.body.activityId;
 
     if (activityPackId && activityId) {
@@ -116,7 +116,7 @@ export const removeActivityPackActivity = async (
     req: Request,
     res: Response
 ) => {
-    const activityPackId = req.body.id;
+    const activityPackId = req.body.activityPackId;
     const activityId = req.body.activityId;
 
     if (activityPackId && activityId) {
@@ -140,7 +140,7 @@ export const removeAllActivityPackActivities = async (
     req: Request,
     res: Response
 ) => {
-    const activityPackId = req.body.id;
+    const activityPackId = req.body.activityPackId;
 
     if (activityPackId) {
         const updateResult =
@@ -159,7 +159,7 @@ export const removeAllActivityPackActivities = async (
 };
 
 export const deleteActivityPack = async (req: Request, res: Response) => {
-    const activityPackId = req.body.id;
+    const activityPackId = req.body.activityPackId;
 
     if (activityPackId) {
         const updateResult = await ActivityPackService.deleteActivityPack(

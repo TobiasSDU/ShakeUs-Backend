@@ -19,7 +19,7 @@ describe('endpoint tests for ActivityPack routes using GET', () => {
         const activityPackId = testActivityPack1.id;
 
         const res = await req.get('/activity-pack/show').send({
-            id: activityPackId,
+            activityPackId: activityPackId,
         });
 
         expect(res.statusCode).toEqual(200);
@@ -37,7 +37,7 @@ describe('endpoint tests for ActivityPack routes using GET', () => {
         const activityPackId = 'invalidId';
 
         const res = await req.get('/activity-pack/show').send({
-            id: activityPackId,
+            activityPackId: activityPackId,
         });
 
         expect(res.statusCode).toEqual(400);
@@ -68,9 +68,9 @@ describe('endpoint tests for ActivityPack routes using POST', () => {
         });
 
         expect(res.statusCode).toEqual(200);
-        expect(res.body.id).toBeTruthy();
+        expect(res.body.activityPackId).toBeTruthy();
 
-        const id = res.body.id;
+        const id = res.body.activityPackId;
 
         const activityPack = await getActivityPack(id);
 
@@ -99,7 +99,7 @@ describe('endpoint tests for ActivityPack routes using PATCH', () => {
         const newTitle = 'NewTitle';
 
         const res = await req.patch('/activity-pack/title/update').send({
-            id: id,
+            activityPackId: id,
             newTitle: newTitle,
         });
 
@@ -115,7 +115,7 @@ describe('endpoint tests for ActivityPack routes using PATCH', () => {
         const newDescription = 'NewDescription';
 
         const res = await req.patch('/activity-pack/description/update').send({
-            id: id,
+            activityPackId: id,
             newDescription: newDescription,
         });
 
@@ -135,7 +135,7 @@ describe('endpoint tests for ActivityPack routes using PATCH', () => {
         const activityId = 'NewActivityId';
 
         const res = await req.patch('/activity-pack/activities/add').send({
-            id: id,
+            activityPackId: id,
             activityId: activityId,
         });
 
@@ -153,7 +153,7 @@ describe('endpoint tests for ActivityPack routes using PATCH', () => {
         const activityId = testActivityPack1.getActivities[0];
 
         const res = await req.patch('/activity-pack/activities/remove').send({
-            id: id,
+            activityPackId: id,
             activityId: activityId,
         });
 
@@ -172,7 +172,7 @@ describe('endpoint tests for ActivityPack routes using PATCH', () => {
         const res = await req
             .patch('/activity-pack/activities/remove-all')
             .send({
-                id: id,
+                activityPackId: id,
             });
 
         expect(res.statusCode).toEqual(200);
@@ -200,7 +200,7 @@ describe('endpoint tests for ActivityPack routes using DELETE', () => {
         const id = testActivityPack1.id;
 
         const res = await req.delete('/activity-pack/delete').send({
-            id: id,
+            activityPackId: id,
         });
 
         expect(res.statusCode).toEqual(200);
@@ -213,7 +213,7 @@ describe('endpoint tests for ActivityPack routes using DELETE', () => {
         const id = 'InvalidId';
 
         const res = await req.delete('/activity-pack/delete').send({
-            id: id,
+            activityPackId: id,
         });
 
         expect(res.statusCode).toEqual(400);

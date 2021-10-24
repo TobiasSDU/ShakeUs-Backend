@@ -16,7 +16,7 @@ describe('endpoint tests for Activity routes using GET', () => {
         const activityId = testActivity1.id;
 
         const res = await req.get('/activity/show').send({
-            id: activityId,
+            activityId: activityId,
         });
 
         expect(res.statusCode).toEqual(200);
@@ -34,7 +34,7 @@ describe('endpoint tests for Activity routes using GET', () => {
         const activityId = 'invalidId';
 
         const res = await req.get('/activity/show').send({
-            id: activityId,
+            activityId: activityId,
         });
 
         expect(res.statusCode).toEqual(400);
@@ -68,7 +68,7 @@ describe('endpoint tests for Activity routes using POST', () => {
 
         expect(res.statusCode).toEqual(200);
 
-        const id = res.body.id;
+        const id = res.body.activityId;
         expect(id).toBeTruthy();
 
         const activity = await getTestActivity(id);
@@ -97,7 +97,7 @@ describe('endpoint tests for Activity routes using PATCH', () => {
         const newTitle = 'NewTitle';
 
         const res = await req.patch('/activity/title/update').send({
-            id: id,
+            activityId: id,
             newTitle: newTitle,
         });
 
@@ -113,7 +113,7 @@ describe('endpoint tests for Activity routes using PATCH', () => {
         const newDescription = 'NewDescription';
 
         const res = await req.patch('/activity/description/update').send({
-            id: id,
+            activityId: id,
             newDescription: newDescription,
         });
 
@@ -129,7 +129,7 @@ describe('endpoint tests for Activity routes using PATCH', () => {
         const newStartTime = 'NewStartTime';
 
         const res = await req.patch('/activity/start-time/update').send({
-            id: id,
+            activityId: id,
             newStartTime: newStartTime,
         });
 
@@ -158,7 +158,7 @@ describe('endpoint tests for Activity routes using DELETE', () => {
         const id = testActivity1.id;
 
         const res = await req.delete('/activity/delete').send({
-            id: id,
+            activityId: id,
         });
 
         expect(res.statusCode).toEqual(200);
@@ -172,7 +172,7 @@ describe('endpoint tests for Activity routes using DELETE', () => {
         const id = 'InvalidId';
 
         const res = await req.delete('/activity/delete').send({
-            id: id,
+            activityId: id,
         });
 
         expect(res.statusCode).toEqual(400);
