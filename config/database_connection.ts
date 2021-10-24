@@ -29,10 +29,10 @@ export const setCurrentDbMode = (dbMode: DbMode) => {
     currentDbMode = dbMode;
 };
 
-export const getDbConnectionString = (dbMode: DbMode) => {
+export const getDbConnectionString = () => {
     let connectionString;
 
-    switch (dbMode) {
+    switch (getCurrentDbMode()) {
         case 'prod':
             connectionString = process.env.SHAKE_US_MONGO_URI;
             break;

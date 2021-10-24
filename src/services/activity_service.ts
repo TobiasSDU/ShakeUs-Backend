@@ -1,6 +1,5 @@
 import { Collection, Db } from 'mongodb';
 import {
-    getCurrentDbMode,
     getDatabase,
     getDbConnectionString,
 } from '../../config/database_connection';
@@ -88,9 +87,7 @@ export class ActivityService {
     }
 
     private static async getActivitiesCollection(): Promise<Collection> {
-        const db: Db = await getDatabase(
-            getDbConnectionString(getCurrentDbMode())
-        );
+        const db: Db = await getDatabase(getDbConnectionString());
 
         return db.collection('activities');
     }
