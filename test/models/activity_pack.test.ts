@@ -52,39 +52,39 @@ describe('activity pack model methods return expected values', () => {
     });
 
     test('the activities array is empty initially', () => {
-        expect(testPack.activities.length).toEqual(0);
+        expect(testPack.getActivities.length).toEqual(0);
     });
 
     test('it is possible to set and get the value of the activities array', () => {
         const testActivities = ['activity1', 'activity2', 'activity3'];
-        testPack.activities = testActivities;
+        testPack.setActivities = testActivities;
 
-        expect(testPack.activities).toEqual(testActivities);
+        expect(testPack.getActivities).toEqual(testActivities);
     });
 
     it('is possible to add an activity to the activities array', () => {
         testPack.addActivity('activity1');
 
-        expect(testPack.activities).toEqual(['activity1']);
+        expect(testPack.getActivities).toEqual(['activity1']);
     });
 
     it('is possible to remove an activity from the activities array', () => {
         const testActivities = ['activity1', 'activity2', 'activity3'];
-        testPack.activities = testActivities;
+        testPack.setActivities = testActivities;
 
         testPack.removeActivity('activity3');
 
-        expect(testPack.activities).toEqual(
+        expect(testPack.getActivities).toEqual(
             expect.not.arrayContaining(['activity3'])
         );
     });
 
     it('is possible to remove all activities from the activity array', () => {
         const testActivities = ['activity1', 'activity2', 'activity3'];
-        testPack.activities = testActivities;
+        testPack.setActivities = testActivities;
 
         testPack.removeAllActivities();
 
-        expect(testPack.activities).toEqual([]);
+        expect(testPack.getActivities).toEqual([]);
     });
 });

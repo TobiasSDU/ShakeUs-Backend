@@ -22,7 +22,7 @@ export class ActivityPackService {
                 id,
                 queryResult.title,
                 queryResult.description,
-                queryResult._activities
+                queryResult.activities
             );
 
             return activityPack;
@@ -69,7 +69,7 @@ export class ActivityPackService {
         const collection = await this.getActivityPacksCollection();
         const updateResult = await collection.updateOne(
             { _id: id },
-            { $push: { _activities: activityId } }
+            { $push: { activities: activityId } }
         );
 
         if (updateResult.modifiedCount == 1) {
@@ -86,7 +86,7 @@ export class ActivityPackService {
         const collection = await this.getActivityPacksCollection();
         const updateResult = await collection.updateOne(
             { _id: id },
-            { $pull: { _activities: activityId } }
+            { $pull: { activities: activityId } }
         );
 
         if (updateResult.modifiedCount == 1) {
@@ -100,7 +100,7 @@ export class ActivityPackService {
         const collection = await this.getActivityPacksCollection();
         const updateResult = await collection.updateOne(
             { _id: id },
-            { $set: { _activities: [] } }
+            { $set: { activities: [] } }
         );
 
         if (updateResult.modifiedCount == 1) {

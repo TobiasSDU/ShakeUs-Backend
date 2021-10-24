@@ -4,7 +4,7 @@ export class ActivityPack {
     private _id: string;
     private title: string;
     private description: string;
-    private _activities: string[];
+    private activities: string[];
 
     constructor(
         id: string,
@@ -15,7 +15,7 @@ export class ActivityPack {
         this._id = id;
         this.title = title;
         this.description = description;
-        this._activities = activities;
+        this.activities = activities;
     }
 
     public get id() {
@@ -38,23 +38,23 @@ export class ActivityPack {
         this.description = description;
     }
 
-    public get activities() {
-        return this._activities;
+    public get getActivities() {
+        return this.activities;
     }
 
-    public set activities(activities: string[]) {
-        this._activities = activities;
+    public set setActivities(activities: string[]) {
+        this.activities = activities;
     }
 
     public addActivity(activityId: string) {
-        this._activities.push(activityId);
+        this.activities.push(activityId);
     }
 
     public removeActivity(activityId: string) {
-        removeArrayElement(this._activities, activityId);
+        removeArrayElement(this.activities, activityId);
     }
 
     public removeAllActivities() {
-        this._activities = [];
+        this.activities = [];
     }
 }

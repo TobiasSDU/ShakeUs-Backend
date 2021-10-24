@@ -26,11 +26,11 @@ describe('endpoint tests for ActivityPack routes using GET', () => {
         expect(res.body._id).toBeTruthy();
         expect(res.body.title).toBeTruthy();
         expect(res.body.description).toBeTruthy();
-        expect(res.body._activities).toBeTruthy();
+        expect(res.body.activities).toBeTruthy();
         expect(res.body._id).toEqual(testActivityPack1.id);
         expect(res.body.title).toEqual(testActivityPack1.getTitle);
         expect(res.body.description).toEqual(testActivityPack1.getDescription);
-        expect(res.body._activities).toEqual(testActivityPack1.activities);
+        expect(res.body.activities).toEqual(testActivityPack1.getActivities);
     });
 
     test('GET request to /activity-pack/show with an invalid id returns 400', async () => {
@@ -77,7 +77,7 @@ describe('endpoint tests for ActivityPack routes using POST', () => {
         expect(activityPack.body._id).toEqual(id);
         expect(activityPack.body.title).toEqual(title);
         expect(activityPack.body.description).toEqual(description);
-        expect(activityPack.body._activities).toEqual([]);
+        expect(activityPack.body.activities).toEqual([]);
     });
 
     afterEach(async () => {
@@ -143,14 +143,14 @@ describe('endpoint tests for ActivityPack routes using PATCH', () => {
 
         const activityPack = await getActivityPack(id);
 
-        expect(activityPack.body._activities).toEqual(
+        expect(activityPack.body.activities).toEqual(
             expect.arrayContaining([activityId])
         );
     });
 
     test('PATCH request to /activity-pack/activities/remove removes an activity from the activities array', async () => {
         const id = testActivityPack1.id;
-        const activityId = testActivityPack1.activities[0];
+        const activityId = testActivityPack1.getActivities[0];
 
         const res = await req.patch('/activity-pack/activities/remove').send({
             id: id,
@@ -161,7 +161,7 @@ describe('endpoint tests for ActivityPack routes using PATCH', () => {
 
         const activityPack = await getActivityPack(id);
 
-        expect(activityPack.body._activities).toEqual(
+        expect(activityPack.body.activities).toEqual(
             expect.not.arrayContaining([activityId])
         );
     });
@@ -179,7 +179,7 @@ describe('endpoint tests for ActivityPack routes using PATCH', () => {
 
         const activityPack = await getActivityPack(id);
 
-        expect(activityPack.body._activities).toEqual([]);
+        expect(activityPack.body.activities).toEqual([]);
     });
 
     afterEach(async () => {
