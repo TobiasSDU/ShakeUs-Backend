@@ -55,13 +55,13 @@ describe('activity model methods return expected values', () => {
         const now = Date.now();
         const nowLength = now.toString().length;
 
-        expect(testActivity.startTime.toString().length).toEqual(nowLength);
+        expect(testActivity.getStartTime.toString().length).toEqual(nowLength);
     });
 
     test('it is possible to update the start time', () => {
         const newTime = Date.now();
-        testActivity.startTime = newTime;
+        testActivity.setStartTime = newTime;
 
-        expect(testActivity.startTime).toEqual(newTime);
+        expect(testActivity.getStartTime).toEqual(newTime);
     });
 });

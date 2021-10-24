@@ -2,7 +2,7 @@ export class Activity {
     private _id: string;
     private _title: string;
     private _description: string;
-    private _startTime: number;
+    private startTime: number;
 
     constructor(
         id: string,
@@ -13,7 +13,7 @@ export class Activity {
         this._id = id;
         this._title = title;
         this._description = description;
-        this._startTime = startTime;
+        this.startTime = startTime;
     }
 
     public get id() {
@@ -36,11 +36,11 @@ export class Activity {
         this._description = description;
     }
 
-    public get startTime() {
-        return this._startTime;
+    public get getStartTime() {
+        return this.startTime;
     }
 
-    public set startTime(startTime: number) {
-        this._startTime = startTime;
+    public set setStartTime(startTime: number) {
+        this.startTime = startTime;
     }
 }

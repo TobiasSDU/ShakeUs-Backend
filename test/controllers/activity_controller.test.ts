@@ -23,11 +23,11 @@ describe('endpoint tests for Activity routes using GET', () => {
         expect(res.body._id).toBeTruthy();
         expect(res.body._title).toBeTruthy();
         expect(res.body._description).toBeTruthy();
-        expect(res.body._startTime).toBeTruthy();
+        expect(res.body.startTime).toBeTruthy();
         expect(res.body._id).toEqual(testActivity1.id);
         expect(res.body._title).toEqual(testActivity1.title);
         expect(res.body._description).toEqual(testActivity1.description);
-        expect(res.body._startTime).toEqual(testActivity1.startTime);
+        expect(res.body.startTime).toEqual(testActivity1.getStartTime);
     });
 
     test('GET request to /activity/show with an invalid id returns 400', async () => {
@@ -75,7 +75,7 @@ describe('endpoint tests for Activity routes using POST', () => {
 
         expect(activity.body._title).toEqual(title);
         expect(activity.body._description).toEqual(description);
-        expect(activity.body._startTime).toEqual(startTime);
+        expect(activity.body.startTime).toEqual(startTime);
     });
 
     afterEach(async () => {
@@ -137,7 +137,7 @@ describe('endpoint tests for Activity routes using PATCH', () => {
 
         const activity = await getTestActivity(id);
 
-        expect(activity.body._startTime).toEqual(newStartTime);
+        expect(activity.body.startTime).toEqual(newStartTime);
     });
 
     afterEach(async () => {
