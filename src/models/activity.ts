@@ -1,6 +1,6 @@
 export class Activity {
     private _id: string;
-    private _title: string;
+    private title: string;
     private _description: string;
     private startTime: number;
 
@@ -11,7 +11,7 @@ export class Activity {
         startTime: number
     ) {
         this._id = id;
-        this._title = title;
+        this.title = title;
         this._description = description;
         this.startTime = startTime;
     }
@@ -20,12 +20,12 @@ export class Activity {
         return this._id;
     }
 
-    public get title() {
-        return this._title;
+    public get getTitle() {
+        return this.title;
     }
 
-    public set title(title: string) {
-        this._title = title;
+    public set setTitle(title: string) {
+        this.title = title;
     }
 
     public get description() {

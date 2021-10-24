@@ -24,11 +24,11 @@ describe('endpoint tests for ActivityPack routes using GET', () => {
 
         expect(res.statusCode).toEqual(200);
         expect(res.body._id).toBeTruthy();
-        expect(res.body._title).toBeTruthy();
+        expect(res.body.title).toBeTruthy();
         expect(res.body._description).toBeTruthy();
         expect(res.body._activities).toBeTruthy();
         expect(res.body._id).toEqual(testActivityPack1.id);
-        expect(res.body._title).toEqual(testActivityPack1.title);
+        expect(res.body.title).toEqual(testActivityPack1.getTitle);
         expect(res.body._description).toEqual(testActivityPack1.description);
         expect(res.body._activities).toEqual(testActivityPack1.activities);
     });
@@ -75,7 +75,7 @@ describe('endpoint tests for ActivityPack routes using POST', () => {
         const activityPack = await getActivityPack(id);
 
         expect(activityPack.body._id).toEqual(id);
-        expect(activityPack.body._title).toEqual(title);
+        expect(activityPack.body.title).toEqual(title);
         expect(activityPack.body._description).toEqual(description);
         expect(activityPack.body._activities).toEqual([]);
     });
@@ -107,7 +107,7 @@ describe('endpoint tests for ActivityPack routes using PATCH', () => {
 
         const activityPack = await getActivityPack(id);
 
-        expect(activityPack.body._title).toEqual(newTitle);
+        expect(activityPack.body.title).toEqual(newTitle);
     });
 
     test('PATCH request to /activity-pack/description/update updates the description field', async () => {

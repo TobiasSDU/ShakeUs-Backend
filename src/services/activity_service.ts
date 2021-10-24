@@ -20,7 +20,7 @@ export class ActivityService {
         if (queryResult) {
             const activity = new Activity(
                 id,
-                queryResult._title,
+                queryResult.title,
                 queryResult._description,
                 queryResult.startTime
             );
@@ -35,7 +35,7 @@ export class ActivityService {
         const collection = await this.getActivitiesCollection();
         const updateResult = await collection.updateOne(
             { _id: id },
-            { $set: { _title: newTitle } }
+            { $set: { title: newTitle } }
         );
 
         if (updateResult.modifiedCount == 1) {

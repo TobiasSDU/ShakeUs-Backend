@@ -20,7 +20,7 @@ export class ActivityPackService {
         if (queryResult) {
             const activityPack = new ActivityPack(
                 id,
-                queryResult._title,
+                queryResult.title,
                 queryResult._description,
                 queryResult._activities
             );
@@ -35,7 +35,7 @@ export class ActivityPackService {
         const collection = await this.getActivityPacksCollection();
         const updateResult = await collection.updateOne(
             { _id: id },
-            { $set: { _title: newTitle } }
+            { $set: { title: newTitle } }
         );
 
         if (updateResult.modifiedCount == 1) {

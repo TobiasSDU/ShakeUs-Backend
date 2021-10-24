@@ -29,14 +29,14 @@ describe('activity model methods return expected values', () => {
     });
 
     it('return the expected title', () => {
-        expect(testActivity.title).toEqual(testTitle);
+        expect(testActivity.getTitle).toEqual(testTitle);
     });
 
     test('it is possible to update the title', () => {
         const newTitle = 'NewTitle';
 
-        testActivity.title = newTitle;
-        expect(testActivity.title).toEqual(newTitle);
+        testActivity.setTitle = newTitle;
+        expect(testActivity.getTitle).toEqual(newTitle);
     });
 
     it('returns the expected description', () => {
