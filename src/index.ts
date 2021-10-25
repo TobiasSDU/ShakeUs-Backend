@@ -12,7 +12,7 @@ export const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.use(express.static(path.join(__dirname, '../dummy-client/')));
+app.use(express.static(path.join(__dirname, '../api-docs/')));
 
 app.use('/party', partyRoutes);
 app.use('/guest', guestRoutes);
