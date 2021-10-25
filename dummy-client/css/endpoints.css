@@ -1,0 +1,26 @@
+.endpoint-container {
+    width: 100%;
+}
+
+.endpoint-container h4 {
+    font-size: 20px;
+}
+
+.endpoint-snippets-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.request-body,
+.response-body {
+    width: 48%;
+    margin-top: -50px;
+}
+
+.request-body h5,
+.response-body h5 {
+    text-align: center;
+    margin-top: -50px;
+    font-size: 16px;
+}

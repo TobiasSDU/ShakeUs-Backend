@@ -1,0 +1,287 @@
+<h3>Party Endpoints</h3>
+
+<hr>
+
+<div class="endpoint-container">
+    <h4>POST /party/create</h4>
+    <div class="endpoint-snippets-container">
+        <div class="request-body">
+            <pre>
+                <code>
+                    {
+                        "activityPackId": string,
+                        "hostName": string
+                    }
+                </code>
+            </pre>
+            <h5>Request Body</h5>
+        </div>
+    
+        <div class="response-body">
+            <pre>
+                <code>
+                    {
+                        "hostId": string,
+                        "partyId": string
+                    }
+                </code>
+            </pre>
+            <h5>Response Body (Error Code: 400)</h5>
+        </div>
+    </div>
+</div>
+
+<div class="endpoint-container">
+    <h4>GET /party/show</h4>
+    <div class="endpoint-snippets-container">
+        <div class="request-body">
+            <pre>
+                <code>
+                    {
+                        "partyId": string,
+                        "guestId": string
+                    }
+                </code>
+            </pre>
+            <h5>Request Body</h5>
+        </div>
+
+        <div class="response-body">
+            <pre>
+                <code>
+                    {
+                        "_id": string,
+                        "hosts": string[],
+                        "primaryHost": string,
+                        "guests": string[],
+                        "activityPackId": string
+                    }
+                </code>
+            </pre>
+            <h5>Response Body (Error Code: 400)</h5>
+        </div>
+    </div>
+</div>
+
+<div class="endpoint-container">
+    <h4>PATCH /party/activity-pack/update</h4>
+    <div class="endpoint-snippets-container">
+        <div class="request-body">
+            <pre>
+                <code>
+                    {
+                        "partyId": string,
+                        "primaryHostId": string,
+                        "newActivityPackId": string
+                    }
+                </code>
+            </pre>
+            <h5>Request Body</h5>
+        </div>
+
+        <div class="response-body">
+            <pre>
+                <code>
+                    HTTP: 200 OK
+
+                </code>
+            </pre>
+            <h5>Response Body (Error Code: 400)</h5>
+        </div>
+    </div>
+</div>
+
+<div class="endpoint-container">
+    <h4>PATCH /party/hosts/primary/update</h4>
+    <div class="endpoint-snippets-container">
+        <div class="request-body">
+            <pre>
+                <code>
+                    {
+                        "partyId": string,
+                        "currentPrimary": string,
+                        "newPrimary": string
+                    }
+                </code>
+            </pre>
+            <h5>Request Body</h5>
+        </div>
+
+        <div class="response-body">
+            <pre>
+                <code>
+                    HTTP: 200 OK
+
+                </code>
+            </pre>
+            <h5>Response Body (Error Code: 400)</h5>
+        </div>
+    </div>
+</div>
+
+<div class="endpoint-container">
+    <h4>PATCH /party/hosts/add</h4>
+    <div class="endpoint-snippets-container">
+        <div class="request-body">
+            <pre>
+                <code>
+                    {
+                        "partyId": string,
+                        "hostId": string,
+                        "newHostId": string
+                    }
+                </code>
+            </pre>
+            <h5>Request Body</h5>
+        </div>
+
+        <div class="response-body">
+            <pre>
+                <code>
+                    HTTP: 200 OK
+
+                </code>
+            </pre>
+            <h5>Response Body (Error Code: 400)</h5>
+        </div>
+    </div>
+</div>
+
+<div class="endpoint-container">
+    <h4>PATCH /party/hosts/remove</h4>
+    <div class="endpoint-snippets-container">
+        <div class="request-body">
+            <pre>
+                <code>
+                    {
+                        "partyId": string,
+                        "primaryHostId": string,
+                        "removedHostId": string
+                    }
+                </code>
+            </pre>
+            <h5>Request Body</h5>
+        </div>
+
+        <div class="response-body">
+            <pre>
+                <code>
+                    HTTP: 200 OK
+
+                </code>
+            </pre>
+            <h5>Response Body (Error Code: 400 or 403)</h5>
+        </div>
+    </div>
+</div>
+
+<div class="endpoint-container">
+    <h4>PATCH /party/guests/remove</h4>
+    <div class="endpoint-snippets-container">
+        <div class="request-body">
+            <pre>
+                <code>
+                    {
+                        "partyId": string,
+                        "hostId": string,
+                        "removedGuestId": string
+                    }
+                </code>
+            </pre>
+            <h5>Request Body</h5>
+        </div>
+
+        <div class="response-body">
+            <pre>
+                <code>
+                    HTTP: 200 OK
+
+                </code>
+            </pre>
+            <h5>Response Body (Error Code: 400)</h5>
+        </div>
+    </div>
+</div>
+
+<div class="endpoint-container">
+    <h4>PATCH /party/join</h4>
+    <div class="endpoint-snippets-container">
+        <div class="request-body">
+            <pre>
+                <code>
+                    {
+                        "partyId": string,
+                        "guestName": string
+                    }
+                </code>
+            </pre>
+            <h5>Request Body</h5>
+        </div>
+
+        <div class="response-body">
+            <pre>
+                <code>
+                    {
+                        "_id": string,
+                        "name": string
+                    }
+                </code>
+            </pre>
+            <h5>Response Body (Error Code: 400)</h5>
+        </div>
+    </div>
+</div>
+
+<div class="endpoint-container">
+    <h4>PATCH /party/leave</h4>
+    <div class="endpoint-snippets-container">
+        <div class="request-body">
+            <pre>
+                <code>
+                    {
+                        "partyId": string,
+                        "userId": string
+                    }
+                </code>
+            </pre>
+            <h5>Request Body</h5>
+        </div>
+
+        <div class="response-body">
+            <pre>
+                <code>
+                    HTTP: 200 OK
+
+                </code>
+            </pre>
+            <h5>Response Body (Error Code: 400)</h5>
+        </div>
+    </div>
+</div>
+
+<div class="endpoint-container">
+    <h4>DELETE /party/leave</h4>
+    <div class="endpoint-snippets-container">
+        <div class="request-body">
+            <pre>
+                <code>
+                    {
+                        "partyId": string,
+                        "primaryHostId": string
+                    }
+                </code>
+            </pre>
+            <h5>Request Body</h5>
+        </div>
+
+        <div class="response-body">
+            <pre>
+                <code>
+                    HTTP: 200 OK
+
+                </code>
+            </pre>
+            <h5>Response Body (Error Code: 400)</h5>
+        </div>
+    </div>
+</div>

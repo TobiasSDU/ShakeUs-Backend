@@ -5,6 +5,9 @@
     <title>ShakeUS Dummy Client</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/index.css">
+
+    <!-- Pretty Code Snippets -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/atom-one-dark.min.css">
 </head>
 
 <body>
@@ -13,14 +16,18 @@
         <h1 id="pageTitle">ShakeUs Backend Documentation</h1>
         
         <!-- Page section imports -->
-        {% include "./sections/section1.html" %}
-
-        <input type="text" id="name">
-        <button id="TestButton">TestButton</button>
+        <h2>API Endpoints</h2>
+        {% include "./sections/party-endpoints.html" %}
     
-        <!-- Include Scripts -->
-        {% include "./scripts/socket-test.html" %}
+        
     </div>
+
+    <!-- Include Scripts -->
+    {% include "./scripts/socket-test.html" %}
+
+    <!-- Pretty Code Snippets -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
 </body>
 
 </html>
