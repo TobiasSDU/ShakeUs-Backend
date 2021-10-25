@@ -6,26 +6,23 @@ export class SocketService {
 
     constructor(server: http.Server) {
         this.io = new Server(server);
-        this.io.on('connection', () => {
-            console.log('user connected');
+
+        this.io.on('connection', (socket) => {
+            socket.on('join-room', (roomId) => {
+                socket.join(roomId);
+            });
+
+            socket.on('leave-room', (roomId) => {
+                socket.leave(roomId);
+            });
         });
     }
 
-    public emitToAll(event: string, body: string) {
-        this.io.emit(event, body);
-    }
-
-    public emitToRoom(event: string, body: string, roomId: string) {
+    public emitToRoom(
+        event: string,
+        body: Record<string, unknown>,
+        roomId: string
+    ) {
         this.io.to(roomId).emit(event, body);
-    }
-
-    public joinRoom(socketId: string, roomId: string) {
-        const socket = this.io.sockets.sockets.get(socketId);
-        if (socket) socket.join(roomId);
-    }
-
-    public leaveRoom(socketId: string, roomId: string) {
-        const socket = this.io.sockets.sockets.get(socketId);
-        if (socket) socket.leave(roomId);
     }
 }

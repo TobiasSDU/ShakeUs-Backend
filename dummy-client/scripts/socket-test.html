@@ -2,7 +2,14 @@
 <script>
     var socket = io();
 
-    socket.on('message', message => {
+    let button = document.getElementById('TestButton');
+
+    button.addEventListener('click', () => {
+        socket.emit('test');
+    })
+
+    socket.on('user-joined-party', message => {
         console.log(message);
+        socket.emit('test')
     })
 </script>

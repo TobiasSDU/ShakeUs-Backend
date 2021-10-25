@@ -1,9 +1,12 @@
 import { Collection, Db } from 'mongodb';
+import { app } from '..';
 import {
     getDatabase,
     getDbConnectionString,
 } from '../../config/database_connection';
 import { Guest } from '../models/guest';
+import { PartyService } from './party_service';
+import { SocketService } from './socket_service';
 
 export class GuestService {
     public static async createGuest(guest: Guest) {
@@ -28,12 +31,29 @@ export class GuestService {
 
     public static async updateGuestName(guestId: string, newName: string) {
         const collection = await this.getGuestsCollection();
+        const party = await PartyService.getPartyByUserId(guestId);
+
         const updateResult = await collection.updateOne(
             { _id: guestId },
             { $set: { name: newName } }
         );
 
         const modCount = updateResult.modifiedCount;
+
+        if (modCount == 1) {
+            const user = await GuestService.getGuestInfo(guestId);
+            const socketService: SocketService = app.get('socketService');
+            if (party && user) {
+                socketService.emitToRoom(
+                    'username-updated',
+                    {
+                        user: { ...user },
+                        message: 'The party has ended',
+                    },
+                    party._id
+                );
+            }
+        }
 
         return modCount > 0;
     }

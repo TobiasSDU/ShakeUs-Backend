@@ -8,6 +8,7 @@ import { Guest } from '../models/guest';
 import { Party } from '../models/party';
 import { GuestService } from './guest_service';
 import { SocketService } from './socket_service';
+import { ActivityPackService } from './activity_pack_service';
 
 export class PartyService {
     public static async createParty(party: Party, host: Guest) {
@@ -55,10 +56,29 @@ export class PartyService {
     ) {
         if (await this.isUserPrimaryHost(primaryHostId, partyId)) {
             const collection = await this.getPartiesCollection();
+
             const updateResult = await collection.updateOne(
                 { _id: partyId },
                 { $set: { activityPackId: activityPackId } }
             );
+
+            if (updateResult.modifiedCount == 1) {
+                const newActivityPack =
+                    await ActivityPackService.showActivityPack(activityPackId);
+                const socketService: SocketService = app.get('socketService');
+                if (newActivityPack) {
+                    socketService.emitToRoom(
+                        'activity-pack-updated',
+                        {
+                            ...newActivityPack,
+                            message:
+                                'Activity pack has been updated to: ' +
+                                newActivityPack.getTitle,
+                        },
+                        partyId
+                    );
+                }
+            }
 
             return updateResult.acknowledged;
         } else {
@@ -91,6 +111,7 @@ export class PartyService {
         newHostId: string
     ) {
         const collection = await this.getPartiesCollection();
+        const newHost = await GuestService.getGuestInfo(newHostId);
 
         if (await this.isUserAHost(hostId, partyId)) {
             const removeResult = await collection.updateOne(
@@ -103,6 +124,24 @@ export class PartyService {
                     { _id: partyId },
                     { $push: { hosts: newHostId } }
                 );
+
+                if (addResult.acknowledged) {
+                    const socketService: SocketService =
+                        app.get('socketService');
+                    if (newHost) {
+                        socketService.emitToRoom(
+                            'guest-promoted',
+                            {
+                                newHostId: newHostId,
+                                newHostName: newHost.getName,
+                                message:
+                                    newHost.getName +
+                                    ' has been promoted to host',
+                            },
+                            partyId
+                        );
+                    }
+                }
 
                 return addResult.acknowledged;
             } else {
@@ -119,6 +158,7 @@ export class PartyService {
         removedHostId: string
     ) {
         const collection = await this.getPartiesCollection();
+        const removedHost = await GuestService.getGuestInfo(removedHostId);
 
         if (await this.isUserPrimaryHost(primaryHostId, partyId)) {
             const removeResult = await collection.updateOne(
@@ -131,6 +171,20 @@ export class PartyService {
                     { _id: partyId },
                     { $push: { guests: removedHostId } }
                 );
+
+                const socketService: SocketService = app.get('socketService');
+                if (removedHost) {
+                    socketService.emitToRoom(
+                        'host-demoted',
+                        {
+                            removedHostId: removedHostId,
+                            removedHostName: removedHost.getName,
+                            message:
+                                removedHost.getName + ' is no longer a host',
+                        },
+                        partyId
+                    );
+                }
 
                 return insertResult.acknowledged;
             } else {
@@ -180,7 +234,15 @@ export class PartyService {
 
             if (insertResult) {
                 const socketService: SocketService = app.get('socketService');
-                socketService.emitToAll('message', 'Great success');
+                socketService.emitToRoom(
+                    'user-joined-party',
+                    {
+                        guestId: newGuest.id,
+                        guestName: newGuest.getName,
+                        message: newGuest.getName + ' joined the room',
+                    },
+                    partyId
+                );
             }
             return insertResult;
         } else {
@@ -195,9 +257,24 @@ export class PartyService {
         const isPrimaryHost = await this.isUserPrimaryHost(userId, partyId);
 
         if (!isPrimaryHost && party) {
+            const userObject: Guest | undefined =
+                await GuestService.getGuestInfo(userId);
             const deleteResult = await GuestService.deleteGuest(userId);
 
             if (deleteResult) {
+                const socketService: SocketService = app.get('socketService');
+                if (userObject) {
+                    socketService.emitToRoom(
+                        'user-left-party',
+                        {
+                            userId: userId,
+                            userName: userObject.getName,
+                            message: userObject.getName + ' left the room',
+                        },
+                        partyId
+                    );
+                }
+
                 if (isHost) {
                     const removeResult = await collection.updateOne(
                         { _id: partyId },
@@ -238,6 +315,16 @@ export class PartyService {
                     _id: partyId,
                 });
 
+                const socketService: SocketService = app.get('socketService');
+                socketService.emitToRoom(
+                    'party-deleted',
+                    {
+                        partyId: partyId,
+                        message: 'The party has ended',
+                    },
+                    partyId
+                );
+
                 return deleteResult.acknowledged;
             } else {
                 return false;
@@ -245,6 +332,26 @@ export class PartyService {
         }
 
         return false;
+    }
+
+    public static async getPartyByActivityPackId(activityPackId: string) {
+        const collection = await this.getPartiesCollection();
+
+        const queryResult = await collection.findOne({
+            activityPackId: activityPackId,
+        });
+
+        return queryResult;
+    }
+
+    public static async getPartyByUserId(userId: string) {
+        const collection = await this.getPartiesCollection();
+
+        const queryResult = await collection.findOne({
+            $or: [{ guests: userId }, { hosts: userId }],
+        });
+
+        return queryResult;
     }
 
     private static async getPartiesCollection(): Promise<Collection> {

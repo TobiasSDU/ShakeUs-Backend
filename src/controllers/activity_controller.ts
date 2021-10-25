@@ -45,7 +45,7 @@ export const updateActivityTitle = async (req: Request, res: Response) => {
     const newTitle = req.body.newTitle;
 
     if (id && newTitle) {
-        const updateResult = await ActivityService.updateActivityPackTitle(
+        const updateResult = await ActivityService.updateActivityTitle(
             id,
             newTitle
         );
