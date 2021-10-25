@@ -1,7 +1,9 @@
 import { app } from './index';
 import http from 'http';
 import { Server } from 'socket.io';
-import { generatePartyId } from './util/party_id_generator';
+import path from 'path';
+import nunjucks from 'nunjucks';
+import fs from 'fs';
 
 const server = http.createServer(app);
 const port = process.env.PORT || 3000;
@@ -9,7 +11,7 @@ const port = process.env.PORT || 3000;
 const io = new Server(server);
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(path.join(__dirname, '../dummy-client/index.html'));
 });
 
 io.on('connection', (socket) => {
@@ -17,6 +19,16 @@ io.on('connection', (socket) => {
 });
 
 server.listen(port, () => {
+    compileClient();
     console.log(`listening on port ${port}`);
-    console.log(generatePartyId());
 });
+
+const compileClient = () => {
+    fs.writeFile(
+        path.join(__dirname, '../dummy-client/index.html'),
+        nunjucks.render(path.join(__dirname, '../dummy-client/index.njk')),
+        (err) => {
+            if (err) console.log(err);
+        }
+    );
+};

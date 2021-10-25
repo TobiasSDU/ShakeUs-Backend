@@ -125,3 +125,6 @@ dist
 ### TS Compiler Output ###
 ./build
 ./build/**/*
+
+### Generated index.html ###
+dummy-client/index.html
