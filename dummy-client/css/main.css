@@ -22,3 +22,7 @@ body {
     text-align: center;
     margin: 35px auto;
 }
+
+.section-title {
+    font-size: 28px;
+}

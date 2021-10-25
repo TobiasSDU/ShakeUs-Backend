@@ -2,7 +2,7 @@
     width: 100%;
 }
 
-.endpoint-container h4 {
+.endpoint-container h3 {
     font-size: 20px;
 }
 
@@ -18,8 +18,8 @@
     margin-top: -50px;
 }
 
-.request-body h5,
-.response-body h5 {
+.request-body h4,
+.response-body h4 {
     text-align: center;
     margin-top: -50px;
     font-size: 16px;
