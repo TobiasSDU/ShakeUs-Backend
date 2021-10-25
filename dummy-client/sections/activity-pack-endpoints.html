@@ -1,0 +1,215 @@
+<h2 class="section-title">Activity Pack Endpoints</h2>
+
+<hr>
+
+<div class="endpoint-container">
+    <h3>POST /activity-pack/create</h3>
+    <div class="endpoint-snippets-container">
+        <div class="request-body">
+            <pre>
+                <code>
+                    {
+                        "title": string,
+                        "description": string
+                    }
+                </code>
+            </pre>
+            <h4>Request Body</h4>
+        </div>
+
+        <div class="response-body">
+            <pre>
+                <code>
+                    {
+                        "activityPackId": string
+                    }
+                </code>
+            </pre>
+            <h4>Response Body (Error Code: 400)</h4>
+        </div>
+    </div>
+</div>
+
+<div class="endpoint-container">
+    <h3>GET /activity-pack/show</h3>
+    <div class="endpoint-snippets-container">
+        <div class="request-body">
+            <pre>
+                <code>
+                    {
+                        "activityPackId": string
+                    }
+                </code>
+            </pre>
+            <h4>Request Body</h4>
+        </div>
+
+        <div class="response-body">
+            <pre>
+                <code>
+                    {
+                        "_id": string,
+                        "title": string,
+                        "description": string,
+                        "activities": string[],
+                    }
+                </code>
+            </pre>
+            <h4>Response Body (Error Code: 400)</h4>
+        </div>
+    </div>
+</div>
+
+<div class="endpoint-container">
+    <h3>PATCH /activity-pack/title/update</h3>
+    <div class="endpoint-snippets-container">
+        <div class="request-body">
+            <pre>
+                <code>
+                    {
+                        "activityPackId": string,
+                        "newTitle": string
+                    }
+                </code>
+            </pre>
+            <h4>Request Body</h4>
+        </div>
+
+        <div class="response-body">
+            <pre>
+                <code>
+                    HTTP: 200 OK
+                </code>
+            </pre>
+            <h4>Response Body (Error Code: 400)</h4>
+        </div>
+    </div>
+</div>
+
+<div class="endpoint-container">
+    <h3>PATCH /activity-pack/description/update</h3>
+    <div class="endpoint-snippets-container">
+        <div class="request-body">
+            <pre>
+                <code>
+                    {
+                        "activityPackId": string,
+                        "newDescription": string
+                    }
+                </code>
+            </pre>
+            <h4>Request Body</h4>
+        </div>
+
+        <div class="response-body">
+            <pre>
+                <code>
+                    HTTP: 200 OK
+                </code>
+            </pre>
+            <h4>Response Body (Error Code: 400)</h4>
+        </div>
+    </div>
+</div>
+
+<div class="endpoint-container">
+    <h3>PATCH /activity-pack/activities/add</h3>
+    <div class="endpoint-snippets-container">
+        <div class="request-body">
+            <pre>
+                <code>
+                    {
+                        "activityPackId": string,
+                        "activityId": string
+                    }
+                </code>
+            </pre>
+            <h4>Request Body</h4>
+        </div>
+
+        <div class="response-body">
+            <pre>
+                <code>
+                    HTTP: 200 OK
+                </code>
+            </pre>
+            <h4>Response Body (Error Code: 400)</h4>
+        </div>
+    </div>
+</div>
+
+<div class="endpoint-container">
+    <h3>PATCH /activity-pack/activities/remove</h3>
+    <div class="endpoint-snippets-container">
+        <div class="request-body">
+            <pre>
+                <code>
+                    {
+                        "activityPackId": string,
+                        "activityId": string
+                    }
+                </code>
+            </pre>
+            <h4>Request Body</h4>
+        </div>
+
+        <div class="response-body">
+            <pre>
+                <code>
+                    HTTP: 200 OK
+                </code>
+            </pre>
+            <h4>Response Body (Error Code: 400)</h4>
+        </div>
+    </div>
+</div>
+
+<div class="endpoint-container">
+    <h3>PATCH /activity-pack/activities/remove-all</h3>
+    <div class="endpoint-snippets-container">
+        <div class="request-body">
+            <pre>
+                <code>
+                    {
+                        "activityPackId": string,
+                    }
+                </code>
+            </pre>
+            <h4>Request Body</h4>
+        </div>
+
+        <div class="response-body">
+            <pre>
+                <code>
+                    HTTP: 200 OK
+                </code>
+            </pre>
+            <h4>Response Body (Error Code: 400)</h4>
+        </div>
+    </div>
+</div>
+
+<div class="endpoint-container">
+    <h3>DELETE /activity-pack/delete</h3>
+    <div class="endpoint-snippets-container">
+        <div class="request-body">
+            <pre>
+                <code>
+                    {
+                        "activityPackId": string,
+                    }
+                </code>
+            </pre>
+            <h4>Request Body</h4>
+        </div>
+
+        <div class="response-body">
+            <pre>
+                <code>
+                    HTTP: 200 OK
+                </code>
+            </pre>
+            <h4>Response Body (Error Code: 400)</h4>
+        </div>
+    </div>
+</div>
