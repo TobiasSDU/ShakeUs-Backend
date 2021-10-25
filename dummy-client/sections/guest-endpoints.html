@@ -1,0 +1,57 @@
+<h3>Guest Endpoints</h3>
+
+<hr>
+
+<div class="endpoint-container">
+    <h4>GET /guest/show</h4>
+    <div class="endpoint-snippets-container">
+        <div class="request-body">
+            <pre>
+                <code>
+                    {
+                        "guestId": string,
+                    }
+                </code>
+            </pre>
+            <h5>Request Body</h5>
+        </div>
+
+        <div class="response-body">
+            <pre>
+                <code>
+                    {
+                        "_id": string,
+                        "name": string
+                    }
+                </code>
+            </pre>
+            <h5>Response Body (Error Code: 400)</h5>
+        </div>
+    </div>
+</div>
+
+<div class="endpoint-container">
+    <h4>PATCH /guest/name/update</h4>
+    <div class="endpoint-snippets-container">
+        <div class="request-body">
+            <pre>
+                <code>
+                    {
+                        "guestId": string,
+                        "newName": string
+                    }
+                </code>
+            </pre>
+            <h5>Request Body</h5>
+        </div>
+
+        <div class="response-body">
+            <pre>
+                <code>
+                    HTTP: 200 OK
+                </code>
+            </pre>
+            <h5>Response Body (Error Code: 400)</h5>
+        </div>
+    </div>
+</div>
