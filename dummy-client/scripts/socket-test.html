@@ -3,9 +3,20 @@
     var socket = io();
 
     let button = document.getElementById('TestButton');
+    let input = document.getElementById('name');
 
     button.addEventListener('click', () => {
-        socket.emit('test');
+        fetch('http://localhost:3000/party/join', {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                partyId: 'f2008ec3-456b-460e-8cac-ae1513358e93',
+                guestName: input.value
+            })
+        })
+        socket.emit('join-room', 'f2008ec3-456b-460e-8cac-ae1513358e93');
     })
 
     socket.on('user-joined-party', message => {

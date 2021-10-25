@@ -10,6 +10,7 @@ export class SocketService {
         this.io.on('connection', (socket) => {
             socket.on('join-room', (roomId) => {
                 socket.join(roomId);
+                console.log('User joined room: ' + roomId);
             });
 
             socket.on('leave-room', (roomId) => {
