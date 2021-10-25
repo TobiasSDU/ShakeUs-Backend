@@ -8,6 +8,7 @@ import {
 } from '../seed/activity_pack.seed';
 import { dropDatabase, req } from './endpoint_tests_setup';
 import http from 'http';
+import { seedActivityCollection, testActivity1 } from './../seed/activity.seed';
 
 let server: http.Server;
 
@@ -19,6 +20,7 @@ beforeAll(() => {
 });
 
 beforeEach(async () => {
+    await seedActivityCollection();
     await seedActivityPackCollection();
 });
 
@@ -112,7 +114,7 @@ describe('endpoint tests for ActivityPack routes using PATCH', () => {
 
     test('PATCH request to /activity-pack/activities/add adds an activity to the activities array', async () => {
         const id = testActivityPack1.id;
-        const activityId = 'NewActivityId';
+        const activityId = testActivity1.id;
 
         const res = await req.patch('/activity-pack/activities/add').send({
             activityPackId: id,

@@ -1,9 +1,10 @@
 <script src="/socket.io/socket.io.js"></script>
 <script>
-    /* var socket = io();
+    let socket = io();
 
     let button = document.getElementById('TestButton');
     let input = document.getElementById('name');
+    let roomCode = document.getElementById('roomCode');
 
     button.addEventListener('click', () => {
         fetch('http://localhost:3000/party/join', {
@@ -12,15 +13,20 @@
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                partyId: 'f2008ec3-456b-460e-8cac-ae1513358e93',
+                partyId: roomCode.value,
                 guestName: input.value
             })
         })
-        socket.emit('join-room', 'f2008ec3-456b-460e-8cac-ae1513358e93');
+        socket.emit('join-room', roomCode.value);
     })
 
     socket.on('user-joined-party', message => {
         console.log(message);
         socket.emit('test')
-    }) */
+    }) 
+
+    socket.on('activity-started', message => {
+        console.log(new Date(Date.now()));
+        console.log(message);
+    });
 </script>

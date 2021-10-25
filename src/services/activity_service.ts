@@ -16,9 +16,9 @@ export class ActivityService {
         const insertResult = await collection.insertOne({ ...activity });
 
         if (insertResult.acknowledged) {
-            scheduleActivity(activity);
+            await scheduleActivity(activity);
         }
-
+        
         return insertResult.acknowledged;
     }
 

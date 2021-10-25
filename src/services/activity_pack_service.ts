@@ -8,6 +8,7 @@ import { ActivityPack } from './../models/activity_pack';
 import { SocketService } from './socket_service';
 import { ActivityService } from './activity_service';
 import { PartyService } from './party_service';
+import { rescheduleActivity } from './scheduling_service';
 
 export class ActivityPackService {
     public static async createActivityPack(activityPack: ActivityPack) {
@@ -81,7 +82,9 @@ export class ActivityPackService {
             { $push: { activities: activityId } }
         );
 
-        if (updateResult.modifiedCount == 1) {
+        if (updateResult.modifiedCount == 1 && newActivity) {
+            await rescheduleActivity(newActivity);
+
             const socketService: SocketService = app.get('socketService');
             if (newActivity && party) {
                 socketService.emitToRoom(

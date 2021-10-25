@@ -1,34 +1,43 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <title>ShakeUS API Docs</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="css/index.css">
+    <head>
+        <title>ShakeUS API Docs</title>
+        <meta charset="utf-8">
+        <link
+        rel="stylesheet" href="css/index.css"> <!-- Pretty Code Snippets -->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/atom-one-dark.min.css">
+    </head>
 
-    <!-- Pretty Code Snippets -->
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/atom-one-dark.min.css">
-</head>
+    <body>
+        <div id="pageContainer">
+            <h1 id="pageTitle">ShakeUs Backend Documentation</h1>
+            
+            <h2>Join room</h2>
 
-<body>
+            <label>Name</label><br> 
+            <input type="text" id="name"><br>
 
-    <div id="pageContainer">
-        <h1 id="pageTitle">ShakeUs Backend Documentation</h1>
-        
-        <!-- Page section imports -->
-        {% include "./sections/party-endpoints.html" %}
-        {% include "./sections/guest-endpoints.html" %}
-        {% include "./sections/activity-endpoints.html" %}
-        {% include "./sections/activity-pack-endpoints.html" %}
-        
-    </div>
+            <label>Room Code</label><br> 
+            <input type="text" id="roomCode">
 
-    <!-- Include Scripts -->
-    {% include "./scripts/socket-test.html" %}
+            <button id="TestButton">Join Room</button>
 
-    <!-- Pretty Code Snippets -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
-    <script>hljs.highlightAll();</script>
-</body>
+            <!-- Page section imports -->
+            {% include "./sections/party-endpoints.html" %}
+            {% include "./sections/guest-endpoints.html" %}
+            {% include "./sections/activity-endpoints.html" %}
+            {% include "./sections/activity-pack-endpoints.html" %}
+        </div>
+
+        <!-- Include Scripts -->
+        {% include "./scripts/socket-test.html" %}
+
+        <!-- Pretty Code Snippets -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+        <script>
+            hljs.highlightAll();
+        </script>
+    </body>
 
 </html>
