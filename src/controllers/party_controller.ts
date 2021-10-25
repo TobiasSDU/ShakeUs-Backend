@@ -172,7 +172,6 @@ export const joinParty = async (req: Request, res: Response) => {
         const updateResult = await PartyService.joinParty(partyId, newGuest);
 
         if (updateResult) {
-            req.app.get('socketService').emitEvent('message', 'Great success');
             return res.json(newGuest);
         }
 

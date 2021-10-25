@@ -1,4 +1,5 @@
 import { Collection, Db } from 'mongodb';
+import { app } from '..';
 import {
     getDatabase,
     getDbConnectionString,
@@ -6,6 +7,7 @@ import {
 import { Guest } from '../models/guest';
 import { Party } from '../models/party';
 import { GuestService } from './guest_service';
+import { SocketService } from './socket_service';
 
 export class PartyService {
     public static async createParty(party: Party, host: Guest) {
@@ -175,6 +177,11 @@ export class PartyService {
 
         if (updateResult.modifiedCount > 0) {
             const insertResult = await GuestService.createGuest(newGuest);
+
+            if (insertResult) {
+                const socketService: SocketService = app.get('socketService');
+                socketService.emitToAll('message', 'Great success');
+            }
             return insertResult;
         } else {
             return false;

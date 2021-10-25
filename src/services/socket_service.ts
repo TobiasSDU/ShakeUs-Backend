@@ -11,7 +11,21 @@ export class SocketService {
         });
     }
 
-    public emitEvent(event: string, body: string) {
-        if (body) this.io.emit(event, body);
+    public emitToAll(event: string, body: string) {
+        this.io.emit(event, body);
+    }
+
+    public emitToRoom(event: string, body: string, roomId: string) {
+        this.io.to(roomId).emit(event, body);
+    }
+
+    public joinRoom(socketId: string, roomId: string) {
+        const socket = this.io.sockets.sockets.get(socketId);
+        if (socket) socket.join(roomId);
+    }
+
+    public leaveRoom(socketId: string, roomId: string) {
+        const socket = this.io.sockets.sockets.get(socketId);
+        if (socket) socket.leave(roomId);
     }
 }
