@@ -127,4 +127,4 @@ dist
 ./build/**/*
 
 ### Generated index.html ###
-dummy-client/index.html
+api-docs/index.html
