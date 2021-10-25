@@ -9,16 +9,24 @@ import {
 import { testParty } from '../helpers/party_test_helpers';
 import { testHostOrGuest } from '../helpers/guest_test_helpers';
 import { getTestParty } from './../helpers/party_test_helpers';
+import { app } from '../../src';
+import { SocketService } from '../../src/services/socket_service';
+import http from 'http';
+
+let server: http.Server;
+
+beforeAll(() => {
+    server = http.createServer(app);
+
+    setCurrentDbMode('testFile1');
+    app.set('socketService', new SocketService(server));
+});
+
+beforeEach(async () => {
+    await seedPartiesCollection();
+});
 
 describe('endpoint tests for Party routes using GET', () => {
-    beforeAll(() => {
-        setCurrentDbMode('testFile1');
-    });
-
-    beforeEach(async () => {
-        await seedPartiesCollection();
-    });
-
     test('GET request to /party/show with an invalid user id does not return a party', async () => {
         const res = await getTestParty(testParty2.id, 'invalidId');
 
@@ -42,21 +50,9 @@ describe('endpoint tests for Party routes using GET', () => {
         expect(res.statusCode).toEqual(200);
         expect(res.body._id).toEqual(testParty2.id);
     });
-
-    afterEach(async () => {
-        await dropDatabase();
-    });
 });
 
 describe('endpoint tests for Party routes using POST', () => {
-    beforeAll(() => {
-        setCurrentDbMode('testFile1');
-    });
-
-    beforeEach(async () => {
-        await seedPartiesCollection();
-    });
-
     test('POST request to /party/create creates a party and a host', async () => {
         const activityPackId = generateUUID();
         const hostName = 'TestHost';
@@ -72,21 +68,9 @@ describe('endpoint tests for Party routes using POST', () => {
         await testParty(partyId, [hostId], hostId, [], activityPackId);
         await testHostOrGuest(hostId, hostName);
     });
-
-    afterEach(async () => {
-        await dropDatabase();
-    });
 });
 
 describe('endpoint tests for Party routes using PATCH', () => {
-    beforeAll(() => {
-        setCurrentDbMode('testFile1');
-    });
-
-    beforeEach(async () => {
-        await seedPartiesCollection();
-    });
-
     test('PATCH request to /party/activity-pack/update updates the activityPackId field', async () => {
         const partyId = testParty2.id;
         const primaryHostId = testParty2.getPrimaryHost;
@@ -263,21 +247,9 @@ describe('endpoint tests for Party routes using PATCH', () => {
 
         expect(party.body.guests).toEqual(expect.not.arrayContaining([userId]));
     });
-
-    afterEach(async () => {
-        await dropDatabase();
-    });
 });
 
 describe('endpoint tests for Party routes using DELETE', () => {
-    beforeAll(() => {
-        setCurrentDbMode('testFile1');
-    });
-
-    beforeEach(async () => {
-        await seedPartiesCollection();
-    });
-
     test('DELETE request to /party/delete deletes the requested party', async () => {
         const partyId = testParty2.id;
         const primaryHostId = testParty2.getPrimaryHost;
@@ -325,8 +297,12 @@ describe('endpoint tests for Party routes using DELETE', () => {
 
         expect(party.body._id).toEqual(partyId);
     });
+});
 
-    afterEach(async () => {
-        await dropDatabase();
-    });
+afterEach(async () => {
+    await dropDatabase();
+});
+
+afterAll(() => {
+    server.close();
 });

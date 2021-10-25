@@ -1,17 +1,25 @@
 import { setCurrentDbMode } from '../../config/database_connection';
+import { app } from '../../src';
+import { SocketService } from '../../src/services/socket_service';
 import { getTestActivity } from '../helpers/activity_test_helpers';
 import { seedActivityCollection, testActivity1 } from '../seed/activity.seed';
 import { dropDatabase, req } from './endpoint_tests_setup';
+import http from 'http';
+
+let server: http.Server;
+
+beforeAll(() => {
+    server = http.createServer(app);
+
+    setCurrentDbMode('testFile4');
+    app.set('socketService', new SocketService(server));
+});
+
+beforeEach(async () => {
+    await seedActivityCollection();
+});
 
 describe('endpoint tests for Activity routes using GET', () => {
-    beforeAll(() => {
-        setCurrentDbMode('testFile4');
-    });
-
-    beforeEach(async () => {
-        await seedActivityCollection();
-    });
-
     test('GET request to /activity/show returns an activity', async () => {
         const activityId = testActivity1.id;
 
@@ -40,21 +48,9 @@ describe('endpoint tests for Activity routes using GET', () => {
         expect(res.statusCode).toEqual(400);
         expect(Object.keys(res.body).length).toEqual(0);
     });
-
-    afterEach(async () => {
-        await dropDatabase();
-    });
 });
 
 describe('endpoint tests for Activity routes using POST', () => {
-    beforeAll(() => {
-        setCurrentDbMode('testFile4');
-    });
-
-    beforeEach(async () => {
-        await seedActivityCollection();
-    });
-
     test('POST request to /activity/show returns an activity', async () => {
         const title = 'TestTitle';
         const description = 'TestDescription';
@@ -77,21 +73,9 @@ describe('endpoint tests for Activity routes using POST', () => {
         expect(activity.body.description).toEqual(description);
         expect(activity.body.startTime).toEqual(startTime);
     });
-
-    afterEach(async () => {
-        await dropDatabase();
-    });
 });
 
 describe('endpoint tests for Activity routes using PATCH', () => {
-    beforeAll(() => {
-        setCurrentDbMode('testFile4');
-    });
-
-    beforeEach(async () => {
-        await seedActivityCollection();
-    });
-
     test('PATCH request to /activity/title/update updates the title field', async () => {
         const id = testActivity1.id;
         const newTitle = 'NewTitle';
@@ -139,21 +123,9 @@ describe('endpoint tests for Activity routes using PATCH', () => {
 
         expect(activity.body.startTime).toEqual(newStartTime);
     });
-
-    afterEach(async () => {
-        await dropDatabase();
-    });
 });
 
 describe('endpoint tests for Activity routes using DELETE', () => {
-    beforeAll(() => {
-        setCurrentDbMode('testFile4');
-    });
-
-    beforeEach(async () => {
-        await seedActivityCollection();
-    });
-
     test('DELETE request to /activity/delete deletes an activity', async () => {
         const id = testActivity1.id;
 
@@ -177,8 +149,12 @@ describe('endpoint tests for Activity routes using DELETE', () => {
 
         expect(res.statusCode).toEqual(400);
     });
+});
 
-    afterEach(async () => {
-        await dropDatabase();
-    });
+afterEach(async () => {
+    await dropDatabase();
+});
+
+afterAll(() => {
+    server.close();
 });

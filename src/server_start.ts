@@ -1,24 +1,19 @@
 import { app } from './index';
 import http from 'http';
-import { Server } from 'socket.io';
 import path from 'path';
 import nunjucks from 'nunjucks';
 import fs from 'fs';
+import { SocketService } from './services/socket_service';
 
 const server = http.createServer(app);
 const port = process.env.PORT || 3000;
-
-const io = new Server(server);
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../dummy-client/index.html'));
 });
 
-io.on('connection', (socket) => {
-    console.log('a user connected on socket: ' + socket.id);
-});
-
 server.listen(port, () => {
+    app.set('socketService', new SocketService(server));
     compileClient();
     console.log(`listening on port ${port}`);
 });

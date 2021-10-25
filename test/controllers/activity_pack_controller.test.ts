@@ -1,20 +1,28 @@
 import { setCurrentDbMode } from '../../config/database_connection';
+import { app } from '../../src';
+import { SocketService } from '../../src/services/socket_service';
 import { getActivityPack } from '../helpers/activity_pack_test_helpers';
 import {
     seedActivityPackCollection,
     testActivityPack1,
 } from '../seed/activity_pack.seed';
 import { dropDatabase, req } from './endpoint_tests_setup';
+import http from 'http';
+
+let server: http.Server;
+
+beforeAll(() => {
+    server = http.createServer(app);
+
+    setCurrentDbMode('testFile3');
+    app.set('socketService', new SocketService(server));
+});
+
+beforeEach(async () => {
+    await seedActivityPackCollection();
+});
 
 describe('endpoint tests for ActivityPack routes using GET', () => {
-    beforeAll(() => {
-        setCurrentDbMode('testFile3');
-    });
-
-    beforeEach(async () => {
-        await seedActivityPackCollection();
-    });
-
     test('GET request to /activity-pack/show returns an activity pack', async () => {
         const activityPackId = testActivityPack1.id;
 
@@ -43,21 +51,9 @@ describe('endpoint tests for ActivityPack routes using GET', () => {
         expect(res.statusCode).toEqual(400);
         expect(Object.keys(res.body).length).toEqual(0);
     });
-
-    afterEach(async () => {
-        await dropDatabase();
-    });
 });
 
 describe('endpoint tests for ActivityPack routes using POST', () => {
-    beforeAll(() => {
-        setCurrentDbMode('testFile3');
-    });
-
-    beforeEach(async () => {
-        await seedActivityPackCollection();
-    });
-
     test('POST request to /activity-pack/create creates an activity pack', async () => {
         const title = 'newTitle';
         const description = 'newDescription';
@@ -79,21 +75,9 @@ describe('endpoint tests for ActivityPack routes using POST', () => {
         expect(activityPack.body.description).toEqual(description);
         expect(activityPack.body.activities).toEqual([]);
     });
-
-    afterEach(async () => {
-        await dropDatabase();
-    });
 });
 
 describe('endpoint tests for ActivityPack routes using PATCH', () => {
-    beforeAll(() => {
-        setCurrentDbMode('testFile3');
-    });
-
-    beforeEach(async () => {
-        await seedActivityPackCollection();
-    });
-
     test('PATCH request to /activity-pack/title/update updates the title field', async () => {
         const id = testActivityPack1.id;
         const newTitle = 'NewTitle';
@@ -124,10 +108,6 @@ describe('endpoint tests for ActivityPack routes using PATCH', () => {
         const activityPack = await getActivityPack(id);
 
         expect(activityPack.body.description).toEqual(newDescription);
-    });
-
-    afterEach(async () => {
-        await dropDatabase();
     });
 
     test('PATCH request to /activity-pack/activities/add adds an activity to the activities array', async () => {
@@ -181,21 +161,9 @@ describe('endpoint tests for ActivityPack routes using PATCH', () => {
 
         expect(activityPack.body.activities).toEqual([]);
     });
-
-    afterEach(async () => {
-        await dropDatabase();
-    });
 });
 
 describe('endpoint tests for ActivityPack routes using DELETE', () => {
-    beforeAll(() => {
-        setCurrentDbMode('testFile3');
-    });
-
-    beforeEach(async () => {
-        await seedActivityPackCollection();
-    });
-
     test('DELETE request to /activity-pack/delete deletes an activity pack', async () => {
         const id = testActivityPack1.id;
 
@@ -218,8 +186,12 @@ describe('endpoint tests for ActivityPack routes using DELETE', () => {
 
         expect(res.statusCode).toEqual(400);
     });
+});
 
-    afterEach(async () => {
-        await dropDatabase();
-    });
+afterEach(async () => {
+    await dropDatabase();
+});
+
+afterAll(() => {
+    server.close();
 });

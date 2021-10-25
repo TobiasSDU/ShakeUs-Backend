@@ -1,17 +1,25 @@
 import { setCurrentDbMode } from '../../config/database_connection';
+import { app } from '../../src';
+import { SocketService } from '../../src/services/socket_service';
 import { getTestGuest } from '../helpers/guest_test_helpers';
 import { seedGuestsCollection, testGuest1 } from '../seed/guest.seed';
 import { dropDatabase, req } from './endpoint_tests_setup';
+import http from 'http';
+
+let server: http.Server;
+
+beforeAll(() => {
+    server = http.createServer(app);
+
+    setCurrentDbMode('testFile2');
+    app.set('socketService', new SocketService(server));
+});
+
+beforeEach(async () => {
+    await seedGuestsCollection();
+});
 
 describe('endpoint tests for Guest routes using GET', () => {
-    beforeAll(() => {
-        setCurrentDbMode('testFile2');
-    });
-
-    beforeEach(async () => {
-        await seedGuestsCollection();
-    });
-
     test('GET request to /guest/show returns a guest', async () => {
         const guestId = testGuest1.id;
 
@@ -35,21 +43,9 @@ describe('endpoint tests for Guest routes using GET', () => {
         expect(res.statusCode).toEqual(400);
         expect(Object.keys(res.body).length).toEqual(0);
     });
-
-    afterEach(async () => {
-        await dropDatabase();
-    });
 });
 
 describe('endpoint tests for Guest routes using PATCH', () => {
-    beforeAll(() => {
-        setCurrentDbMode('testFile2');
-    });
-
-    beforeEach(async () => {
-        await seedGuestsCollection();
-    });
-
     test('PATCH request to /guest/name/update updates name field', async () => {
         const guestId = testGuest1.id;
         const newName = 'NewGuestName';
@@ -78,8 +74,12 @@ describe('endpoint tests for Guest routes using PATCH', () => {
 
         expect(res.statusCode).toEqual(400);
     });
+});
 
-    afterEach(async () => {
-        await dropDatabase();
-    });
+afterEach(async () => {
+    await dropDatabase();
+});
+
+afterAll(() => {
+    server.close();
 });
