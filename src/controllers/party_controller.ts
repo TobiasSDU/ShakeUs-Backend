@@ -3,9 +3,10 @@ import { generateUUID } from '../util/uuid_generator';
 import { Guest } from '../models/guest';
 import { Party } from '../models/party';
 import { PartyService } from '../services/party_service';
+import { generatePartyId } from '../util/party_id_generator';
 
 export const createParty = async (req: Request, res: Response) => {
-    const partyId = generateUUID();
+    const partyId = generatePartyId();
     const activityPackId = req.body.activityPackId;
     const hostName = req.body.hostName;
     const host = new Guest(generateUUID(), hostName);

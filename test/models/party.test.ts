@@ -2,6 +2,7 @@ import { Party } from '../../src/models/party';
 import { generateUUID } from '../../src/util/uuid_generator';
 import { ActivityPack } from '../../src/models/activity_pack';
 import { testActivityPack2 } from '../seed/activity_pack.seed';
+import { generatePartyId } from '../../src/util/party_id_generator';
 
 const hostId = generateUUID();
 
@@ -13,7 +14,7 @@ const activityPack: ActivityPack = new ActivityPack(
 );
 
 const originalParty: Party = new Party(
-    generateUUID(),
+    generatePartyId(),
     [hostId],
     hostId,
     [],

@@ -1,9 +1,10 @@
 import { Collection } from 'mongodb';
 import { Party } from '../../src/models/party';
+import { generatePartyId } from '../../src/util/party_id_generator';
 import { getCollection } from '../controllers/endpoint_tests_setup';
 
 export const testParty1 = new Party(
-    'TestParty1',
+    generatePartyId(),
     ['TestHost1'],
     'TestHost1',
     ['TestGuest1'],
@@ -11,7 +12,7 @@ export const testParty1 = new Party(
 );
 
 export const testParty2 = new Party(
-    'TestParty2',
+    generatePartyId(),
     ['TestHost2', 'TestHost3'],
     'TestHost2',
     ['TestGuest2', 'TestGuest3'],
