@@ -7,12 +7,17 @@ import {
 import { Activity } from './../models/activity';
 import { ActivityPackService } from './activity_pack_service';
 import { PartyService } from './party_service';
+import { scheduleActivity } from './scheduling_service';
 import { SocketService } from './socket_service';
 
 export class ActivityService {
     public static async createActivity(activity: Activity) {
         const collection = await this.getActivitiesCollection();
         const insertResult = await collection.insertOne({ ...activity });
+
+        if (insertResult.acknowledged) {
+            scheduleActivity(activity);
+        }
 
         return insertResult.acknowledged;
     }
