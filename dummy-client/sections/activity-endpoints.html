@@ -1,0 +1,165 @@
+<h2 class="section-title">Activity Endpoints</h2>
+
+<hr>
+
+<div class="endpoint-container">
+    <h3>POST /activity/create</h3>
+    <div class="endpoint-snippets-container">
+        <div class="request-body">
+            <pre>
+                <code>
+                    {
+                        "title": string,
+                        "description": string,
+                        "startTime": number    // Unix timestamp in miliseconds
+                    }
+                </code>
+            </pre>
+            <h4>Request Body</h4>
+        </div>
+
+        <div class="response-body">
+            <pre>
+                <code>
+                    {
+                        "activityId": string
+                    }
+                </code>
+            </pre>
+            <h4>Response Body (Error Code: 400)</h4>
+        </div>
+    </div>
+</div>
+
+<div class="endpoint-container">
+    <h3>GET /activity/show</h3>
+    <div class="endpoint-snippets-container">
+        <div class="request-body">
+            <pre>
+                <code>
+                    {
+                        "activityId": string
+                    }
+                </code>
+            </pre>
+            <h4>Request Body</h4>
+        </div>
+
+        <div class="response-body">
+            <pre>
+                <code>
+                    {
+                        "_id": string,
+                        "title": string,
+                        "description": string,
+                        "startTime": number
+                    }
+                </code>
+            </pre>
+            <h4>Response Body (Error Code: 400)</h4>
+        </div>
+    </div>
+</div>
+
+<div class="endpoint-container">
+    <h3>PATCH /activity/title/update</h3>
+    <div class="endpoint-snippets-container">
+        <div class="request-body">
+            <pre>
+                <code>
+                    {
+                        "activityId": string,
+                        "newTitle": string
+                    }
+                </code>
+            </pre>
+            <h4>Request Body</h4>
+        </div>
+
+        <div class="response-body">
+            <pre>
+                <code>
+                    HTTP: 200 OK
+                </code>
+            </pre>
+            <h4>Response Body (Error Code: 400)</h4>
+        </div>
+    </div>
+</div>
+
+<div class="endpoint-container">
+    <h3>PATCH /activity/description/update</h3>
+    <div class="endpoint-snippets-container">
+        <div class="request-body">
+            <pre>
+                <code>
+                    {
+                        "activityId": string,
+                        "newDescription": string
+                    }
+                </code>
+            </pre>
+            <h4>Request Body</h4>
+        </div>
+
+        <div class="response-body">
+            <pre>
+                <code>
+                    HTTP: 200 OK
+                </code>
+            </pre>
+            <h4>Response Body (Error Code: 400)</h4>
+        </div>
+    </div>
+</div>
+
+<div class="endpoint-container">
+    <h3>PATCH /activity/start-time/update</h3>
+    <div class="endpoint-snippets-container">
+        <div class="request-body">
+            <pre>
+                <code>
+                    {
+                        "activityId": string,
+                        "newStartTime": number    // Unix timestamp in miliseconds
+                    }
+                </code>
+            </pre>
+            <h4>Request Body</h4>
+        </div>
+
+        <div class="response-body">
+            <pre>
+                <code>
+                    HTTP: 200 OK
+                </code>
+            </pre>
+            <h4>Response Body (Error Code: 400)</h4>
+        </div>
+    </div>
+</div>
+
+<div class="endpoint-container">
+    <h3>DELETE /activity/delete</h3>
+    <div class="endpoint-snippets-container">
+        <div class="request-body">
+            <pre>
+                <code>
+                    {
+                        "activityId": string
+                    }
+                </code>
+            </pre>
+            <h4>Request Body</h4>
+        </div>
+
+        <div class="response-body">
+            <pre>
+                <code>
+                    HTTP: 200 OK
+                </code>
+            </pre>
+            <h4>Response Body (Error Code: 400)</h4>
+        </div>
+    </div>
+</div>
