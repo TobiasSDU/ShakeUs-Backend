@@ -4,194 +4,334 @@
 </div>
 
 <div class="endpoint-container">
-    <h3>POST /activity/create</h3>
-    <div class="endpoint-snippets-container">
-        <div class="request-body">
-            <pre>
-                <code>
-                    {
-                        "title": string,
-                        "description": string,
-                        "startTime": number    // Unix timestamp in miliseconds
-                    }
-                </code>
-            </pre>
-            <h4>Request Body</h4>
+    <div class="endpoint-header">
+        <h3 class="endpoint-method">POST</h3>
+        <p class="endpoint-path">/activity/create</p>
+        <div class="endpoint-response-codes">
+            <p class="endpoint-response-divider">Reponse Codes: </p>
+            <p class="endpoint-response-success">200</p>
+            <p class="endpoint-response-divider">|</p>
+            <p class="endpoint-response-error">400</p>
         </div>
-
-        <div class="response-body">
-            <pre>
-                <code>
-                    {
-                        "activityId": string
-                    }
-                </code>
-            </pre>
-            <h4>Response Body (Error Code: 400)</h4>
+    </div>
+    <div class="endpoint-body">
+        <div class="endpoint-body-left">
+            <h3 class="endpoint-body-title">Description</h3>
+            <p class="endpoint-paragraph">
+                Filler Text
+            </p>
+            <h3 class="endpoint-body-title">Socket.IO Events</h3>
+            <p class="endpoint-paragraph">
+                Filler Text
+            </p>
+        </div>
+        <div class="endpoint-body-right">
+            <div class="endpoint-request-body">
+                <pre>
+                    <code class="language-json">
+                        // Request Body
+                        {
+                            "title": string,
+                            "description": string,
+                            "startTime": number // Unix timestamp in miliseconds
+                        }
+                    </code>
+                </pre>
+            </div>
+            <div class="endpoint-response-body">
+                <pre>
+                    <code class="language-json">
+                        // Response Body
+                        {
+                            "activityId": string
+                        }
+                    </code>
+                </pre>
+            </div>
         </div>
     </div>
 </div>
 
 <div class="endpoint-container">
-    <h3>GET /activity/show</h3>
-    <div class="endpoint-snippets-container">
-        <div class="request-body">
-            <pre>
-                <code>
-                    {
-                        "activityId": string
-                    }
-                </code>
-            </pre>
-            <h4>Request Body</h4>
+    <div class="endpoint-header">
+        <h3 class="endpoint-method">GET</h3>
+        <p class="endpoint-path">/activity/show</p>
+        <div class="endpoint-response-codes">
+            <p class="endpoint-response-divider">Reponse Codes: </p>
+            <p class="endpoint-response-success">200</p>
+            <p class="endpoint-response-divider">|</p>
+            <p class="endpoint-response-error">400</p>
         </div>
-
-        <div class="response-body">
-            <pre>
-                <code>
-                    {
-                        "_id": string,
-                        "title": string,
-                        "description": string,
-                        "startTime": number
-                    }
-                </code>
-            </pre>
-            <h4>Response Body (Error Code: 400)</h4>
+    </div>
+    <div class="endpoint-body">
+        <div class="endpoint-body-left">
+            <h3 class="endpoint-body-title">Description</h3>
+            <p class="endpoint-paragraph">
+                Filler Text
+            </p>
+            <h3 class="endpoint-body-title">Socket.IO Events</h3>
+            <p class="endpoint-paragraph">
+                Filler Text
+            </p>
+        </div>
+        <div class="endpoint-body-right">
+            <div class="endpoint-request-body">
+                <pre>
+                    <code class="language-json">
+                        // Request Body
+                        {
+                            "activityId": string
+                        }
+                    </code>
+                </pre>
+            </div>
+            <div class="endpoint-response-body">
+                <pre>
+                    <code class="language-json">
+                        // Response Body
+                        {
+                            "_id": string,
+                            "title": string,
+                            "description": string,
+                            "startTime": number
+                        }
+                    </code>
+                </pre>
+            </div>
         </div>
     </div>
 </div>
 
 <div class="endpoint-container">
-    <h3>GET /activity/next</h3>
-    <div class="endpoint-snippets-container">
-        <div class="request-body">
-            <pre>
-                <code>
-                    {
-                    "partyId": string,
-                    "userId": string
-                    }
-                </code>
-            </pre>
-            <h4>Request Body</h4>
+    <div class="endpoint-header">
+        <h3 class="endpoint-method">GET</h3>
+        <p class="endpoint-path">/activity/next</p>
+        <div class="endpoint-response-codes">
+            <p class="endpoint-response-divider">Reponse Codes: </p>
+            <p class="endpoint-response-success">200</p>
+            <p class="endpoint-response-divider">|</p>
+            <p class="endpoint-response-error">400</p>
         </div>
-
-        <div class="response-body">
-            <pre>
-                <code>
-                    {
-                        "_id": string,
-                        "title": string,
-                        "description": string,
-                        "startTime": number
-                    }
-                </code>
-            </pre>
-            <h4>Response Body (Error Code: 400)</h4>
+    </div>
+    <div class="endpoint-body">
+        <div class="endpoint-body-left">
+            <h3 class="endpoint-body-title">Description</h3>
+            <p class="endpoint-paragraph">
+                Filler Text
+            </p>
+            <h3 class="endpoint-body-title">Socket.IO Events</h3>
+            <p class="endpoint-paragraph">
+                Filler Text
+            </p>
+        </div>
+        <div class="endpoint-body-right">
+            <div class="endpoint-request-body">
+                <pre>
+                    <code class="language-json">
+                        // Request Body
+                        {
+                            "partyId": string,
+                            "userId": string
+                        }
+                    </code>
+                </pre>
+            </div>
+            <div class="endpoint-response-body">
+                <pre>
+                    <code class="language-json">
+                        // Response Body
+                        {
+                            "_id": string,
+                            "title": string,
+                            "description": string,
+                            "startTime": number
+                        }
+                    </code>
+                </pre>
+            </div>
         </div>
     </div>
 </div>
 
 <div class="endpoint-container">
-    <h3>PATCH /activity/title/update</h3>
-    <div class="endpoint-snippets-container">
-        <div class="request-body">
-            <pre>
-                <code>
-                    {
-                        "activityId": string,
-                        "newTitle": string
-                    }
-                </code>
-            </pre>
-            <h4>Request Body</h4>
+    <div class="endpoint-header">
+        <h3 class="endpoint-method">PATCH</h3>
+        <p class="endpoint-path">/activity/title/update</p>
+        <div class="endpoint-response-codes">
+            <p class="endpoint-response-divider">Reponse Codes: </p>
+            <p class="endpoint-response-success">200</p>
+            <p class="endpoint-response-divider">|</p>
+            <p class="endpoint-response-error">400</p>
         </div>
-
-        <div class="response-body">
-            <pre>
-                <code>
-                    HTTP: 200 OK
-                </code>
-            </pre>
-            <h4>Response Body (Error Code: 400)</h4>
+    </div>
+    <div class="endpoint-body">
+        <div class="endpoint-body-left">
+            <h3 class="endpoint-body-title">Description</h3>
+            <p class="endpoint-paragraph">
+                Filler Text
+            </p>
+            <h3 class="endpoint-body-title">Socket.IO Events</h3>
+            <p class="endpoint-paragraph">
+                Filler Text
+            </p>
+        </div>
+        <div class="endpoint-body-right">
+            <div class="endpoint-request-body">
+                <pre>
+                    <code class="language-json">
+                        // Request Body
+                        {
+                            "activityId": string,
+                            "newTitle": string
+                        }
+                    </code>
+                </pre>
+            </div>
+            <div class="endpoint-response-body">
+                <pre>
+                    <code class="language-json">
+                        // Response Body
+                        HTTP: 200 OK
+                    </code>
+                </pre>
+            </div>
         </div>
     </div>
 </div>
 
 <div class="endpoint-container">
-    <h3>PATCH /activity/description/update</h3>
-    <div class="endpoint-snippets-container">
-        <div class="request-body">
-            <pre>
-                <code>
-                    {
-                        "activityId": string,
-                        "newDescription": string
-                    }
-                </code>
-            </pre>
-            <h4>Request Body</h4>
+    <div class="endpoint-header">
+        <h3 class="endpoint-method">PATCH</h3>
+        <p class="endpoint-path">/activity/description/update</p>
+        <div class="endpoint-response-codes">
+            <p class="endpoint-response-divider">Reponse Codes: </p>
+            <p class="endpoint-response-success">200</p>
+            <p class="endpoint-response-divider">|</p>
+            <p class="endpoint-response-error">400</p>
         </div>
-
-        <div class="response-body">
-            <pre>
-                <code>
-                    HTTP: 200 OK
-                </code>
-            </pre>
-            <h4>Response Body (Error Code: 400)</h4>
+    </div>
+    <div class="endpoint-body">
+        <div class="endpoint-body-left">
+            <h3 class="endpoint-body-title">Description</h3>
+            <p class="endpoint-paragraph">
+                Filler Text
+            </p>
+            <h3 class="endpoint-body-title">Socket.IO Events</h3>
+            <p class="endpoint-paragraph">
+                Filler Text
+            </p>
+        </div>
+        <div class="endpoint-body-right">
+            <div class="endpoint-request-body">
+                <pre>
+                    <code class="language-json">
+                        // Request Body
+                        {
+                            "activityId": string,
+                            "newDescription": string
+                        }
+                    </code>
+                </pre>
+            </div>
+            <div class="endpoint-response-body">
+                <pre>
+                    <code class="language-json">
+                        // Response Body
+                        HTTP: 200 OK
+                    </code>
+                </pre>
+            </div>
         </div>
     </div>
 </div>
 
 <div class="endpoint-container">
-    <h3>PATCH /activity/start-time/update</h3>
-    <div class="endpoint-snippets-container">
-        <div class="request-body">
-            <pre>
-                <code>
-                    {
-                        "activityId": string,
-                        "newStartTime": number    // Unix timestamp in miliseconds
-                    }
-                </code>
-            </pre>
-            <h4>Request Body</h4>
+    <div class="endpoint-header">
+        <h3 class="endpoint-method">PATCH</h3>
+        <p class="endpoint-path">/activity/start-time/update</p>
+        <div class="endpoint-response-codes">
+            <p class="endpoint-response-divider">Reponse Codes: </p>
+            <p class="endpoint-response-success">200</p>
+            <p class="endpoint-response-divider">|</p>
+            <p class="endpoint-response-error">400</p>
         </div>
-
-        <div class="response-body">
-            <pre>
-                <code>
-                    HTTP: 200 OK
-                </code>
-            </pre>
-            <h4>Response Body (Error Code: 400)</h4>
+    </div>
+    <div class="endpoint-body">
+        <div class="endpoint-body-left">
+            <h3 class="endpoint-body-title">Description</h3>
+            <p class="endpoint-paragraph">
+                Filler Text
+            </p>
+            <h3 class="endpoint-body-title">Socket.IO Events</h3>
+            <p class="endpoint-paragraph">
+                Filler Text
+            </p>
+        </div>
+        <div class="endpoint-body-right">
+            <div class="endpoint-request-body">
+                <pre>
+                    <code class="language-json">
+                        // Request Body
+                        {
+                            "activityId": string,
+                            "newStartTime": number // Unix timestamp in miliseconds
+                        }
+                    </code>
+                </pre>
+            </div>
+            <div class="endpoint-response-body">
+                <pre>
+                    <code class="language-json">
+                        // Response Body
+                        HTTP: 200 OK
+                    </code>
+                </pre>
+            </div>
         </div>
     </div>
 </div>
 
 <div class="endpoint-container">
-    <h3>DELETE /activity/delete</h3>
-    <div class="endpoint-snippets-container">
-        <div class="request-body">
-            <pre>
-                <code>
-                    {
-                        "activityId": string
-                    }
-                </code>
-            </pre>
-            <h4>Request Body</h4>
+    <div class="endpoint-header">
+        <h3 class="endpoint-method">DELETE</h3>
+        <p class="endpoint-path">/activity/delete</p>
+        <div class="endpoint-response-codes">
+            <p class="endpoint-response-divider">Reponse Codes: </p>
+            <p class="endpoint-response-success">200</p>
+            <p class="endpoint-response-divider">|</p>
+            <p class="endpoint-response-error">400</p>
         </div>
-
-        <div class="response-body">
-            <pre>
-                <code>
-                    HTTP: 200 OK
-                </code>
-            </pre>
-            <h4>Response Body (Error Code: 400)</h4>
+    </div>
+    <div class="endpoint-body">
+        <div class="endpoint-body-left">
+            <h3 class="endpoint-body-title">Description</h3>
+            <p class="endpoint-paragraph">
+                Filler Text
+            </p>
+            <h3 class="endpoint-body-title">Socket.IO Events</h3>
+            <p class="endpoint-paragraph">
+                Filler Text
+            </p>
+        </div>
+        <div class="endpoint-body-right">
+            <div class="endpoint-request-body">
+                <pre>
+                    <code class="language-json">
+                        // Request Body
+                        {
+                            "activityId": string
+                        }
+                    </code>
+                </pre>
+            </div>
+            <div class="endpoint-response-body">
+                <pre>
+                    <code class="language-json">
+                        // Response Body
+                        HTTP: 200 OK
+                    </code>
+                </pre>
+            </div>
         </div>
     </div>
 </div>

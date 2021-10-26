@@ -3,15 +3,52 @@
     <hr>
 </div>
 
-<span id="default-activity-pack">
-    <b>Available Activity Pack:</b>
-</span><br>
+<div class="endpoint-container">
+    <div class="endpoint-header">
+        <h3 class="endpoint-method">How to create a party</h3>
+    </div>
+    <div class="endpoint-body">
+        <div class="endpoint-body-left">
+            <h3 class="endpoint-body-title">Description</h3>
+            <p class="endpoint-paragraph">
 
-<label>HostName</label><br>
-<input type="text" id="hostName">
+                <span id="default-activity-pack">
+                    <b>Available Activity Pack:</b>
+                </span><br>
 
-<button id="CreatePartyButton">Create Party</button>
+                <label>HostName</label><br>
+                <input type="text" id="hostName">
+                
+                <button id="CreatePartyButton">Create Party</button>
+                
+                <div id="createPartyResultData">
+                    <span><b>Result Data:</b></span>
+                </div>
 
-<div id="createPartyResultData">
-    <span><b>Result Data:</b></span>
+            </p>
+
+        </div>
+        <div class="endpoint-body-right">
+            <div class="endpoint-request-body">
+                <pre>
+                    <code class="language-json">
+                        // Request Body
+                        {
+                            "activityPackId": string,
+                        }
+                    </code>
+                </pre>
+            </div>
+            <div class="endpoint-response-body">
+                <pre>
+                    <code class="language-json">
+                        // Response Body
+                        HTTP: 200 OK
+                    </code>
+                </pre>
+            </div>
+        </div>
+    </div>
 </div>
+
+
