@@ -40,6 +40,28 @@ export const showActivity = async (req: Request, res: Response) => {
     return res.sendStatus(400);
 };
 
+export const nextActivity = async (req: Request, res: Response) => {
+    const partyId = req.body.partyId;
+    const userId = req.body.userId;
+    const currentTime = Date.now();
+
+    if (partyId && userId) {
+        const activity = await ActivityService.getNextActivity(
+            partyId,
+            userId,
+            currentTime
+        );
+
+        if (activity) {
+            return res.json(activity);
+        }
+
+        return res.sendStatus(400);
+    }
+
+    return res.sendStatus(400);
+};
+
 export const updateActivityTitle = async (req: Request, res: Response) => {
     const id = req.body.activityId;
     const newTitle = req.body.newTitle;

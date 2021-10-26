@@ -18,7 +18,7 @@ export class ActivityService {
         if (insertResult.acknowledged) {
             await scheduleActivity(activity);
         }
-        
+
         return insertResult.acknowledged;
     }
 
@@ -38,6 +38,34 @@ export class ActivityService {
         } else {
             return null;
         }
+    }
+
+    public static async getNextActivity(
+        partyId: string,
+        userId: string,
+        currentTime: number
+    ) {
+        const collection = await this.getActivitiesCollection();
+        const activityIds = await this.getPartyActivities(partyId, userId);
+
+        if (activityIds) {
+            const activities = collection
+                .find({
+                    $and: [
+                        { startTime: { $gt: currentTime } },
+                        { _id: { $in: activityIds } },
+                    ],
+                })
+                .sort({ startTime: 1 });
+
+            if (await activities.hasNext()) {
+                return activities.next();
+            }
+
+            return null;
+        }
+
+        return null;
     }
 
     public static async updateActivityTitle(id: string, newTitle: string) {
@@ -144,5 +172,21 @@ export class ActivityService {
                 activityPack._id
             );
         }
+    }
+
+    private static async getPartyActivities(partyId: string, userId: string) {
+        const party = await PartyService.getPartyInfo(partyId, userId);
+
+        if (party) {
+            const activityPack = await ActivityPackService.showActivityPack(
+                party.getActivityPackId
+            );
+
+            if (activityPack) {
+                return activityPack.getActivities;
+            }
+        }
+
+        return null;
     }
 }

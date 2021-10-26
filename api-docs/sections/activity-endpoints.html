@@ -62,6 +62,37 @@
 </div>
 
 <div class="endpoint-container">
+    <h3>GET /activity/next</h3>
+    <div class="endpoint-snippets-container">
+        <div class="request-body">
+            <pre>
+                <code>
+                    {
+                    "partyId": string,
+                    "userId": string
+                    }
+                </code>
+            </pre>
+            <h4>Request Body</h4>
+        </div>
+
+        <div class="response-body">
+            <pre>
+                <code>
+                    {
+                        "_id": string,
+                        "title": string,
+                        "description": string,
+                        "startTime": number
+                    }
+                </code>
+            </pre>
+            <h4>Response Body (Error Code: 400)</h4>
+        </div>
+    </div>
+</div>
+
+<div class="endpoint-container">
     <h3>PATCH /activity/title/update</h3>
     <div class="endpoint-snippets-container">
         <div class="request-body">
