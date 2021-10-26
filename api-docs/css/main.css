@@ -1,7 +1,3 @@
-* {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
 body {
     padding: 0;
     margin: 0;
@@ -18,8 +14,4 @@ body {
 #pageTitle {
     text-align: center;
     margin: 35px auto;
-}
-
-.section-title {
-    font-size: 28px;
 }
