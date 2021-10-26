@@ -10,12 +10,14 @@ for (let i = 0; i < scrollListeners.length; i++) {
     });
 }
 
-const sectionTitle = document.getElementsByClassName('section-title');
+const sectionTitles = document.getElementsByClassName('section-title');
 
 const getSectionTitleElement = (titleText) => {
-    for (let i = 0; i < sectionTitle.length; i++) {
-        if (sectionTitle[i].innerText == titleText) {
-            return sectionTitle[i];
+    for (let i = 0; i < sectionTitles.length; i++) {
+        const titleElement = sectionTitles[i].getElementsByTagName('h2')[0];
+
+        if (titleElement.innerText == titleText) {
+            return sectionTitles[i];
         }
     }
 };

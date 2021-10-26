@@ -1,26 +1,80 @@
-.endpoint-container {
+.endpoint-container, .endpoint-header, .endpoint-body {
     width: 100%;
+    display: block;
+    position: relative;
 }
 
-.endpoint-container h3 {
-    font-size: 20px;
+.endpoint-header {
+    padding: 25px;
+    width: calc(100% - 50px);
 }
 
-.endpoint-snippets-container {
-    width: 100%;
+.endpoint-header {
+    background-color: #1296B3;
+    color: white;
     display: flex;
-    justify-content: space-between;
+    align-items: center;
 }
 
-.request-body,
-.response-body {
-    width: 48%;
-    margin-top: -50px;
+.endpoint-method, .endpoint-path, .endpoint-response-codes,
+.endpoint-response-success, .endpoint-response-divider,
+.endpoint-response-error
+ {
+    display: inline-block;
+    margin: 0;
 }
 
-.request-body h4,
-.response-body h4 {
-    text-align: center;
-    margin-top: -50px;
-    font-size: 16px;
+.endpoint-method {
+    font-size: 32px;
+}
+
+.endpoint-path {
+    font-size: 26px;
+    margin-left: 25px;
+}
+
+.endpoint-response-codes {
+    margin-left: auto;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.endpoint-body {
+    display: flex;
+}
+
+.endpoint-body-left {
+    width: calc(65% - 50px);
+    position: relative;
+    padding: 25px;
+}
+
+.endpoint-body-title {
+    margin: 0;
+}
+
+.endpoint-paragraph {
+    margin: 0;
+}
+
+.endpoint-body-right {
+    width: 35%;
+    color: white;
+    position: relative;
+    background-color: #282C34;
+}
+
+.endpoint-request-body {
+    border-bottom: 2px solid #777;
+    padding-bottom: 16px;
+}
+
+code {
+    overflow: hidden;
+}
+
+.language-json.hljs {
+    position: relative;
+    top: -32px;
+    padding: 0 0 32px;
 }
