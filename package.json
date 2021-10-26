@@ -11,7 +11,7 @@
         "dev": "nodemon ./src/server_start.ts",
         "postinstall": "tsc && cp -r ./api-docs ./build",
         "build": "tsc --project ./ && cp -r ./api-docs ./build",
-        "lint": "npx eslint . --ext .js,.ts && cp /api-docs /build",
+        "lint": "npx eslint . --ext .js,.ts",
         "test": "jest --config jest.config.ts --verbose",
         "test:watch": "jest --config jest.config.ts --watch"
     },
