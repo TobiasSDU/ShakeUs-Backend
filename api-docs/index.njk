@@ -12,22 +12,25 @@
     </head>
 
     <body>
-        {% include "./sections/sidebar.html" %}
+        {% include "./pages/sections/sidebar.html" %}
+        {% include "./pages/sections/github-link.html" %}
 
         <div id="pageContainer">
             <h1 id="pageTitle">ShakeUs Backend Documentation</h1>
+
+            <!-- GitHub link import -->
             
             <!-- Page section imports -->
-            {% include "./sections/party-endpoints.html" %}
-            {% include "./sections/guest-endpoints.html" %}
-            {% include "./sections/activity-endpoints.html" %}
-            {% include "./sections/activity-pack-endpoints.html" %}
+            {% include "./pages/sections/party-endpoints.html" %}
+            {% include "./pages/sections/guest-endpoints.html" %}
+            {% include "./pages/sections/activity-endpoints.html" %}
+            {% include "./pages/sections/activity-pack-endpoints.html" %}
 
             <!-- Example imports -->
             <h2>Examples</h2>
 
             
-            {% include "./sections/examples/create-party.html" %}
+            {% include "./pages/examples/create-party.html" %}
             
         </div>
 

@@ -1,0 +1,14 @@
+#githubLink {
+    position: absolute;
+    background: white;
+    border-radius: 100%;
+    top: 25px; right: 25px;
+    width: 75px; height: 74px;
+}
+
+#githubLink img {
+    display: block;
+    width: 75px; height: 75px;
+    margin-top: -1px;
+}
+
