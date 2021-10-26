@@ -9,9 +9,9 @@
     "scripts": {
         "start": "node build/src/server_start.js",
         "dev": "nodemon ./src/server_start.ts",
-        "postinstall": "tsc",
-        "build": "tsc --project ./",
-        "lint": "npx eslint . --ext .js,.ts",
+        "postinstall": "tsc && cp -r ./api-docs ./build",
+        "build": "tsc --project ./ && cp -r ./api-docs ./build",
+        "lint": "npx eslint . --ext .js,.ts && cp /api-docs /build",
         "test": "jest --config jest.config.ts --verbose",
         "test:watch": "jest --config jest.config.ts --watch"
     },
