@@ -4,6 +4,8 @@
     <head>
         <title>ShakeUS API Docs</title>
         <meta charset="utf-8">
+        <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
         <link
         rel="stylesheet" href="css/index.css"> <!-- Pretty Code Snippets -->
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/atom-one-dark.min.css">
@@ -13,15 +15,15 @@
         <div id="pageContainer">
             <h1 id="pageTitle">ShakeUs Backend Documentation</h1>
             
-            <h2>Join room</h2>
+            <h2>Examples</h2>
 
-            <label>Name</label><br> 
-            <input type="text" id="name"><br>
+            <h3>1) Create Party</h3>
+            <span id="default-activity-pack">
+                <b>Available Activity Pack:</b>
+            </span><br>
 
-            <label>Room Code</label><br> 
-            <input type="text" id="roomCode">
-
-            <button id="TestButton">Join Room</button>
+            {% include "./sections/examples/create-party.html" %}
+            
 
             <!-- Page section imports -->
             {% include "./sections/party-endpoints.html" %}
@@ -31,7 +33,9 @@
         </div>
 
         <!-- Include Scripts -->
-        {% include "./scripts/socket-test.html" %}
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="./scripts/index.js"></script>
+        
 
         <!-- Pretty Code Snippets -->
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>

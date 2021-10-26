@@ -22,6 +22,10 @@ export class ActivityPack {
         return this._id;
     }
 
+    public set id(newId: string) {
+        this._id = newId;
+    }
+
     public get getTitle() {
         return this.title;
     }

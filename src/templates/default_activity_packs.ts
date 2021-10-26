@@ -1,5 +1,10 @@
 import { ActivityPack } from '../models/activity_pack';
-import { defaultActivities } from './default_activities';
+import {
+    createActivitiesFromTemplate,
+    defaultActivities,
+} from './default_activities';
+import { ActivityPackService } from './../services/activity_pack_service';
+import { generateUUID } from './../util/uuid_generator';
 
 const defaultActivityPack = new ActivityPack(
     'DefaultActivityPack1',
@@ -14,3 +19,44 @@ const defaultActivityPack = new ActivityPack(
 );
 
 export const defaultActivityPacks: ActivityPack[] = [defaultActivityPack];
+
+export const createActivityPackFromTemplate = async (
+    activityPackId: string
+) => {
+    const activityPack = getActivityPackById(activityPackId);
+
+    if (activityPack) {
+        activityPack.id = generateUUID();
+
+        const newActivityIds = await createActivitiesFromTemplate(
+            activityPack.getActivities
+        );
+        updateActivityIds(activityPack, newActivityIds);
+
+        await ActivityPackService.createActivityPack(activityPack);
+
+        return activityPack.id;
+    }
+
+    return '';
+};
+
+const getActivityPackById = (activityPackId: string) => {
+    for (let i = 0; i < defaultActivityPacks.length; i++) {
+        if (defaultActivityPacks[i].id == activityPackId) {
+            return defaultActivityPacks[i];
+        }
+    }
+
+    return null;
+};
+
+const updateActivityIds = (
+    activityPack: ActivityPack,
+    newActivityIds: string[]
+) => {
+    activityPack.setActivities = [];
+    for (let i = 0; i < newActivityIds.length; i++) {
+        activityPack.addActivity(newActivityIds[i]);
+    }
+};
