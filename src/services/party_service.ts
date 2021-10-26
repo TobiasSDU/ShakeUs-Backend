@@ -10,6 +10,7 @@ import { GuestService } from './guest_service';
 import { SocketService } from './socket_service';
 import { ActivityPackService } from './activity_pack_service';
 import { createActivityPackFromTemplate } from '../templates/default_activity_packs';
+import { ActivityService } from './activity_service';
 
 export class PartyService {
     public static async createParty(party: Party, host: Guest) {
@@ -321,7 +322,11 @@ export class PartyService {
                 partyId
             );
 
-            if (deleteUsersResult) {
+            const deleteActivitiesResult = await this.deleteActivitiesAndPacks(
+                partyId
+            );
+
+            if (deleteUsersResult && deleteActivitiesResult) {
                 const deleteResult = await collection.deleteOne({
                     _id: partyId,
                 });
@@ -445,6 +450,43 @@ export class PartyService {
                     return false;
                 }
             });
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private static async deleteActivitiesAndPacks(partyId: string) {
+        const collection = await this.getPartiesCollection();
+        const party = await collection.findOne({ _id: partyId });
+
+        if (party) {
+            const activityPack = await ActivityPackService.showActivityPack(
+                party.activityPackId
+            );
+
+            if (activityPack) {
+                activityPack.getActivities.forEach(
+                    async (activityId: string) => {
+                        const deleteStatus =
+                            await ActivityService.deleteActivity(activityId);
+
+                        if (!deleteStatus) {
+                            return false;
+                        }
+                    }
+                );
+
+                const packDeleteStatus =
+                    await ActivityPackService.deleteActivityPack(
+                        activityPack.id
+                    );
+
+                if (!packDeleteStatus) {
+                    return false;
+                }
+            }
 
             return true;
         } else {
