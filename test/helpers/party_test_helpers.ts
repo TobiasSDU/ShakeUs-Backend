@@ -13,8 +13,7 @@ export const testParty = async (
     partyId: string,
     hostsArray: string[],
     primaryHostId: string,
-    guestsArray: string[],
-    activityPackId: string
+    guestsArray: string[]
 ) => {
     const party = await (
         await getCollection(partiesCollectionName)
@@ -27,12 +26,10 @@ export const testParty = async (
         expect(hostsArray).toBeTruthy();
         expect(primaryHostId).toBeTruthy();
         expect(guestsArray).toBeTruthy();
-        expect(activityPackId).toBeTruthy();
         expect(party._id).toEqual(partyId);
         expect(party.hosts).toEqual(hostsArray);
         expect(party.primaryHost).toEqual(primaryHostId);
         expect(party.guests).toEqual(guestsArray);
-        expect(party.activityPackId).toEqual(activityPackId);
     } else {
         throw new Error('party not found');
     }

@@ -54,7 +54,7 @@ describe('endpoint tests for Party routes using GET', () => {
 
 describe('endpoint tests for Party routes using POST', () => {
     test('POST request to /party/create creates a party and a host', async () => {
-        const activityPackId = generateUUID();
+        const activityPackId = 'testId';
         const hostName = 'TestHost';
 
         const res = await req.post('/party/create').send({
@@ -65,7 +65,7 @@ describe('endpoint tests for Party routes using POST', () => {
         const partyId = res.body.partyId;
         const hostId = res.body.hostId;
 
-        await testParty(partyId, [hostId], hostId, [], activityPackId);
+        await testParty(partyId, [hostId], hostId, []);
         await testHostOrGuest(hostId, hostName);
     });
 });
