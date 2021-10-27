@@ -3,6 +3,7 @@ import {
     addActivityPackActivity,
     createActivityPack,
     deleteActivityPack,
+    getActivityPackTemplates,
     removeActivityPackActivity,
     removeAllActivityPackActivities,
     showActivityPack,
@@ -14,6 +15,7 @@ export const activityPackRoutes = express.Router();
 
 activityPackRoutes.post('/create', createActivityPack);
 activityPackRoutes.get('/show', showActivityPack);
+activityPackRoutes.get('/templates', getActivityPackTemplates);
 activityPackRoutes.patch('/title/update', updateActivityPackTitle);
 activityPackRoutes.patch('/description/update', updateActivityPackDescription);
 activityPackRoutes.patch('/activities/add', addActivityPackActivity);

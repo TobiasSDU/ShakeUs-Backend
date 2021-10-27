@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { defaultActivityPacks } from '../templates/default_activity_packs';
 import { generateUUID } from '../util/uuid_generator';
 import { ActivityPack } from './../models/activity_pack';
 import { ActivityPackService } from './../services/activity_pack_service';
@@ -46,6 +47,14 @@ export const showActivityPack = async (req: Request, res: Response) => {
     }
 
     return res.sendStatus(400);
+};
+
+export const getActivityPackTemplates = async (req: Request, res: Response) => {
+    if (defaultActivityPacks) {
+        return res.json(defaultActivityPacks);
+    }
+
+    return res.sendStatus(404);
 };
 
 export const updateActivityPackTitle = async (req: Request, res: Response) => {

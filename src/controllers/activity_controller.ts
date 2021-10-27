@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { defaultActivities } from '../templates/default_activities';
 import { generateUUID } from '../util/uuid_generator';
 import { Activity } from './../models/activity';
 import { ActivityService } from './../services/activity_service';
@@ -38,6 +39,14 @@ export const showActivity = async (req: Request, res: Response) => {
     }
 
     return res.sendStatus(400);
+};
+
+export const getActivityTemplates = async (req: Request, res: Response) => {
+    if (defaultActivities) {
+        return res.json(defaultActivities);
+    }
+
+    return res.sendStatus(404);
 };
 
 export const nextActivity = async (req: Request, res: Response) => {

@@ -7,12 +7,14 @@ import {
     updateActivityStartTime,
     deleteActivity,
     nextActivity,
+    getActivityTemplates,
 } from './../controllers/activity_controller';
 
 export const activityRoutes = express.Router();
 
 activityRoutes.post('/create', createActivity);
 activityRoutes.get('/show', showActivity);
+activityRoutes.get('/templates', getActivityTemplates);
 activityRoutes.get('/next', nextActivity);
 activityRoutes.patch('/title/update', updateActivityTitle);
 activityRoutes.patch('/description/update', updateActivityDescription);
