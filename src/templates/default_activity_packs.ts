@@ -44,7 +44,10 @@ export const createActivityPackFromTemplate = async (
 const getActivityPackById = (activityPackId: string) => {
     for (let i = 0; i < defaultActivityPacks.length; i++) {
         if (defaultActivityPacks[i].id == activityPackId) {
-            return defaultActivityPacks[i];
+            return Object.assign(
+                Object.getPrototypeOf(defaultActivityPacks[i]),
+                defaultActivityPacks[i]
+            );
         }
     }
 

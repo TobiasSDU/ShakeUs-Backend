@@ -10,7 +10,6 @@ import { GuestService } from './guest_service';
 import { SocketService } from './socket_service';
 import { ActivityPackService } from './activity_pack_service';
 import { createActivityPackFromTemplate } from '../templates/default_activity_packs';
-import { ActivityService } from './activity_service';
 
 export class PartyService {
     public static async createParty(party: Party, host: Guest) {
@@ -467,23 +466,16 @@ export class PartyService {
             );
 
             if (activityPack) {
-                activityPack.getActivities.forEach(
-                    async (activityId: string) => {
-                        const deleteStatus =
-                            await ActivityService.deleteActivity(activityId);
-
-                        if (!deleteStatus) {
-                            return false;
-                        }
-                    }
-                );
-
+                const activitiesDeleteStatus =
+                    ActivityPackService.removeAllActivityPackActivities(
+                        activityPack.id
+                    );
                 const packDeleteStatus =
                     await ActivityPackService.deleteActivityPack(
                         activityPack.id
                     );
 
-                if (!packDeleteStatus) {
+                if (!packDeleteStatus || !activitiesDeleteStatus) {
                     return false;
                 }
             }

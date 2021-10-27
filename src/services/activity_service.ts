@@ -22,6 +22,27 @@ export class ActivityService {
         return insertResult.acknowledged;
     }
 
+    public static async createManyActivities(activities: Activity[]) {
+        const collection = await this.getActivitiesCollection();
+        const documents = [];
+
+        for (let i = 0; i < activities.length; i++) {
+            documents.push({ ...activities[i] });
+        }
+
+        const insertResult = await collection.insertMany(documents);
+
+        if (insertResult.insertedCount == activities.length) {
+            for (let i = 0; i < activities.length; i++) {
+                await scheduleActivity(activities[i]);
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
     public static async showActivity(id: string) {
         const collection = await this.getActivitiesCollection();
         const queryResult = await collection.findOne({ _id: id });
