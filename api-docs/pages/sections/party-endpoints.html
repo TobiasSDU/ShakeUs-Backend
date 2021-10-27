@@ -6,7 +6,7 @@
 <div class="endpoint-container">
     <div class="endpoint-header">
         <h3 class="endpoint-method">POST</h3>
-        <p class="endpoint-path">/party/create</p>
+        <p class="endpoint-path">/party</p>
         <div class="endpoint-response-codes">
             <p class="endpoint-response-divider">Reponse Codes: </p>
             <p class="endpoint-response-success">200</p>
@@ -73,7 +73,7 @@
 <div class="endpoint-container">
     <div class="endpoint-header">
         <h3 class="endpoint-method">GET</h3>
-        <p class="endpoint-path">/party/show</p>
+        <p class="endpoint-path">/party</p>
         <div class="endpoint-response-codes">
             <p class="endpoint-response-divider">Reponse Codes: </p>
             <p class="endpoint-response-success">200</p>
@@ -134,7 +134,7 @@
 <div class="endpoint-container">
     <div class="endpoint-header">
         <h3 class="endpoint-method">PATCH</h3>
-        <p class="endpoint-path">/party/activity-pack/update</p>
+        <p class="endpoint-path">/party</p>
         <div class="endpoint-response-codes">
             <p class="endpoint-response-divider">Reponse Codes: </p>
             <p class="endpoint-response-success">200</p>
@@ -146,70 +146,23 @@
         <div class="endpoint-body-left">
             <h3 class="endpoint-body-title">Description</h3>
             <p class="endpoint-paragraph">
-                Updates the activity pack reference of a party.<br><br>
+                Updates the activity pack and/or primary host reference
+                of a party.<br><br>
 
                 <b>partyId:</b> The party which should be updated.<br>
                 <b>primaryHostId:</b> The id of the primary host. 
                 This field ensures that only the primary host can
                 update the activity pack reference.<br>
                 <b>newActivityPackId:</b> The id of the new activity pack.
-            </p>
-            <h3 class="endpoint-body-title">Socket.IO Event</h3>
-            <p class="endpoint-paragraph">
-                <b>Event name:</b> activity-pack-updated<br>
-                <b>Data:</b> { ActivityPack, message }
-            </p>
-        </div>
-        <div class="endpoint-body-right">
-            <div class="endpoint-request-body">
-                <pre>
-                    <code class="language-json">
-                        // Request Body
-                        {
-                            "partyId": string,
-                            "primaryHostId": string,
-                            "newActivityPackId": string
-                        }
-                    </code>
-                </pre>
-            </div>
-            <div class="endpoint-response-body">
-                <pre>
-                    <code class="language-json">
-                        // Response Code
-                        HTTP: 200 OK
-                    </code>
-                </pre>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="endpoint-container">
-    <div class="endpoint-header">
-        <h3 class="endpoint-method">PATCH</h3>
-        <p class="endpoint-path">/party/hosts/primary/update</p>
-        <div class="endpoint-response-codes">
-            <p class="endpoint-response-divider">Reponse Codes: </p>
-            <p class="endpoint-response-success">200</p>
-            <p class="endpoint-response-divider">|</p>
-            <p class="endpoint-response-error">400</p>
-        </div>
-    </div>
-    <div class="endpoint-body">
-        <div class="endpoint-body-left">
-            <h3 class="endpoint-body-title">Description</h3>
-            <p class="endpoint-paragraph">
-                Updates the primary host reference of a party.<br><br>
-                
-                <b>partyId:</b> The party which should be updated.<br>
-                <b>currentPrimary:</b> The id of the current primary host.
-                This field ensures that only the current primary host can
-                assign another host as the primary host.<br>
                 <b>newPrimary:</b> The id of the new primary host.
             </p>
-            <h3 class="endpoint-body-title">Socket.IO Event</h3>
+            <h3 class="endpoint-body-title">Socket.IO Events</h3>
             <p class="endpoint-paragraph">
+                <b>Event name:</b> activity-pack-updated<br>
+                <b>Data:</b> { ActivityPack, message }<br><br>
+
+                And / Or<br><br>
+
                 <b>Event name:</b> primary-host-updated<br>
                 <b>Data:</b> { partyId, newPrimaryHostId, message }
             </p>
@@ -221,8 +174,9 @@
                         // Request Body
                         {
                             "partyId": string,
-                            "currentPrimary": string,
-                            "newPrimary": string
+                            "primaryHostId": string,
+                            "newActivityPackId": string // Optional
+                            "newPrimary": string // Optional
                         }
                     </code>
                 </pre>
@@ -241,8 +195,8 @@
 
 <div class="endpoint-container">
     <div class="endpoint-header">
-        <h3 class="endpoint-method">PATCH</h3>
-        <p class="endpoint-path">/party/hosts/add</p>
+        <h3 class="endpoint-method">POST</h3>
+        <p class="endpoint-path">/party/add-host</p>
         <div class="endpoint-response-codes">
             <p class="endpoint-response-divider">Reponse Codes: </p>
             <p class="endpoint-response-success">200</p>
@@ -294,8 +248,8 @@
 
 <div class="endpoint-container">
     <div class="endpoint-header">
-        <h3 class="endpoint-method">PATCH</h3>
-        <p class="endpoint-path">/party/hosts/remove</p>
+        <h3 class="endpoint-method">POST</h3>
+        <p class="endpoint-path">/party/remove-host</p>
         <div class="endpoint-response-codes">
             <p class="endpoint-response-divider">Reponse Codes: </p>
             <p class="endpoint-response-success">200</p>
@@ -351,8 +305,8 @@
 
 <div class="endpoint-container">
     <div class="endpoint-header">
-        <h3 class="endpoint-method">PATCH</h3>
-        <p class="endpoint-path">/party/guests/remove</p>
+        <h3 class="endpoint-method">POST</h3>
+        <p class="endpoint-path">/party/remove-guest</p>
         <div class="endpoint-response-codes">
             <p class="endpoint-response-divider">Reponse Codes: </p>
             <p class="endpoint-response-success">200</p>
@@ -406,7 +360,7 @@
 
 <div class="endpoint-container">
     <div class="endpoint-header">
-        <h3 class="endpoint-method">PATCH</h3>
+        <h3 class="endpoint-method">POST</h3>
         <p class="endpoint-path">/party/join</p>
         <div class="endpoint-response-codes">
             <p class="endpoint-response-divider">Reponse Codes: </p>
@@ -460,7 +414,7 @@
 
 <div class="endpoint-container">
     <div class="endpoint-header">
-        <h3 class="endpoint-method">PATCH</h3>
+        <h3 class="endpoint-method">POST</h3>
         <p class="endpoint-path">/party/leave</p>
         <div class="endpoint-response-codes">
             <p class="endpoint-response-divider">Reponse Codes: </p>
@@ -515,7 +469,7 @@
 <div class="endpoint-container">
     <div class="endpoint-header">
         <h3 class="endpoint-method">DELETE</h3>
-        <p class="endpoint-path">/party/delete</p>
+        <p class="endpoint-path">/party</p>
         <div class="endpoint-response-codes">
             <p class="endpoint-response-divider">Reponse Codes: </p>
             <p class="endpoint-response-success">200</p>

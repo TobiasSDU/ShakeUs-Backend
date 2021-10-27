@@ -8,19 +8,17 @@ import {
     removeGuest,
     removeHost,
     showParty,
-    updateActivityPack,
-    updatePrimaryHost,
+    updateParty,
 } from '../controllers/party_controller';
 
 export const partyRoutes = express.Router();
 
-partyRoutes.post('/create', createParty);
-partyRoutes.get('/show', showParty);
-partyRoutes.patch('/activity-pack/update', updateActivityPack);
-partyRoutes.patch('/hosts/primary/update', updatePrimaryHost);
-partyRoutes.patch('/hosts/add', addHost);
-partyRoutes.patch('/hosts/remove', removeHost);
-partyRoutes.patch('/guests/remove', removeGuest);
-partyRoutes.patch('/join', joinParty);
-partyRoutes.patch('/leave', leaveParty);
-partyRoutes.delete('/delete', deleteParty);
+partyRoutes.post('', createParty);
+partyRoutes.get('', showParty);
+partyRoutes.patch('', updateParty);
+partyRoutes.post('/add-host', addHost);
+partyRoutes.post('/remove-host', removeHost);
+partyRoutes.post('/remove-guest', removeGuest);
+partyRoutes.post('/join', joinParty);
+partyRoutes.post('/leave', leaveParty);
+partyRoutes.delete('', deleteParty);

@@ -49,11 +49,43 @@ export const showParty = async (req: Request, res: Response) => {
     return res.sendStatus(400);
 };
 
-export const updateActivityPack = async (req: Request, res: Response) => {
+export const updateParty = async (req: Request, res: Response) => {
     const partyId = req.body.partyId;
     const primaryHostId = req.body.primaryHostId;
     const newActivityPackId = req.body.newActivityPackId;
+    const newPrimary = req.body.newPrimary;
+    const resultsArray: boolean[] = [];
 
+    if (partyId && primaryHostId) {
+        if (newActivityPackId) {
+            resultsArray.push(
+                await updateActivityPack(
+                    partyId,
+                    primaryHostId,
+                    newActivityPackId
+                )
+            );
+        }
+
+        if (newPrimary) {
+            resultsArray.push(
+                await updatePrimaryHost(partyId, primaryHostId, newPrimary)
+            );
+        }
+
+        if (!resultsArray.includes(false)) {
+            return res.sendStatus(200);
+        }
+    }
+
+    return res.sendStatus(400);
+};
+
+const updateActivityPack = async (
+    partyId: string,
+    primaryHostId: string,
+    newActivityPackId: string
+) => {
     if (partyId && primaryHostId && newActivityPackId) {
         const updateResult = await PartyService.updateActivityPack(
             partyId,
@@ -62,20 +94,18 @@ export const updateActivityPack = async (req: Request, res: Response) => {
         );
 
         if (updateResult) {
-            return res.sendStatus(200);
+            return true;
         }
-
-        return res.sendStatus(400);
     }
 
-    return res.sendStatus(400);
+    return false;
 };
 
-export const updatePrimaryHost = async (req: Request, res: Response) => {
-    const partyId = req.body.partyId;
-    const currentPrimary = req.body.currentPrimary;
-    const newPrimary = req.body.newPrimary;
-
+const updatePrimaryHost = async (
+    partyId: string,
+    currentPrimary: string,
+    newPrimary: string
+) => {
     if (partyId && currentPrimary && newPrimary) {
         const updateResult = await PartyService.updatePrimaryHost(
             partyId,
@@ -84,13 +114,11 @@ export const updatePrimaryHost = async (req: Request, res: Response) => {
         );
 
         if (updateResult) {
-            return res.sendStatus(200);
+            return true;
         }
-
-        return res.sendStatus(400);
     }
 
-    return res.sendStatus(400);
+    return false;
 };
 
 export const addHost = async (req: Request, res: Response) => {
