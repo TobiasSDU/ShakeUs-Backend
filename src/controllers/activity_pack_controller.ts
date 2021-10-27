@@ -57,10 +57,40 @@ export const getActivityPackTemplates = async (req: Request, res: Response) => {
     return res.sendStatus(404);
 };
 
-export const updateActivityPackTitle = async (req: Request, res: Response) => {
+export const updateActivityPack = async (req: Request, res: Response) => {
     const activityPackId = req.body.activityPackId;
     const newTitle = req.body.newTitle;
+    const newDescription = req.body.newDescription;
+    const resultArray: boolean[] = [];
 
+    if (activityPackId) {
+        if (newTitle) {
+            resultArray.push(
+                await updateActivityPackTitle(activityPackId, newTitle)
+            );
+        }
+
+        if (newDescription) {
+            resultArray.push(
+                await updateActivityPackDescription(
+                    activityPackId,
+                    newDescription
+                )
+            );
+        }
+
+        if (!resultArray.includes(false)) {
+            return res.sendStatus(200);
+        }
+    }
+
+    return res.sendStatus(400);
+};
+
+const updateActivityPackTitle = async (
+    activityPackId: string,
+    newTitle: string
+) => {
     if (activityPackId && newTitle) {
         const updateResult = await ActivityPackService.updateActivityPackTitle(
             activityPackId,
@@ -68,22 +98,17 @@ export const updateActivityPackTitle = async (req: Request, res: Response) => {
         );
 
         if (updateResult) {
-            return res.sendStatus(200);
+            return true;
         }
-
-        return res.sendStatus(400);
     }
 
-    return res.sendStatus(400);
+    return false;
 };
 
-export const updateActivityPackDescription = async (
-    req: Request,
-    res: Response
+const updateActivityPackDescription = async (
+    activityPackId: string,
+    newDescription: string
 ) => {
-    const activityPackId = req.body.activityPackId;
-    const newDescription = req.body.newDescription;
-
     if (activityPackId && newDescription) {
         const updateResult =
             await ActivityPackService.updateActivityPackDescription(
@@ -92,13 +117,11 @@ export const updateActivityPackDescription = async (
             );
 
         if (updateResult) {
-            return res.sendStatus(200);
+            return true;
         }
-
-        return res.sendStatus(400);
     }
 
-    return res.sendStatus(400);
+    return false;
 };
 
 export const addActivityPackActivity = async (req: Request, res: Response) => {

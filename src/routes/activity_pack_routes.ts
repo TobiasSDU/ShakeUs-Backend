@@ -7,21 +7,19 @@ import {
     removeActivityPackActivity,
     removeAllActivityPackActivities,
     showActivityPack,
-    updateActivityPackDescription,
-    updateActivityPackTitle,
+    updateActivityPack,
 } from '../controllers/activity_pack_controller';
 
 export const activityPackRoutes = express.Router();
 
-activityPackRoutes.post('/create', createActivityPack);
-activityPackRoutes.get('/show', showActivityPack);
+activityPackRoutes.post('', createActivityPack);
+activityPackRoutes.get('', showActivityPack);
 activityPackRoutes.get('/templates', getActivityPackTemplates);
-activityPackRoutes.patch('/title/update', updateActivityPackTitle);
-activityPackRoutes.patch('/description/update', updateActivityPackDescription);
-activityPackRoutes.patch('/activities/add', addActivityPackActivity);
-activityPackRoutes.patch('/activities/remove', removeActivityPackActivity);
-activityPackRoutes.patch(
-    '/activities/remove-all',
+activityPackRoutes.patch('', updateActivityPack);
+activityPackRoutes.post('/add-activity', addActivityPackActivity);
+activityPackRoutes.post('/remove-activity', removeActivityPackActivity);
+activityPackRoutes.post(
+    '/remove-all-activities',
     removeAllActivityPackActivities
 );
-activityPackRoutes.delete('/delete', deleteActivityPack);
+activityPackRoutes.delete('', deleteActivityPack);

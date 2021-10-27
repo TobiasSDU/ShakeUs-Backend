@@ -25,10 +25,10 @@ beforeEach(async () => {
 });
 
 describe('endpoint tests for ActivityPack routes using GET', () => {
-    test('GET request to /activity-pack/show returns an activity pack', async () => {
+    test('GET request to /activity-pack returns an activity pack', async () => {
         const activityPackId = testActivityPack1.id;
 
-        const res = await req.get('/activity-pack/show').send({
+        const res = await req.get('/activity-pack').send({
             activityPackId: activityPackId,
         });
 
@@ -43,10 +43,10 @@ describe('endpoint tests for ActivityPack routes using GET', () => {
         expect(res.body.activities).toEqual(testActivityPack1.getActivities);
     });
 
-    test('GET request to /activity-pack/show with an invalid id returns 400', async () => {
+    test('GET request to /activity-pack with an invalid id returns 400', async () => {
         const activityPackId = 'invalidId';
 
-        const res = await req.get('/activity-pack/show').send({
+        const res = await req.get('/activity-pack').send({
             activityPackId: activityPackId,
         });
 
@@ -56,11 +56,11 @@ describe('endpoint tests for ActivityPack routes using GET', () => {
 });
 
 describe('endpoint tests for ActivityPack routes using POST', () => {
-    test('POST request to /activity-pack/create creates an activity pack', async () => {
+    test('POST request to /activity-pack creates an activity pack', async () => {
         const title = 'newTitle';
         const description = 'newDescription';
 
-        const res = await req.post('/activity-pack/create').send({
+        const res = await req.post('/activity-pack').send({
             title: title,
             description: description,
         });
@@ -77,46 +77,12 @@ describe('endpoint tests for ActivityPack routes using POST', () => {
         expect(activityPack.body.description).toEqual(description);
         expect(activityPack.body.activities).toEqual([]);
     });
-});
 
-describe('endpoint tests for ActivityPack routes using PATCH', () => {
-    test('PATCH request to /activity-pack/title/update updates the title field', async () => {
-        const id = testActivityPack1.id;
-        const newTitle = 'NewTitle';
-
-        const res = await req.patch('/activity-pack/title/update').send({
-            activityPackId: id,
-            newTitle: newTitle,
-        });
-
-        expect(res.statusCode).toEqual(200);
-
-        const activityPack = await getActivityPack(id);
-
-        expect(activityPack.body.title).toEqual(newTitle);
-    });
-
-    test('PATCH request to /activity-pack/description/update updates the description field', async () => {
-        const id = testActivityPack1.id;
-        const newDescription = 'NewDescription';
-
-        const res = await req.patch('/activity-pack/description/update').send({
-            activityPackId: id,
-            newDescription: newDescription,
-        });
-
-        expect(res.statusCode).toEqual(200);
-
-        const activityPack = await getActivityPack(id);
-
-        expect(activityPack.body.description).toEqual(newDescription);
-    });
-
-    test('PATCH request to /activity-pack/activities/add adds an activity to the activities array', async () => {
+    test('POST request to /activity-pack/add-activity adds an activity to the activities array', async () => {
         const id = testActivityPack1.id;
         const activityId = testActivity1.id;
 
-        const res = await req.patch('/activity-pack/activities/add').send({
+        const res = await req.post('/activity-pack/add-activity').send({
             activityPackId: id,
             activityId: activityId,
         });
@@ -130,11 +96,11 @@ describe('endpoint tests for ActivityPack routes using PATCH', () => {
         );
     });
 
-    test('PATCH request to /activity-pack/activities/remove removes an activity from the activities array', async () => {
+    test('POST request to /activity-pack/remove-activity removes an activity from the activities array', async () => {
         const id = testActivityPack1.id;
         const activityId = testActivityPack1.getActivities[0];
 
-        const res = await req.patch('/activity-pack/activities/remove').send({
+        const res = await req.post('/activity-pack/remove-activity').send({
             activityPackId: id,
             activityId: activityId,
         });
@@ -148,11 +114,11 @@ describe('endpoint tests for ActivityPack routes using PATCH', () => {
         );
     });
 
-    test('PATCH request to /activity-pack/activities/remove-all removes all activities from the activities array', async () => {
+    test('POST request to /activity-pack/remove-all-activities removes all activities from the activities array', async () => {
         const id = testActivityPack1.id;
 
         const res = await req
-            .patch('/activity-pack/activities/remove-all')
+            .post('/activity-pack/remove-all-activities')
             .send({
                 activityPackId: id,
             });
@@ -165,11 +131,45 @@ describe('endpoint tests for ActivityPack routes using PATCH', () => {
     });
 });
 
+describe('endpoint tests for ActivityPack routes using PATCH', () => {
+    test('PATCH request to /activity-pack updates the title field', async () => {
+        const id = testActivityPack1.id;
+        const newTitle = 'NewTitle';
+
+        const res = await req.patch('/activity-pack').send({
+            activityPackId: id,
+            newTitle: newTitle,
+        });
+
+        expect(res.statusCode).toEqual(200);
+
+        const activityPack = await getActivityPack(id);
+
+        expect(activityPack.body.title).toEqual(newTitle);
+    });
+
+    test('PATCH request to /activity-pack updates the description field', async () => {
+        const id = testActivityPack1.id;
+        const newDescription = 'NewDescription';
+
+        const res = await req.patch('/activity-pack').send({
+            activityPackId: id,
+            newDescription: newDescription,
+        });
+
+        expect(res.statusCode).toEqual(200);
+
+        const activityPack = await getActivityPack(id);
+
+        expect(activityPack.body.description).toEqual(newDescription);
+    });
+});
+
 describe('endpoint tests for ActivityPack routes using DELETE', () => {
-    test('DELETE request to /activity-pack/delete deletes an activity pack', async () => {
+    test('DELETE request to /activity-pack deletes an activity pack', async () => {
         const id = testActivityPack1.id;
 
-        const res = await req.delete('/activity-pack/delete').send({
+        const res = await req.delete('/activity-pack').send({
             activityPackId: id,
         });
 
@@ -179,10 +179,10 @@ describe('endpoint tests for ActivityPack routes using DELETE', () => {
         expect(Object.keys(activityPack.body).length).toEqual(0);
     });
 
-    test('DELETE request to /activity-pack/delete with an invalid id returns 400', async () => {
+    test('DELETE request to /activity-pack with an invalid id returns 400', async () => {
         const id = 'InvalidId';
 
-        const res = await req.delete('/activity-pack/delete').send({
+        const res = await req.delete('/activity-pack').send({
             activityPackId: id,
         });
 
