@@ -97,7 +97,7 @@ export class ActivityService {
         );
 
         if (updateResult.modifiedCount == 1) {
-            await this.emitActivityUpdated(id);
+            await this.emitActivityUpdated(id, 'title', newTitle);
             return true;
         }
 
@@ -115,7 +115,7 @@ export class ActivityService {
         );
 
         if (updateResult.modifiedCount == 1) {
-            await this.emitActivityUpdated(id);
+            await this.emitActivityUpdated(id, 'description', newDescription);
             return true;
         }
 
@@ -133,7 +133,7 @@ export class ActivityService {
         );
 
         if (updateResult.modifiedCount == 1) {
-            await this.emitActivityUpdated(id);
+            await this.emitActivityUpdated(id, 'start-time', newStartTime);
             return true;
         }
 
@@ -176,16 +176,21 @@ export class ActivityService {
         return db.collection('activities');
     }
 
-    private static async emitActivityUpdated(activityId: string) {
+    private static async emitActivityUpdated(
+        activityId: string,
+        updatedField: string,
+        updatedValue: string
+    ) {
         const party = await this.getPartyId(activityId);
         const updatedActivity = await ActivityService.showActivity(activityId);
         const socketService: SocketService = app.get('socketService');
 
         if (party) {
             socketService.emitToRoom(
-                'activity-updated',
+                `activity-${updatedField}-updated`,
                 {
                     updatedActivity: { ...updatedActivity },
+                    updatedField: updatedValue,
                     message: 'The activity has been updated',
                 },
                 party._id
