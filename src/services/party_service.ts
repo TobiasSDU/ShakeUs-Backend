@@ -110,6 +110,19 @@ export class PartyService {
                 { $set: { primaryHost: newPrimary } }
             );
 
+            if (updateResult.modifiedCount == 1) {
+                const socketService: SocketService = app.get('socketService');
+                socketService.emitToRoom(
+                    'primary-host-updated',
+                    {
+                        partyId: partyId,
+                        newPrimaryHostId: newPrimary,
+                        message: 'The primary host has been updated',
+                    },
+                    partyId
+                );
+            }
+
             return updateResult.acknowledged;
         } else {
             return false;
@@ -223,6 +236,20 @@ export class PartyService {
                 const deleteResult = await GuestService.deleteGuest(
                     removedGuestId
                 );
+
+                if (deleteResult) {
+                    const socketService: SocketService =
+                        app.get('socketService');
+                    socketService.emitToRoom(
+                        'guest-removed',
+                        {
+                            partyId: partyId,
+                            removedGuestId: removedGuestId,
+                            message: 'A guest has been removed from the party',
+                        },
+                        partyId
+                    );
+                }
                 return deleteResult;
             } else {
                 return false;
