@@ -71,10 +71,37 @@ export const nextActivity = async (req: Request, res: Response) => {
     return res.sendStatus(400);
 };
 
-export const updateActivityTitle = async (req: Request, res: Response) => {
+export const updateActivity = async (req: Request, res: Response) => {
     const id = req.body.activityId;
     const newTitle = req.body.newTitle;
+    const newDescription = req.body.newDescription;
+    const newStartTime = req.body.newStartTime;
+    const resultArray: boolean[] = [];
 
+    if (id) {
+        if (newTitle) {
+            resultArray.push(await updateActivityTitle(id, newTitle));
+        }
+
+        if (newDescription) {
+            resultArray.push(
+                await updateActivityDescription(id, newDescription)
+            );
+        }
+
+        if (newStartTime) {
+            resultArray.push(await updateActivityStartTime(id, newStartTime));
+        }
+
+        if (!resultArray.includes(false)) {
+            return res.sendStatus(200);
+        }
+    }
+
+    return res.sendStatus(400);
+};
+
+const updateActivityTitle = async (id: string, newTitle: string) => {
     if (id && newTitle) {
         const updateResult = await ActivityService.updateActivityTitle(
             id,
@@ -82,22 +109,17 @@ export const updateActivityTitle = async (req: Request, res: Response) => {
         );
 
         if (updateResult) {
-            return res.sendStatus(200);
+            return true;
         }
-
-        return res.sendStatus(400);
     }
 
-    return res.sendStatus(400);
+    return false;
 };
 
-export const updateActivityDescription = async (
-    req: Request,
-    res: Response
+const updateActivityDescription = async (
+    id: string,
+    newDescription: string
 ) => {
-    const id = req.body.activityId;
-    const newDescription = req.body.newDescription;
-
     if (id && newDescription) {
         const updateResult = await ActivityService.updateActivityDescription(
             id,
@@ -105,19 +127,14 @@ export const updateActivityDescription = async (
         );
 
         if (updateResult) {
-            return res.sendStatus(200);
+            return true;
         }
-
-        return res.sendStatus(400);
     }
 
-    return res.sendStatus(400);
+    return false;
 };
 
-export const updateActivityStartTime = async (req: Request, res: Response) => {
-    const id = req.body.activityId;
-    const newStartTime = req.body.newStartTime;
-
+const updateActivityStartTime = async (id: string, newStartTime: string) => {
     if (id && newStartTime) {
         const updateResult = await ActivityService.updateActivityStartTime(
             id,
@@ -125,13 +142,11 @@ export const updateActivityStartTime = async (req: Request, res: Response) => {
         );
 
         if (updateResult) {
-            return res.sendStatus(200);
+            return true;
         }
-
-        return res.sendStatus(400);
     }
 
-    return res.sendStatus(400);
+    return false;
 };
 
 export const deleteActivity = async (req: Request, res: Response) => {

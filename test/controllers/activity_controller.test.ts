@@ -20,10 +20,10 @@ beforeEach(async () => {
 });
 
 describe('endpoint tests for Activity routes using GET', () => {
-    test('GET request to /activity/show returns an activity', async () => {
+    test('GET request to /activity returns an activity', async () => {
         const activityId = testActivity1.id;
 
-        const res = await req.get('/activity/show').send({
+        const res = await req.get('/activity').send({
             activityId: activityId,
         });
 
@@ -38,10 +38,10 @@ describe('endpoint tests for Activity routes using GET', () => {
         expect(res.body.startTime).toEqual(testActivity1.getStartTime);
     });
 
-    test('GET request to /activity/show with an invalid id returns 400', async () => {
+    test('GET request to /activity with an invalid id returns 400', async () => {
         const activityId = 'invalidId';
 
-        const res = await req.get('/activity/show').send({
+        const res = await req.get('/activity').send({
             activityId: activityId,
         });
 
@@ -51,12 +51,12 @@ describe('endpoint tests for Activity routes using GET', () => {
 });
 
 describe('endpoint tests for Activity routes using POST', () => {
-    test('POST request to /activity/show returns an activity', async () => {
+    test('POST request to /activity returns an activity', async () => {
         const title = 'TestTitle';
         const description = 'TestDescription';
         const startTime = 1635082733652;
 
-        const res = await req.post('/activity/create').send({
+        const res = await req.post('/activity').send({
             title: title,
             description: description,
             startTime: startTime,
@@ -76,11 +76,11 @@ describe('endpoint tests for Activity routes using POST', () => {
 });
 
 describe('endpoint tests for Activity routes using PATCH', () => {
-    test('PATCH request to /activity/title/update updates the title field', async () => {
+    test('PATCH request to /activity updates the title field', async () => {
         const id = testActivity1.id;
         const newTitle = 'NewTitle';
 
-        const res = await req.patch('/activity/title/update').send({
+        const res = await req.patch('/activity').send({
             activityId: id,
             newTitle: newTitle,
         });
@@ -92,11 +92,11 @@ describe('endpoint tests for Activity routes using PATCH', () => {
         expect(activity.body.title).toEqual(newTitle);
     });
 
-    test('PATCH request to /activity/description/update updates the description field', async () => {
+    test('PATCH request to /activity updates the description field', async () => {
         const id = testActivity1.id;
         const newDescription = 'NewDescription';
 
-        const res = await req.patch('/activity/description/update').send({
+        const res = await req.patch('/activity').send({
             activityId: id,
             newDescription: newDescription,
         });
@@ -108,11 +108,11 @@ describe('endpoint tests for Activity routes using PATCH', () => {
         expect(activity.body.description).toEqual(newDescription);
     });
 
-    test('PATCH request to /activity/start-time/update updates the startTime field', async () => {
+    test('PATCH request to /activity updates the startTime field', async () => {
         const id = testActivity1.id;
         const newStartTime = 'NewStartTime';
 
-        const res = await req.patch('/activity/start-time/update').send({
+        const res = await req.patch('/activity').send({
             activityId: id,
             newStartTime: newStartTime,
         });
@@ -126,10 +126,10 @@ describe('endpoint tests for Activity routes using PATCH', () => {
 });
 
 describe('endpoint tests for Activity routes using DELETE', () => {
-    test('DELETE request to /activity/delete deletes an activity', async () => {
+    test('DELETE request to /activity deletes an activity', async () => {
         const id = testActivity1.id;
 
-        const res = await req.delete('/activity/delete').send({
+        const res = await req.delete('/activity').send({
             activityId: id,
         });
 
@@ -140,10 +140,10 @@ describe('endpoint tests for Activity routes using DELETE', () => {
         expect(Object.keys(activity.body).length).toEqual(0);
     });
 
-    test('DELETE request to /activity/delete with an invalid id returns 400', async () => {
+    test('DELETE request to /activity with an invalid id returns 400', async () => {
         const id = 'InvalidId';
 
-        const res = await req.delete('/activity/delete').send({
+        const res = await req.delete('/activity').send({
             activityId: id,
         });
 

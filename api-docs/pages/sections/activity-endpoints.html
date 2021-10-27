@@ -6,7 +6,7 @@
 <div class="endpoint-container">
     <div class="endpoint-header">
         <h3 class="endpoint-method">POST</h3>
-        <p class="endpoint-path">/activity/create</p>
+        <p class="endpoint-path">/activity</p>
         <div class="endpoint-response-codes">
             <p class="endpoint-response-divider">Reponse Codes: </p>
             <p class="endpoint-response-success">200</p>
@@ -65,7 +65,7 @@
 <div class="endpoint-container">
     <div class="endpoint-header">
         <h3 class="endpoint-method">GET</h3>
-        <p class="endpoint-path">/activity/show</p>
+        <p class="endpoint-path">/activity</p>
         <div class="endpoint-response-codes">
             <p class="endpoint-response-divider">Reponse Codes: </p>
             <p class="endpoint-response-success">200</p>
@@ -109,6 +109,58 @@
                             "description": string,
                             "startTime": number
                         }
+                    </code>
+                </pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="endpoint-container">
+    <div class="endpoint-header">
+        <h3 class="endpoint-method">GET</h3>
+        <p class="endpoint-path">/activity/templates</p>
+        <div class="endpoint-response-codes">
+            <p class="endpoint-response-divider">Reponse Codes: </p>
+            <p class="endpoint-response-success">200</p>
+        </div>
+    </div>
+    <div class="endpoint-body">
+        <div class="endpoint-body-left">
+            <h3 class="endpoint-body-title">Description</h3>
+            <p class="endpoint-paragraph">
+                Returns an array of template activities. These
+                activities are in the app by default and can be
+                added to activity packs.<br><br>
+
+                This endpoint does not require any request parameters.
+            </p>
+            <h3 class="endpoint-body-title">Socket.IO Event</h3>
+            <p class="endpoint-paragraph">
+                No event emitted
+            </p>
+        </div>
+        <div class="endpoint-body-right">
+            <div class="endpoint-request-body">
+                <pre>
+                    <code class="language-json">
+                        // No Request Body
+                    </code>
+                </pre>
+            </div>
+            <div class="endpoint-response-body">
+                <pre>
+                    <code class="language-json">
+                        // Response Body
+                        [
+                            {
+                                "_id": string,
+                                "title": string,
+                                "description": string,
+                                "startTime": number
+                            },
+                            ...
+                        ]
                     </code>
                 </pre>
             </div>
@@ -179,7 +231,7 @@
 <div class="endpoint-container">
     <div class="endpoint-header">
         <h3 class="endpoint-method">PATCH</h3>
-        <p class="endpoint-path">/activity/title/update</p>
+        <p class="endpoint-path">/activity</p>
         <div class="endpoint-response-codes">
             <p class="endpoint-response-divider">Reponse Codes: </p>
             <p class="endpoint-response-success">200</p>
@@ -191,113 +243,30 @@
         <div class="endpoint-body-left">
             <h3 class="endpoint-body-title">Description</h3>
             <p class="endpoint-paragraph">
-                Updates the title of an activity.<br><br>
+                Updates the title, description and/or startTime
+                fields of an activity.<br><br>
                 
                 <b>activityId:</b> The activity which should be updated.<br>
                 <b>newTitle:</b> The activity's new title<br>
+                <b>newDescription:</b> The activity's new description<br>
+                <b>newStartTime:</b> The activity's new start time<br>
             </p>
-            <h3 class="endpoint-body-title">Socket.IO Event</h3>
+            <h3 class="endpoint-body-title">Socket.IO Events</h3>
             <p class="endpoint-paragraph">
                 <b>Event name:</b> activity-title-updated<br>
                 <b>Data:</b> { removedActivityId, updatedField, message }
-            </p>
-        </div>
-        <div class="endpoint-body-right">
-            <div class="endpoint-request-body">
-                <pre>
-                    <code class="language-json">
-                        // Request Body
-                        {
-                            "activityId": string,
-                            "newTitle": string
-                        }
-                    </code>
-                </pre>
-            </div>
-            <div class="endpoint-response-body">
-                <pre>
-                    <code class="language-json">
-                        // Response Code
-                        HTTP: 200 OK
-                    </code>
-                </pre>
-            </div>
-        </div>
-    </div>
-</div>
+                <br><br>
 
-<div class="endpoint-container">
-    <div class="endpoint-header">
-        <h3 class="endpoint-method">PATCH</h3>
-        <p class="endpoint-path">/activity/description/update</p>
-        <div class="endpoint-response-codes">
-            <p class="endpoint-response-divider">Reponse Codes: </p>
-            <p class="endpoint-response-success">200</p>
-            <p class="endpoint-response-divider">|</p>
-            <p class="endpoint-response-error">400</p>
-        </div>
-    </div>
-    <div class="endpoint-body">
-        <div class="endpoint-body-left">
-            <h3 class="endpoint-body-title">Description</h3>
-            <p class="endpoint-paragraph">
-                Updates the description of an activity.<br><br>
-                
-                <b>activityId:</b> The activity which should be updated.<br>
-                <b>newDescription:</b> The activity's new description<br>
-            </p>
-            <h3 class="endpoint-body-title">Socket.IO Event</h3>
-            <p class="endpoint-paragraph">
+                And / Or
+
+                <br><br>
                 <b>Event name:</b> activity-description-updated<br>
                 <b>Data:</b> { removedActivityId, updatedField, message }
-            </p>
-        </div>
-        <div class="endpoint-body-right">
-            <div class="endpoint-request-body">
-                <pre>
-                    <code class="language-json">
-                        // Request Body
-                        {
-                            "activityId": string,
-                            "newDescription": string
-                        }
-                    </code>
-                </pre>
-            </div>
-            <div class="endpoint-response-body">
-                <pre>
-                    <code class="language-json">
-                        // Response Code
-                        HTTP: 200 OK
-                    </code>
-                </pre>
-            </div>
-        </div>
-    </div>
-</div>
+                <br><br>
 
-<div class="endpoint-container">
-    <div class="endpoint-header">
-        <h3 class="endpoint-method">PATCH</h3>
-        <p class="endpoint-path">/activity/start-time/update</p>
-        <div class="endpoint-response-codes">
-            <p class="endpoint-response-divider">Reponse Codes: </p>
-            <p class="endpoint-response-success">200</p>
-            <p class="endpoint-response-divider">|</p>
-            <p class="endpoint-response-error">400</p>
-        </div>
-    </div>
-    <div class="endpoint-body">
-        <div class="endpoint-body-left">
-            <h3 class="endpoint-body-title">Description</h3>
-            <p class="endpoint-paragraph">
-                Updates the start time of an activity.<br><br>
-                
-                <b>activityId:</b> The activity which should be updated.<br>
-                <b>newStartTime:</b> The activity's new start time<br>
-            </p>
-            <h3 class="endpoint-body-title">Socket.IO Event</h3>
-            <p class="endpoint-paragraph">
+                And / Or
+
+                <br><br>
                 <b>Event name:</b> activity-start-time-updated<br>
                 <b>Data:</b> { removedActivityId, updatedField, message }
             </p>
@@ -309,7 +278,9 @@
                         // Request Body
                         {
                             "activityId": string,
-                            "newStartTime": number // Unix timestamp in miliseconds
+                            "newTitle": string, // Optional
+                            "newDescription": string, // Optional
+                            "newStartTime": string // Optional
                         }
                     </code>
                 </pre>
