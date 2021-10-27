@@ -1,24 +1,27 @@
 import { defaultActivityPack } from '../templates/default_activity_pack.js';
 
 // eslint-disable-next-line no-undef
-let socket = io();
+const socket = io();
 
-let button = document.getElementById('CreatePartyButton');
-let nameInput = document.getElementById('hostName');
-let activityPackId = defaultActivityPack._id;
-let resultElement = document.getElementById('createPartyResultData');
+const button = document.getElementById('CreatePartyButton');
+const nameInput = document.getElementById('hostName');
+const activityPackId = defaultActivityPack._id;
+const resultElement = document.getElementById('createPartyResultData');
 
 button.addEventListener('click', async () => {
-    const res = await fetch('http://localhost:3000/party/create', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            activityPackId: activityPackId,
-            hostName: nameInput.value,
-        }),
-    });
+    const res = await fetch(
+        `${location.protocol}//${location.host}/party/create`,
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                activityPackId: activityPackId,
+                hostName: nameInput.value,
+            }),
+        }
+    );
 
     const data = await res.json();
 
