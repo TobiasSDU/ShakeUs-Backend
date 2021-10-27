@@ -20,10 +20,10 @@ beforeEach(async () => {
 });
 
 describe('endpoint tests for Guest routes using GET', () => {
-    test('GET request to /guest/show returns a guest', async () => {
+    test('GET request to /guest returns a guest', async () => {
         const guestId = testGuest1.id;
 
-        const res = await req.get('/guest/show').send({
+        const res = await req.get('/guest').send({
             guestId: guestId,
         });
 
@@ -33,10 +33,10 @@ describe('endpoint tests for Guest routes using GET', () => {
         expect(res.body.name).toBeTruthy();
     });
 
-    test('GET request to /guest/show with an invalid guestId returns 400', async () => {
+    test('GET request to /guest with an invalid guestId returns 400', async () => {
         const guestId = 'invalidId';
 
-        const res = await req.get('/guest/show').send({
+        const res = await req.get('/guest').send({
             guestId: guestId,
         });
 
@@ -46,11 +46,11 @@ describe('endpoint tests for Guest routes using GET', () => {
 });
 
 describe('endpoint tests for Guest routes using PATCH', () => {
-    test('PATCH request to /guest/name/update updates name field', async () => {
+    test('PATCH request to /guest updates name field', async () => {
         const guestId = testGuest1.id;
         const newName = 'NewGuestName';
 
-        const res = await req.patch('/guest/name/update').send({
+        const res = await req.patch('/guest').send({
             guestId: guestId,
             newName: newName,
         });
@@ -63,11 +63,11 @@ describe('endpoint tests for Guest routes using PATCH', () => {
         expect(guest.body.name).toEqual(newName);
     });
 
-    test('PATCH request to /guest/name/update with an invalid guestId returns 400', async () => {
+    test('PATCH request to /guest with an invalid guestId returns 400', async () => {
         const guestId = 'invalidId';
         const newName = 'NewGuestName';
 
-        const res = await req.patch('/guest/name/update').send({
+        const res = await req.patch('/guest').send({
             guestId: guestId,
             newName: newName,
         });

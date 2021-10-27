@@ -3,5 +3,5 @@ import { showGuest, updateGuestName } from '../controllers/guest_controller';
 
 export const guestRoutes = express.Router();
 
-guestRoutes.get('/show', showGuest);
-guestRoutes.patch('/name/update', updateGuestName);
+guestRoutes.get('', showGuest);
+guestRoutes.patch('', updateGuestName);
