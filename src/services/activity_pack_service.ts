@@ -44,7 +44,7 @@ export class ActivityPackService {
         );
 
         if (updateResult.modifiedCount == 1) {
-            await this.emitActivityPackUpdated(id);
+            await this.emitActivityPackUpdated(id, 'title', newTitle);
             return true;
         }
 
@@ -62,7 +62,11 @@ export class ActivityPackService {
         );
 
         if (updateResult.modifiedCount == 1) {
-            await this.emitActivityPackUpdated(id);
+            await this.emitActivityPackUpdated(
+                id,
+                'description',
+                newDescription
+            );
             return true;
         }
 
@@ -216,16 +220,21 @@ export class ActivityPackService {
         return db.collection('activity-packs');
     }
 
-    private static async emitActivityPackUpdated(activityPackId: string) {
+    private static async emitActivityPackUpdated(
+        activityPackId: string,
+        updatedField: string,
+        updatedValue: string
+    ) {
         const party = await this.getPartyId(activityPackId);
         const updatedActivityPack = await this.showActivityPack(activityPackId);
         const socketService: SocketService = app.get('socketService');
 
         if (party) {
             socketService.emitToRoom(
-                'activity-pack-updated',
+                `activity-pack-${updatedField}-updated`,
                 {
                     updatedActivityPack: { ...updatedActivityPack },
+                    updatedField: updatedValue,
                     message: 'The activity pack has been updated',
                 },
                 party._id
