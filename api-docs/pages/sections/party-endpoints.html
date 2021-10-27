@@ -18,11 +18,29 @@
         <div class="endpoint-body-left">
             <h3 class="endpoint-body-title">Description</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                Creates a new party.<br><br>
+
+                <b>activityPackId:</b> If the parameter points to
+                an activity pack that exists in the database, then this
+                activity pack will be assigned to the party.<br>
+                Alternatively, the id of an activity pack template 
+                <em>(/src/templates/default_activity_packs.ts)</em>
+                can be used. This will create a clone of the template
+                and the activities contained in it and generate unique
+                ids for all of them. This is not recommended, as it
+                increased the response time of the request. A better
+                solution would be to create the activity pack first via
+                the "/activity/create" endpoint and then use the returned
+                id to create the party.<br>
+
+                <b>hostName:</b> The name of the host. A document will
+                automatically be added to the guests collection when
+                the party is created  
+
             </p>
-            <h3 class="endpoint-body-title">Socket.IO Events</h3>
+            <h3 class="endpoint-body-title">Socket.IO Event</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                No event emitted
             </p>
         </div>
         <div class="endpoint-body-right">
@@ -67,11 +85,20 @@
         <div class="endpoint-body-left">
             <h3 class="endpoint-body-title">Description</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                Returns information about the party matching the
+                provided id.<br><br>
+
+                <b>partyId:</b> The id of the party you want information
+                about.<br>
+
+                <b>guestId:</b> A guestId needs to be provided.
+                This ensures that only users who have the partyId can
+                request information about the party. A hostId will also
+                grant access to the endpoint. 
             </p>
-            <h3 class="endpoint-body-title">Socket.IO Events</h3>
+            <h3 class="endpoint-body-title">Socket.IO Event</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                No event emitted
             </p>
         </div>
         <div class="endpoint-body-right">
@@ -119,11 +146,18 @@
         <div class="endpoint-body-left">
             <h3 class="endpoint-body-title">Description</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                Updates the activity pack reference of a party.<br><br>
+
+                <b>partyId:</b> The party which should be updated.<br>
+                <b>primaryHostId:</b> The id of the primary host. 
+                This field ensures that only the primary host can
+                update the activity pack reference.<br>
+                <b>newActivityPackId:</b> The id of the new activity pack.
             </p>
-            <h3 class="endpoint-body-title">Socket.IO Events</h3>
+            <h3 class="endpoint-body-title">Socket.IO Event</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                <b>Event name:</b> activity-pack-updated<br>
+                <b>Data:</b> { ActivityPack, message }
             </p>
         </div>
         <div class="endpoint-body-right">
@@ -166,11 +200,17 @@
         <div class="endpoint-body-left">
             <h3 class="endpoint-body-title">Description</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                Updates the primary host reference of a party.<br><br>
+                
+                <b>partyId:</b> The party which should be updated.<br>
+                <b>currentPrimary:</b> The id of the current primary host.
+                This field ensures that only the current primary host can
+                assign another host as the primary host.<br>
+                <b>newPrimary:</b> The id of the new primary host.
             </p>
-            <h3 class="endpoint-body-title">Socket.IO Events</h3>
+            <h3 class="endpoint-body-title">Socket.IO Event</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                No event emitted
             </p>
         </div>
         <div class="endpoint-body-right">
@@ -213,11 +253,17 @@
         <div class="endpoint-body-left">
             <h3 class="endpoint-body-title">Description</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                Promotes a guest to a host.<br><br>
+                
+                <b>partyId:</b> The party which should be updated.<br>
+                <b>hostId:</b> The id of any current host in the party.
+                This field ensures that only hosts can add other hosts.<br>
+                <b>newHostId:</b> The id of the new host.
             </p>
-            <h3 class="endpoint-body-title">Socket.IO Events</h3>
+            <h3 class="endpoint-body-title">Socket.IO Event</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                <b>Event name:</b> guest-promoted<br>
+                <b>Data:</b> { newHostId, newHostName, message }
             </p>
         </div>
         <div class="endpoint-body-right">
@@ -262,11 +308,19 @@
         <div class="endpoint-body-left">
             <h3 class="endpoint-body-title">Description</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                Demotes a host to a guest.<br><br>
+                
+                <b>partyId:</b> The party which should be updated.<br>
+                <b>primaryHostId:</b> The id of the primary host.
+                This field ensures that only the primary host can remove
+                other hosts.<br>
+                <b>removedHostId:</b> The id of the host that should be
+                demoted.
             </p>
-            <h3 class="endpoint-body-title">Socket.IO Events</h3>
+            <h3 class="endpoint-body-title">Socket.IO Event</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                <b>Event name:</b> host-demoted<br>
+                <b>Data:</b> { removedHostId, removedHostName, message }
             </p>
         </div>
         <div class="endpoint-body-right">
@@ -309,11 +363,18 @@
         <div class="endpoint-body-left">
             <h3 class="endpoint-body-title">Description</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                Removes a guest from the party.<br><br>
+                
+                <b>partyId:</b> The party which should be updated.<br>
+                <b>hostId:</b> The id of any current host.
+                This field ensures that only hosts can remove guest from
+                the party.<br>
+                <b>removedGuestId:</b> The id of the guest that should be
+                removed.
             </p>
-            <h3 class="endpoint-body-title">Socket.IO Events</h3>
+            <h3 class="endpoint-body-title">Socket.IO Event</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                No event emitted
             </p>
         </div>
         <div class="endpoint-body-right">
@@ -356,11 +417,16 @@
         <div class="endpoint-body-left">
             <h3 class="endpoint-body-title">Description</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                Connects a guest to a party.<br><br>
+                
+                <b>partyId:</b> The id of the party which the user 
+                wishes to join<br>
+                <b>guestName:</b> The name of the guest
             </p>
-            <h3 class="endpoint-body-title">Socket.IO Events</h3>
+            <h3 class="endpoint-body-title">Socket.IO Event</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                <b>Event name:</b> user-joined-party<br>
+                <b>Data:</b> { guestId, guestName, message }
             </p>
         </div>
         <div class="endpoint-body-right">
@@ -405,11 +471,19 @@
         <div class="endpoint-body-left">
             <h3 class="endpoint-body-title">Description</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                Disconnects a user from a party.<br><br>
+            
+                <b>partyId:</b> The id of the party which the user
+                wishes to leave<br>
+                <b>userId:</b> The id of the user. Both guests and
+                hosts can leave a party. However, the primary host
+                can not leave a party. The primary host has to assign
+                a new primary host first or delete the party.
             </p>
-            <h3 class="endpoint-body-title">Socket.IO Events</h3>
+            <h3 class="endpoint-body-title">Socket.IO Event</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                <b>Event name:</b> user-left-party<br>
+                <b>Data:</b> { userId, userName, message }
             </p>
         </div>
         <div class="endpoint-body-right">
@@ -451,11 +525,18 @@
         <div class="endpoint-body-left">
             <h3 class="endpoint-body-title">Description</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                Deletes a party.<br><br>
+                
+                <b>partyId:</b> The id of the party which should be
+                deleted.<br>
+                <b>primaryHostId:</b> The id of the primary host.
+                This field ensures that only the primary host can delete
+                a party.
             </p>
-            <h3 class="endpoint-body-title">Socket.IO Events</h3>
+            <h3 class="endpoint-body-title">Socket.IO Event</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                <b>Event name:</b> party-deleted<br>
+                <b>Data:</b> { partyId, message }
             </p>
         </div>
         <div class="endpoint-body-right">

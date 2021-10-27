@@ -18,11 +18,21 @@
         <div class="endpoint-body-left">
             <h3 class="endpoint-body-title">Description</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                Creates a new activity.<br><br>
+                
+                <b>title:</b> The title of the activity.<br>
+                
+                <b>description:</b> A description explaining the rules
+                of the activity.<br>
+
+                <b>startTime:</b> The time when the event should start.
+                The start time should be submitted as a unix timestamp
+                in miliseconds. The easiest way to do this is by calling
+                getTime() on a Date object.
             </p>
-            <h3 class="endpoint-body-title">Socket.IO Events</h3>
+            <h3 class="endpoint-body-title">Socket.IO Event</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                No event emitted
             </p>
         </div>
         <div class="endpoint-body-right">
@@ -67,11 +77,15 @@
         <div class="endpoint-body-left">
             <h3 class="endpoint-body-title">Description</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                Returns information about the activity matching the
+                provided id.<br><br>
+                
+                <b>activityId:</b> The id of the activity you want 
+                information about.<br>
             </p>
-            <h3 class="endpoint-body-title">Socket.IO Events</h3>
+            <h3 class="endpoint-body-title">Socket.IO Event</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                No event emitted
             </p>
         </div>
         <div class="endpoint-body-right">
@@ -117,11 +131,20 @@
         <div class="endpoint-body-left">
             <h3 class="endpoint-body-title">Description</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                Returns information about the activity with the closest
+                startTime to the time the request is sent.
+                Only activities which have not started yet are
+                evaluated<br><br>
+                
+                <b>partyId:</b> The id of the party you want to
+                get the next activity for<br>
+                <b>userId:</b> The id of a user in the party. This
+                field ensures that only users in the party can request
+                information about the next activity.
             </p>
-            <h3 class="endpoint-body-title">Socket.IO Events</h3>
+            <h3 class="endpoint-body-title">Socket.IO Event</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                No event emitted
             </p>
         </div>
         <div class="endpoint-body-right">
@@ -168,11 +191,14 @@
         <div class="endpoint-body-left">
             <h3 class="endpoint-body-title">Description</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                Updates the title of an activity.<br><br>
+                
+                <b>activityId:</b> The activity which should be updated.<br>
+                <b>newTitle:</b> The activity's new title<br>
             </p>
-            <h3 class="endpoint-body-title">Socket.IO Events</h3>
+            <h3 class="endpoint-body-title">Socket.IO Event</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                No event emitted
             </p>
         </div>
         <div class="endpoint-body-right">
@@ -214,11 +240,14 @@
         <div class="endpoint-body-left">
             <h3 class="endpoint-body-title">Description</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                Updates the description of an activity.<br><br>
+                
+                <b>activityId:</b> The activity which should be updated.<br>
+                <b>newDescription:</b> The activity's new description<br>
             </p>
-            <h3 class="endpoint-body-title">Socket.IO Events</h3>
+            <h3 class="endpoint-body-title">Socket.IO Event</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                No event emitted
             </p>
         </div>
         <div class="endpoint-body-right">
@@ -260,11 +289,14 @@
         <div class="endpoint-body-left">
             <h3 class="endpoint-body-title">Description</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                Updates the start time of an activity.<br><br>
+                
+                <b>activityId:</b> The activity which should be updated.<br>
+                <b>newStartTime:</b> The activity's new start time<br>
             </p>
-            <h3 class="endpoint-body-title">Socket.IO Events</h3>
+            <h3 class="endpoint-body-title">Socket.IO Event</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                No event emitted
             </p>
         </div>
         <div class="endpoint-body-right">
@@ -306,11 +338,15 @@
         <div class="endpoint-body-left">
             <h3 class="endpoint-body-title">Description</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                Deletes an activity.<br><br>
+                
+                <b>activityId:</b> The id of the activity which should be
+                deleted.<br>
             </p>
-            <h3 class="endpoint-body-title">Socket.IO Events</h3>
+            <h3 class="endpoint-body-title">Socket.IO Event</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                <b>Event name:</b> activity-deleted<br>
+                <b>Data:</b> { removedActivityId, message }
             </p>
         </div>
         <div class="endpoint-body-right">

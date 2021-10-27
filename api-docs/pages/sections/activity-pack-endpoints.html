@@ -18,11 +18,16 @@
         <div class="endpoint-body-left">
             <h3 class="endpoint-body-title">Description</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                Creates a new activity pack.<br><br>
+                
+                <b>title:</b> The title of the activity pack.<br>
+                
+                <b>description:</b> A description explaining the content
+                of the activity pack.<br>
             </p>
-            <h3 class="endpoint-body-title">Socket.IO Events</h3>
+            <h3 class="endpoint-body-title">Socket.IO Event</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                No event emitted
             </p>
         </div>
         <div class="endpoint-body-right">
@@ -66,11 +71,15 @@
         <div class="endpoint-body-left">
             <h3 class="endpoint-body-title">Description</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                Returns information about the activity pack matching the
+                provided id.<br><br>
+                
+                <b>activityPackId:</b> The id of the activity pack you want
+                information about.<br>
             </p>
-            <h3 class="endpoint-body-title">Socket.IO Events</h3>
+            <h3 class="endpoint-body-title">Socket.IO Event</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                No event emitted
             </p>
         </div>
         <div class="endpoint-body-right">
@@ -116,11 +125,15 @@
         <div class="endpoint-body-left">
             <h3 class="endpoint-body-title">Description</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                Updates the title of an activity pack.<br><br>
+                
+                <b>activityPackId:</b> The activity pack which
+                should be updated.<br>
+                <b>newTitle:</b> The activity pack's new title<br>
             </p>
-            <h3 class="endpoint-body-title">Socket.IO Events</h3>
+            <h3 class="endpoint-body-title">Socket.IO Event</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                No event emitted
             </p>
         </div>
         <div class="endpoint-body-right">
@@ -162,11 +175,15 @@
         <div class="endpoint-body-left">
             <h3 class="endpoint-body-title">Description</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                Updates the description of an activity pack.<br><br>
+                
+                <b>activityPackId:</b> The activity pack which
+                should be updated.<br>
+                <b>newDescription:</b> The activity pack's new description<br>
             </p>
-            <h3 class="endpoint-body-title">Socket.IO Events</h3>
+            <h3 class="endpoint-body-title">Socket.IO Event</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                No event emitted
             </p>
         </div>
         <div class="endpoint-body-right">
@@ -208,11 +225,16 @@
         <div class="endpoint-body-left">
             <h3 class="endpoint-body-title">Description</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                Adds an activity to an activity pack.<br><br>
+                
+                <b>activityPackId:</b> The activity pack which the activity
+                should be added to.<br>
+                <b>activityId:</b> The id of the added activity<br>
             </p>
-            <h3 class="endpoint-body-title">Socket.IO Events</h3>
+            <h3 class="endpoint-body-title">Socket.IO Event</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                <b>Event name:</b> activity-added<br>
+                <b>Data:</b> { Activity, message }
             </p>
         </div>
         <div class="endpoint-body-right">
@@ -254,11 +276,16 @@
         <div class="endpoint-body-left">
             <h3 class="endpoint-body-title">Description</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                Removes an activity from an activity pack.<br><br>
+                
+                <b>activityPackId:</b> The activity pack which the activity
+                should be removed from.<br>
+                <b>activityId:</b> The id of the removed activity<br>
             </p>
-            <h3 class="endpoint-body-title">Socket.IO Events</h3>
+            <h3 class="endpoint-body-title">Socket.IO Event</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                <b>Event name:</b> activity-removed<br>
+                <b>Data:</b> { Activity, message }
             </p>
         </div>
         <div class="endpoint-body-right">
@@ -300,11 +327,15 @@
         <div class="endpoint-body-left">
             <h3 class="endpoint-body-title">Description</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                Removes all activities from an activity pack.<br><br>
+                
+                <b>activityPackId:</b> The activity pack which should
+                updated<br>
             </p>
-            <h3 class="endpoint-body-title">Socket.IO Events</h3>
+            <h3 class="endpoint-body-title">Socket.IO Event</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                <b>Event name:</b> all-activities-removed<br>
+                <b>Data:</b> { message }
             </p>
         </div>
         <div class="endpoint-body-right">
@@ -345,11 +376,14 @@
         <div class="endpoint-body-left">
             <h3 class="endpoint-body-title">Description</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                Deletes an activity pack.<br><br>
+                
+                <b>activityPackId:</b> The id of the activity pack which
+                should be deleted.<br>
             </p>
-            <h3 class="endpoint-body-title">Socket.IO Events</h3>
+            <h3 class="endpoint-body-title">Socket.IO Event</h3>
             <p class="endpoint-paragraph">
-                Filler Text
+                No event emitted
             </p>
         </div>
         <div class="endpoint-body-right">
