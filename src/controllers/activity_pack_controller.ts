@@ -24,8 +24,6 @@ export const createActivityPack = async (req: Request, res: Response) => {
         if (insertResult) {
             return res.json({ activityPackId: activityPackId });
         }
-
-        return res.sendStatus(400);
     }
 
     return res.sendStatus(400);
@@ -42,8 +40,6 @@ export const showActivityPack = async (req: Request, res: Response) => {
         if (activityPack) {
             return res.json(activityPack);
         }
-
-        return res.sendStatus(400);
     }
 
     return res.sendStatus(400);
@@ -137,8 +133,6 @@ export const addActivityPackActivity = async (req: Request, res: Response) => {
         if (updateResult) {
             return res.sendStatus(200);
         }
-
-        return res.sendStatus(400);
     }
 
     return res.sendStatus(400);
@@ -161,8 +155,6 @@ export const removeActivityPackActivity = async (
         if (updateResult) {
             return res.sendStatus(200);
         }
-
-        return res.sendStatus(400);
     }
 
     return res.sendStatus(400);
@@ -183,8 +175,6 @@ export const removeAllActivityPackActivities = async (
         if (updateResult) {
             return res.sendStatus(200);
         }
-
-        return res.sendStatus(400);
     }
 
     return res.sendStatus(400);
@@ -201,8 +191,6 @@ export const deleteActivityPack = async (req: Request, res: Response) => {
         if (updateResult) {
             return res.sendStatus(200);
         }
-
-        return res.sendStatus(400);
     }
 
     return res.sendStatus(400);

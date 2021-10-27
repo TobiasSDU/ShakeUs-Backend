@@ -25,8 +25,6 @@ export const createParty = async (req: Request, res: Response) => {
         if (insertResult) {
             return res.json({ hostId: host.id, partyId: partyId });
         }
-
-        return res.sendStatus(400);
     }
 
     return res.sendStatus(400);
@@ -42,8 +40,6 @@ export const showParty = async (req: Request, res: Response) => {
         if (party) {
             return res.json(party);
         }
-
-        return res.sendStatus(400);
     }
 
     return res.sendStatus(400);
@@ -162,8 +158,6 @@ export const removeHost = async (req: Request, res: Response) => {
         if (updateResult) {
             return res.sendStatus(200);
         }
-
-        return res.sendStatus(400);
     }
 
     return res.sendStatus(400);
@@ -184,8 +178,6 @@ export const removeGuest = async (req: Request, res: Response) => {
         if (updateResult) {
             return res.sendStatus(200);
         }
-
-        return res.sendStatus(400);
     }
 
     return res.sendStatus(400);
@@ -202,8 +194,6 @@ export const joinParty = async (req: Request, res: Response) => {
         if (updateResult) {
             return res.json(newGuest);
         }
-
-        return res.sendStatus(400);
     }
 
     return res.sendStatus(400);
@@ -219,8 +209,6 @@ export const leaveParty = async (req: Request, res: Response) => {
         if (updateResult > 0) {
             return res.sendStatus(200);
         }
-
-        return res.sendStatus(400);
     }
 
     return res.sendStatus(400);
@@ -239,8 +227,6 @@ export const deleteParty = async (req: Request, res: Response) => {
         if (deleteResult) {
             return res.sendStatus(200);
         }
-
-        return res.sendStatus(400);
     }
 
     return res.sendStatus(400);

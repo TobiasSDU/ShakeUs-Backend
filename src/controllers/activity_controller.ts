@@ -18,8 +18,6 @@ export const createActivity = async (req: Request, res: Response) => {
         if (insertResult) {
             return res.json({ activityId: activity.id });
         }
-
-        return res.sendStatus(400);
     }
 
     return res.sendStatus(400);
@@ -34,8 +32,6 @@ export const showActivity = async (req: Request, res: Response) => {
         if (activity) {
             return res.json(activity);
         }
-
-        return res.sendStatus(400);
     }
 
     return res.sendStatus(400);
@@ -64,8 +60,6 @@ export const nextActivity = async (req: Request, res: Response) => {
         if (activity) {
             return res.json(activity);
         }
-
-        return res.sendStatus(400);
     }
 
     return res.sendStatus(400);
@@ -158,8 +152,6 @@ export const deleteActivity = async (req: Request, res: Response) => {
         if (deleteResult) {
             return res.sendStatus(200);
         }
-
-        return res.sendStatus(400);
     }
 
     return res.sendStatus(400);

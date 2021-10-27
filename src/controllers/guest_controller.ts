@@ -10,8 +10,6 @@ export const showGuest = async (req: Request, res: Response) => {
         if (guest) {
             return res.json(guest);
         }
-
-        return res.sendStatus(400);
     }
 
     return res.sendStatus(400);
@@ -30,8 +28,6 @@ export const updateGuestName = async (req: Request, res: Response) => {
         if (updateResult) {
             return res.sendStatus(200);
         }
-
-        return res.sendStatus(400);
     }
 
     return res.sendStatus(400);
