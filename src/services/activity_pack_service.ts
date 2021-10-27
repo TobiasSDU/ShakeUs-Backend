@@ -166,9 +166,38 @@ export class ActivityPackService {
 
     public static async deleteActivityPack(id: string) {
         const collection = await this.getActivityPacksCollection();
-        const deleteResult = await collection.deleteOne({ _id: id });
+        const activityPack = await this.showActivityPack(id);
 
-        return deleteResult.deletedCount == 1;
+        if (activityPack) {
+            const activityPackActivities = activityPack.getActivities;
+            const deleteActivitiesResult =
+                await ActivityService.deleteActivities(activityPackActivities);
+
+            if (deleteActivitiesResult) {
+                const deleteResult = await collection.deleteOne({ _id: id });
+
+                if (deleteResult.deletedCount == 1) {
+                    const party = await this.getPartyId(id);
+                    const socketService: SocketService =
+                        app.get('socketService');
+
+                    if (party) {
+                        socketService.emitToRoom(
+                            'activity-pack-deleted',
+                            {
+                                removedActivityPackId: id,
+                                message: 'The activity pack has been deleted',
+                            },
+                            party._id
+                        );
+                    }
+
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     public static async getActivityPackByActivityId(activityId: string) {
@@ -177,20 +206,6 @@ export class ActivityPackService {
         const queryResult = await collection.findOne({
             activities: activityId,
         });
-
-        const party = await this.getPartyId(activityId);
-        const socketService: SocketService = app.get('socketService');
-
-        if (party) {
-            socketService.emitToRoom(
-                'activity-pack-deleted',
-                {
-                    removedActivityPackId: activityId,
-                    message: 'The activity pack has been deleted',
-                },
-                party._id
-            );
-        }
 
         return queryResult;
     }

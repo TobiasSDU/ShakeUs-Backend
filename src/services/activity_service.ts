@@ -161,6 +161,15 @@ export class ActivityService {
         return deleteResult.deletedCount == 1;
     }
 
+    public static async deleteActivities(activityIds: string[]) {
+        const collection = await this.getActivitiesCollection();
+        const deleteResult = await collection.deleteMany({
+            _id: { $in: activityIds },
+        });
+
+        return deleteResult.deletedCount == activityIds.length;
+    }
+
     private static async getActivitiesCollection(): Promise<Collection> {
         const db: Db = await getDatabase(getDbConnectionString());
 

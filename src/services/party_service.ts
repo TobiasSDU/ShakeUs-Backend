@@ -317,32 +317,33 @@ export class PartyService {
         );
 
         if (isPrimaryHost) {
-            const deleteUsersResult = await this.deleteAllGuestsAndHosts(
-                partyId
-            );
+            const party = await this.getPartyInfo(partyId, primaryHostId);
 
-            const deleteActivitiesResult = await this.deleteActivitiesAndPacks(
-                partyId
-            );
-
-            if (deleteUsersResult && deleteActivitiesResult) {
-                const deleteResult = await collection.deleteOne({
-                    _id: partyId,
-                });
-
-                const socketService: SocketService = app.get('socketService');
-                socketService.emitToRoom(
-                    'party-deleted',
-                    {
-                        partyId: partyId,
-                        message: 'The party has ended',
-                    },
+            if (party) {
+                const deleteUsersResult = await this.deleteAllGuestsAndHosts(
                     partyId
                 );
 
-                return deleteResult.acknowledged;
-            } else {
-                return false;
+                const deleteActivitiesResult =
+                    await ActivityPackService.deleteActivityPack(
+                        party.getActivityPackId
+                    );
+
+                if (deleteUsersResult && deleteActivitiesResult) {
+                    const deleteResult = await collection.deleteOne({
+                        _id: partyId,
+                    });
+
+                    const socketService: SocketService =
+                        app.get('socketService');
+                    socketService.emitToRoom(
+                        'party-deleted',
+                        { partyId: partyId, message: 'The party has ended' },
+                        partyId
+                    );
+
+                    return deleteResult.acknowledged;
+                }
             }
         }
 
@@ -449,36 +450,6 @@ export class PartyService {
                     return false;
                 }
             });
-
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private static async deleteActivitiesAndPacks(partyId: string) {
-        const collection = await this.getPartiesCollection();
-        const party = await collection.findOne({ _id: partyId });
-
-        if (party) {
-            const activityPack = await ActivityPackService.showActivityPack(
-                party.activityPackId
-            );
-
-            if (activityPack) {
-                const activitiesDeleteStatus =
-                    ActivityPackService.removeAllActivityPackActivities(
-                        activityPack.id
-                    );
-                const packDeleteStatus =
-                    await ActivityPackService.deleteActivityPack(
-                        activityPack.id
-                    );
-
-                if (!packDeleteStatus || !activitiesDeleteStatus) {
-                    return false;
-                }
-            }
 
             return true;
         } else {

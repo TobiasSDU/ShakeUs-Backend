@@ -2,13 +2,14 @@ import { Collection } from 'mongodb';
 import { Party } from '../../src/models/party';
 import { generatePartyId } from '../../src/util/party_id_generator';
 import { getCollection } from '../controllers/endpoint_tests_setup';
+import { testActivityPack1, testActivityPack2 } from './activity_pack.seed';
 
 export const testParty1 = new Party(
     generatePartyId(),
     ['TestHost1'],
     'TestHost1',
     ['TestGuest1'],
-    'TestPack1'
+    testActivityPack1.id
 );
 
 export const testParty2 = new Party(
@@ -16,7 +17,7 @@ export const testParty2 = new Party(
     ['TestHost2', 'TestHost3'],
     'TestHost2',
     ['TestGuest2', 'TestGuest3'],
-    'TestPack2'
+    testActivityPack2.id
 );
 
 export const seedPartiesCollection = async () => {

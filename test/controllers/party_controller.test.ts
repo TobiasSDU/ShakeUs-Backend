@@ -12,6 +12,8 @@ import { getTestParty } from './../helpers/party_test_helpers';
 import { app } from '../../src';
 import { SocketService } from '../../src/services/socket_service';
 import http from 'http';
+import { seedActivityPackCollection } from '../seed/activity_pack.seed';
+import { seedActivityCollection } from '../seed/activity.seed';
 
 let server: http.Server;
 
@@ -23,6 +25,8 @@ beforeAll(() => {
 });
 
 beforeEach(async () => {
+    await seedActivityCollection();
+    await seedActivityPackCollection();
     await seedPartiesCollection();
 });
 
