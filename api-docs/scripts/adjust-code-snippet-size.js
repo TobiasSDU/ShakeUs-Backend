@@ -5,7 +5,9 @@ window.addEventListener('load', function () {
         const codeElement = preElements[i].getElementsByTagName('code')[0];
         const codeElementHeight = codeElement.offsetHeight;
 
-        codeElement.style.height = codeElementHeight - 64 + 'px';
-        preElements[i].style.height = codeElementHeight - 56 + 'px';
+        if (!codeElement.classList.contains('no-js-formatting')) {
+            codeElement.style.height = codeElementHeight - 64 + 'px';
+            preElements[i].style.height = codeElementHeight - 56 + 'px';
+        }
     }
 });

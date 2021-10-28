@@ -7,7 +7,7 @@ import {
 import { Activity } from './../models/activity';
 import { ActivityPackService } from './activity_pack_service';
 import { PartyService } from './party_service';
-import { scheduleActivity } from './scheduling_service';
+import { rescheduleActivity, scheduleActivity } from './scheduling_service';
 import { SocketService } from './socket_service';
 
 export class ActivityService {
@@ -133,6 +133,11 @@ export class ActivityService {
         );
 
         if (updateResult.modifiedCount == 1) {
+            const activity = await this.showActivity(id);
+            if (activity) {
+                await rescheduleActivity(activity);
+            }
+
             await this.emitActivityUpdated(id, 'start-time', newStartTime);
             return true;
         }

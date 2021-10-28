@@ -9,17 +9,13 @@
     </div>
     <div class="endpoint-body">
         <div class="endpoint-body-left">
-            <h3 class="endpoint-body-title">Description</h3>
             <p class="endpoint-paragraph">
 
-                <span id="default-activity-pack">
-                    <b>Available Activity Pack:</b>
-                </span><br>
-
-                <label>HostName</label><br>
+                <label>Enter HostName</label><br>
                 <input type="text" id="hostName">
                 
-                <button id="CreatePartyButton">Create Party</button>
+                <button id="CreatePartyButton">Create Party</button><br>
+                <small>(Default Activity Pack #1 is used)</small>
                 
                 <div id="createPartyResultData">
                     <span><b>Result Data:</b></span>
@@ -31,19 +27,26 @@
         <div class="endpoint-body-right">
             <div class="endpoint-request-body">
                 <pre>
-                    <code class="language-json">
-                        // Request Body
-                        {
-                            "activityPackId": string,
-                        }
-                    </code>
-                </pre>
-            </div>
-            <div class="endpoint-response-body">
-                <pre>
-                    <code class="language-json">
-                        // Response Body
-                        HTTP: 200 OK
+                    <code class="language-javascript no-js-formatting">
+                        // Create Party Request
+                        const result = await fetch(
+                            'https://shakeus.herokuapp.com/party',
+                            {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({
+                                    activityPackId: activityPackId,
+                                    hostName: nameInput.value,
+                                }),
+                            });
+                                
+                            const data = await res.json();
+
+                            if (res.ok) {
+                                socket.emit('join-room', data.partyId);
+                            }
                     </code>
                 </pre>
             </div>

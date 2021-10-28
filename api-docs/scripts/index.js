@@ -7,6 +7,5 @@ function loadScript(path) {
 }
 
 loadScript('./scripts/create-party.js');
-loadScript('./scripts/display-default-activity-pack.js');
 loadScript('./scripts/sidebar-scroll-listeners.js');
 loadScript('./scripts/adjust-code-snippet-size.js');
