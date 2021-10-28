@@ -42,9 +42,9 @@
                                 }),
                             });
                                 
-                            const data = await res.json();
+                            const data = await result.json();
 
-                            if (res.ok) {
+                            if (result.ok) {
                                 socket.emit('join-room', data.partyId);
                             }
                     </code>
