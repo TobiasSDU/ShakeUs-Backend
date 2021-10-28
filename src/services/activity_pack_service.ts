@@ -120,6 +120,8 @@ export class ActivityPackService {
             { $pull: { activities: activityId } }
         );
 
+        await ActivityService.deleteActivity(activityId);
+
         if (updateResult.modifiedCount == 1) {
             const socketService: SocketService = app.get('socketService');
             if (removedActivity && party) {
