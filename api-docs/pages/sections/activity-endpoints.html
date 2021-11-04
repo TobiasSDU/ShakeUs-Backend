@@ -1,43 +1,40 @@
 <div class="section-title">
-    <h2>Activity Endpoints</h2>
-    <hr>
+  <h2>Activity Endpoints</h2>
+  <hr />
 </div>
 
 <div class="endpoint-container">
-    <div class="endpoint-header">
-        <h3 class="endpoint-method">POST</h3>
-        <p class="endpoint-path">/activity</p>
-        <div class="endpoint-response-codes">
-            <p class="endpoint-response-divider">Reponse Codes: </p>
-            <p class="endpoint-response-success">200</p>
-            <p class="endpoint-response-divider">|</p>
-            <p class="endpoint-response-error">400</p>
-        </div>
+  <div class="endpoint-header">
+    <h3 class="endpoint-method">POST</h3>
+    <p class="endpoint-path">/activity</p>
+    <div class="endpoint-response-codes">
+      <p class="endpoint-response-divider">Reponse Codes:</p>
+      <p class="endpoint-response-success">200</p>
+      <p class="endpoint-response-divider">|</p>
+      <p class="endpoint-response-error">400</p>
     </div>
-    <div class="endpoint-body">
-        <div class="endpoint-body-left">
-            <h3 class="endpoint-body-title">Description</h3>
-            <p class="endpoint-paragraph">
-                Creates a new activity.<br><br>
-                
-                <b>title:</b> The title of the activity.<br>
-                
-                <b>description:</b> A description explaining the rules
-                of the activity.<br>
+  </div>
+  <div class="endpoint-body">
+    <div class="endpoint-body-left">
+      <h3 class="endpoint-body-title">Description</h3>
+      <p class="endpoint-paragraph">
+        Creates a new activity.<br /><br />
 
-                <b>startTime:</b> The time when the event should start.
-                The start time should be submitted as a unix timestamp
-                in miliseconds. The easiest way to do this is by calling
-                getTime() on a Date object.
-            </p>
-            <h3 class="endpoint-body-title">Socket.IO Event</h3>
-            <p class="endpoint-paragraph">
-                No event emitted
-            </p>
-        </div>
-        <div class="endpoint-body-right">
-            <div class="endpoint-request-body">
-                <pre>
+        <b>title:</b> The title of the activity.<br />
+
+        <b>description:</b> A description explaining the rules of the
+        activity.<br />
+
+        <b>startTime:</b> The time when the event should start. The start time
+        should be submitted as a unix timestamp in miliseconds. The easiest way
+        to do this is by calling getTime() on a Date object.
+      </p>
+      <h3 class="endpoint-body-title">Socket.IO Event</h3>
+      <p class="endpoint-paragraph">No event emitted</p>
+    </div>
+    <div class="endpoint-body-right">
+      <div class="endpoint-request-body">
+        <pre>
                     <code class="language-json">
                         // Request Body
                         {
@@ -47,9 +44,9 @@
                         }
                     </code>
                 </pre>
-            </div>
-            <div class="endpoint-response-body">
-                <pre>
+      </div>
+      <div class="endpoint-response-body">
+        <pre>
                     <code class="language-json">
                         // Response Body
                         {
@@ -57,50 +54,43 @@
                         }
                     </code>
                 </pre>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="endpoint-container">
-    <div class="endpoint-header">
-        <h3 class="endpoint-method">GET</h3>
-        <p class="endpoint-path">/activity</p>
-        <div class="endpoint-response-codes">
-            <p class="endpoint-response-divider">Reponse Codes: </p>
-            <p class="endpoint-response-success">200</p>
-            <p class="endpoint-response-divider">|</p>
-            <p class="endpoint-response-error">400</p>
-        </div>
+  <div class="endpoint-header">
+    <h3 class="endpoint-method">GET</h3>
+    <p class="endpoint-path">/activity/:activtyId</p>
+    <div class="endpoint-response-codes">
+      <p class="endpoint-response-divider">Reponse Codes:</p>
+      <p class="endpoint-response-success">200</p>
+      <p class="endpoint-response-divider">|</p>
+      <p class="endpoint-response-error">400</p>
     </div>
-    <div class="endpoint-body">
-        <div class="endpoint-body-left">
-            <h3 class="endpoint-body-title">Description</h3>
-            <p class="endpoint-paragraph">
-                Returns information about the activity matching the
-                provided id.<br><br>
-                
-                <b>activityId:</b> The id of the activity you want 
-                information about.<br>
-            </p>
-            <h3 class="endpoint-body-title">Socket.IO Event</h3>
-            <p class="endpoint-paragraph">
-                No event emitted
-            </p>
-        </div>
-        <div class="endpoint-body-right">
-            <div class="endpoint-request-body">
-                <pre>
+  </div>
+  <div class="endpoint-body">
+    <div class="endpoint-body-left">
+      <h3 class="endpoint-body-title">Description</h3>
+      <p class="endpoint-paragraph">
+        Returns information about the activity matching the provided id.<br /><br />
+
+        <b>activityId:</b> The id of the activity you want information about.<br />
+      </p>
+      <h3 class="endpoint-body-title">Socket.IO Event</h3>
+      <p class="endpoint-paragraph">No event emitted</p>
+    </div>
+    <div class="endpoint-body-right">
+      <div class="endpoint-request-body">
+        <pre>
                     <code class="language-json">
-                        // Request Body
-                        {
-                            "activityId": string
-                        }
+                        //No Request Body
                     </code>
                 </pre>
-            </div>
-            <div class="endpoint-response-body">
-                <pre>
+      </div>
+      <div class="endpoint-response-body">
+        <pre>
                     <code class="language-json">
                         // Response Body
                         {
@@ -111,47 +101,44 @@
                         }
                     </code>
                 </pre>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="endpoint-container">
-    <div class="endpoint-header">
-        <h3 class="endpoint-method">GET</h3>
-        <p class="endpoint-path">/activity/templates</p>
-        <div class="endpoint-response-codes">
-            <p class="endpoint-response-divider">Reponse Codes: </p>
-            <p class="endpoint-response-success">200</p>
-            <p class="endpoint-response-divider">|</p>
-            <p class="endpoint-response-error">404</p>
-        </div>
+  <div class="endpoint-header">
+    <h3 class="endpoint-method">GET</h3>
+    <p class="endpoint-path">/activity/templates</p>
+    <div class="endpoint-response-codes">
+      <p class="endpoint-response-divider">Reponse Codes:</p>
+      <p class="endpoint-response-success">200</p>
+      <p class="endpoint-response-divider">|</p>
+      <p class="endpoint-response-error">404</p>
     </div>
-    <div class="endpoint-body">
-        <div class="endpoint-body-left">
-            <h3 class="endpoint-body-title">Description</h3>
-            <p class="endpoint-paragraph">
-                Returns an array of template activities. These
-                activities are in the app by default and can be
-                added to activity packs.<br><br>
+  </div>
+  <div class="endpoint-body">
+    <div class="endpoint-body-left">
+      <h3 class="endpoint-body-title">Description</h3>
+      <p class="endpoint-paragraph">
+        Returns an array of template activities. These activities are in the app
+        by default and can be added to activity packs.<br /><br />
 
-                This endpoint does not require any request parameters.
-            </p>
-            <h3 class="endpoint-body-title">Socket.IO Event</h3>
-            <p class="endpoint-paragraph">
-                No event emitted
-            </p>
-        </div>
-        <div class="endpoint-body-right">
-            <div class="endpoint-request-body">
-                <pre>
+        This endpoint does not require any request parameters.
+      </p>
+      <h3 class="endpoint-body-title">Socket.IO Event</h3>
+      <p class="endpoint-paragraph">No event emitted</p>
+    </div>
+    <div class="endpoint-body-right">
+      <div class="endpoint-request-body">
+        <pre>
                     <code class="language-json">
                         // No Request Body
                     </code>
                 </pre>
-            </div>
-            <div class="endpoint-response-body">
-                <pre>
+      </div>
+      <div class="endpoint-response-body">
+        <pre>
                     <code class="language-json">
                         // Response Body
                         [
@@ -165,56 +152,49 @@
                         ]
                     </code>
                 </pre>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="endpoint-container">
-    <div class="endpoint-header">
-        <h3 class="endpoint-method">GET</h3>
-        <p class="endpoint-path">/activity/next</p>
-        <div class="endpoint-response-codes">
-            <p class="endpoint-response-divider">Reponse Codes: </p>
-            <p class="endpoint-response-success">200</p>
-            <p class="endpoint-response-divider">|</p>
-            <p class="endpoint-response-error">400</p>
-        </div>
+  <div class="endpoint-header">
+    <h3 class="endpoint-method">GET</h3>
+    <p class="endpoint-path">/activity/next/:partyId/:userId</p>
+    <div class="endpoint-response-codes">
+      <p class="endpoint-response-divider">Reponse Codes:</p>
+      <p class="endpoint-response-success">200</p>
+      <p class="endpoint-response-divider">|</p>
+      <p class="endpoint-response-error">400</p>
     </div>
-    <div class="endpoint-body">
-        <div class="endpoint-body-left">
-            <h3 class="endpoint-body-title">Description</h3>
-            <p class="endpoint-paragraph">
-                Returns information about the activity with the closest
-                startTime to the time the request is sent.
-                Only activities which have not started yet are
-                evaluated<br><br>
-                
-                <b>partyId:</b> The id of the party you want to
-                get the next activity for<br>
-                <b>userId:</b> The id of a user in the party. This
-                field ensures that only users in the party can request
-                information about the next activity.
-            </p>
-            <h3 class="endpoint-body-title">Socket.IO Event</h3>
-            <p class="endpoint-paragraph">
-                No event emitted
-            </p>
-        </div>
-        <div class="endpoint-body-right">
-            <div class="endpoint-request-body">
-                <pre>
+  </div>
+  <div class="endpoint-body">
+    <div class="endpoint-body-left">
+      <h3 class="endpoint-body-title">Description</h3>
+      <p class="endpoint-paragraph">
+        Returns information about the activity with the closest startTime to the
+        time the request is sent. Only activities which have not started yet are
+        evaluated<br /><br />
+
+        <b>partyId:</b> The id of the party you want to get the next activity
+        for<br />
+        <b>userId:</b> The id of a user in the party. This field ensures that
+        only users in the party can request information about the next activity.
+      </p>
+      <h3 class="endpoint-body-title">Socket.IO Event</h3>
+      <p class="endpoint-paragraph">No event emitted</p>
+    </div>
+    <div class="endpoint-body-right">
+      <div class="endpoint-request-body">
+        <pre>
                     <code class="language-json">
-                        // Request Body
-                        {
-                            "partyId": string,
-                            "userId": string
-                        }
+                        //No Request Body
+                        
                     </code>
                 </pre>
-            </div>
-            <div class="endpoint-response-body">
-                <pre>
+      </div>
+      <div class="endpoint-response-body">
+        <pre>
                     <code class="language-json">
                         // Response Body
                         {
@@ -225,57 +205,55 @@
                         }
                     </code>
                 </pre>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="endpoint-container">
-    <div class="endpoint-header">
-        <h3 class="endpoint-method">PATCH</h3>
-        <p class="endpoint-path">/activity</p>
-        <div class="endpoint-response-codes">
-            <p class="endpoint-response-divider">Reponse Codes: </p>
-            <p class="endpoint-response-success">200</p>
-            <p class="endpoint-response-divider">|</p>
-            <p class="endpoint-response-error">400</p>
-        </div>
+  <div class="endpoint-header">
+    <h3 class="endpoint-method">PATCH</h3>
+    <p class="endpoint-path">/activity</p>
+    <div class="endpoint-response-codes">
+      <p class="endpoint-response-divider">Reponse Codes:</p>
+      <p class="endpoint-response-success">200</p>
+      <p class="endpoint-response-divider">|</p>
+      <p class="endpoint-response-error">400</p>
     </div>
-    <div class="endpoint-body">
-        <div class="endpoint-body-left">
-            <h3 class="endpoint-body-title">Description</h3>
-            <p class="endpoint-paragraph">
-                Updates the title, description and/or startTime
-                fields of an activity.<br><br>
-                
-                <b>activityId:</b> The activity which should be updated.<br>
-                <b>newTitle:</b> The activity's new title<br>
-                <b>newDescription:</b> The activity's new description<br>
-                <b>newStartTime:</b> The activity's new start time<br>
-            </p>
-            <h3 class="endpoint-body-title">Socket.IO Events</h3>
-            <p class="endpoint-paragraph">
-                <b>Event name:</b> activity-title-updated<br>
-                <b>Data:</b> { removedActivityId, updatedField, message }
-                <br><br>
+  </div>
+  <div class="endpoint-body">
+    <div class="endpoint-body-left">
+      <h3 class="endpoint-body-title">Description</h3>
+      <p class="endpoint-paragraph">
+        Updates the title, description and/or startTime fields of an
+        activity.<br /><br />
 
-                And / Or
+        <b>activityId:</b> The activity which should be updated.<br />
+        <b>newTitle:</b> The activity's new title<br />
+        <b>newDescription:</b> The activity's new description<br />
+        <b>newStartTime:</b> The activity's new start time<br />
+      </p>
+      <h3 class="endpoint-body-title">Socket.IO Events</h3>
+      <p class="endpoint-paragraph">
+        <b>Event name:</b> activity-title-updated<br />
+        <b>Data:</b> { removedActivityId, updatedField, message } <br /><br />
 
-                <br><br>
-                <b>Event name:</b> activity-description-updated<br>
-                <b>Data:</b> { removedActivityId, updatedField, message }
-                <br><br>
+        And / Or
 
-                And / Or
+        <br /><br />
+        <b>Event name:</b> activity-description-updated<br />
+        <b>Data:</b> { removedActivityId, updatedField, message } <br /><br />
 
-                <br><br>
-                <b>Event name:</b> activity-start-time-updated<br>
-                <b>Data:</b> { removedActivityId, updatedField, message }
-            </p>
-        </div>
-        <div class="endpoint-body-right">
-            <div class="endpoint-request-body">
-                <pre>
+        And / Or
+
+        <br /><br />
+        <b>Event name:</b> activity-start-time-updated<br />
+        <b>Data:</b> { removedActivityId, updatedField, message }
+      </p>
+    </div>
+    <div class="endpoint-body-right">
+      <div class="endpoint-request-body">
+        <pre>
                     <code class="language-json">
                         // Request Body
                         {
@@ -286,48 +264,47 @@
                         }
                     </code>
                 </pre>
-            </div>
-            <div class="endpoint-response-body">
-                <pre>
+      </div>
+      <div class="endpoint-response-body">
+        <pre>
                     <code class="language-json">
                         // Response Code
                         HTTP: 200 OK
                     </code>
                 </pre>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="endpoint-container">
-    <div class="endpoint-header">
-        <h3 class="endpoint-method">DELETE</h3>
-        <p class="endpoint-path">/activity</p>
-        <div class="endpoint-response-codes">
-            <p class="endpoint-response-divider">Reponse Codes: </p>
-            <p class="endpoint-response-success">200</p>
-            <p class="endpoint-response-divider">|</p>
-            <p class="endpoint-response-error">400</p>
-        </div>
+  <div class="endpoint-header">
+    <h3 class="endpoint-method">DELETE</h3>
+    <p class="endpoint-path">/activity</p>
+    <div class="endpoint-response-codes">
+      <p class="endpoint-response-divider">Reponse Codes:</p>
+      <p class="endpoint-response-success">200</p>
+      <p class="endpoint-response-divider">|</p>
+      <p class="endpoint-response-error">400</p>
     </div>
-    <div class="endpoint-body">
-        <div class="endpoint-body-left">
-            <h3 class="endpoint-body-title">Description</h3>
-            <p class="endpoint-paragraph">
-                Deletes an activity.<br><br>
-                
-                <b>activityId:</b> The id of the activity which should be
-                deleted.<br>
-            </p>
-            <h3 class="endpoint-body-title">Socket.IO Event</h3>
-            <p class="endpoint-paragraph">
-                <b>Event name:</b> activity-deleted<br>
-                <b>Data:</b> { removedActivityId, message }
-            </p>
-        </div>
-        <div class="endpoint-body-right">
-            <div class="endpoint-request-body">
-                <pre>
+  </div>
+  <div class="endpoint-body">
+    <div class="endpoint-body-left">
+      <h3 class="endpoint-body-title">Description</h3>
+      <p class="endpoint-paragraph">
+        Deletes an activity.<br /><br />
+
+        <b>activityId:</b> The id of the activity which should be deleted.<br />
+      </p>
+      <h3 class="endpoint-body-title">Socket.IO Event</h3>
+      <p class="endpoint-paragraph">
+        <b>Event name:</b> activity-deleted<br />
+        <b>Data:</b> { removedActivityId, message }
+      </p>
+    </div>
+    <div class="endpoint-body-right">
+      <div class="endpoint-request-body">
+        <pre>
                     <code class="language-json">
                         // Request Body
                         {
@@ -335,15 +312,15 @@
                         }
                     </code>
                 </pre>
-            </div>
-            <div class="endpoint-response-body">
-                <pre>
+      </div>
+      <div class="endpoint-response-body">
+        <pre>
                     <code class="language-json">
                         // Response Code
                         HTTP: 200 OK
                     </code>
                 </pre>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>

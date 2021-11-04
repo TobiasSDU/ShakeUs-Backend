@@ -1,47 +1,40 @@
 <div class="section-title">
-    <h2>Guest Endpoints</h2>
-    <hr>
+  <h2>Guest Endpoints</h2>
+  <hr />
 </div>
 
 <div class="endpoint-container">
-    <div class="endpoint-header">
-        <h3 class="endpoint-method">GET</h3>
-        <p class="endpoint-path">/guest</p>
-        <div class="endpoint-response-codes">
-            <p class="endpoint-response-divider">Reponse Codes: </p>
-            <p class="endpoint-response-success">200</p>
-            <p class="endpoint-response-divider">|</p>
-            <p class="endpoint-response-error">400</p>
-        </div>
+  <div class="endpoint-header">
+    <h3 class="endpoint-method">GET</h3>
+    <p class="endpoint-path">/guest/:guestId</p>
+    <div class="endpoint-response-codes">
+      <p class="endpoint-response-divider">Reponse Codes:</p>
+      <p class="endpoint-response-success">200</p>
+      <p class="endpoint-response-divider">|</p>
+      <p class="endpoint-response-error">400</p>
     </div>
-    <div class="endpoint-body">
-        <div class="endpoint-body-left">
-            <h3 class="endpoint-body-title">Description</h3>
-            <p class="endpoint-paragraph">
-                Returns information about the guest matching the
-                provided id.<br><br>
-                
-                <b>guestId:</b> The id of the guest you want information
-                about.<br>
-            </p>
-            <h3 class="endpoint-body-title">Socket.IO Event</h3>
-            <p class="endpoint-paragraph">
-                No event emitted
-            </p>
-        </div>
-        <div class="endpoint-body-right">
-            <div class="endpoint-request-body">
-                <pre>
+  </div>
+  <div class="endpoint-body">
+    <div class="endpoint-body-left">
+      <h3 class="endpoint-body-title">Description</h3>
+      <p class="endpoint-paragraph">
+        Returns information about the guest matching the provided id.<br /><br />
+
+        <b>guestId:</b> The id of the guest you want information about.<br />
+      </p>
+      <h3 class="endpoint-body-title">Socket.IO Event</h3>
+      <p class="endpoint-paragraph">No event emitted</p>
+    </div>
+    <div class="endpoint-body-right">
+      <div class="endpoint-request-body">
+        <pre>
                     <code class="language-json">
-                        // Request Body
-                        {
-                            "guestId": string,
-                        }
+                        //No Request Body
                     </code>
                 </pre>
-            </div>
-            <div class="endpoint-response-body">
-                <pre>
+      </div>
+      <div class="endpoint-response-body">
+        <pre>
                     <code class="language-json">
                         // Response Body
                         {
@@ -50,40 +43,40 @@
                         }
                     </code>
                 </pre>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="endpoint-container">
-    <div class="endpoint-header">
-        <h3 class="endpoint-method">PATCH</h3>
-        <p class="endpoint-path">/guest</p>
-        <div class="endpoint-response-codes">
-            <p class="endpoint-response-divider">Reponse Codes: </p>
-            <p class="endpoint-response-success">200</p>
-            <p class="endpoint-response-divider">|</p>
-            <p class="endpoint-response-error">400</p>
-        </div>
+  <div class="endpoint-header">
+    <h3 class="endpoint-method">PATCH</h3>
+    <p class="endpoint-path">/guest</p>
+    <div class="endpoint-response-codes">
+      <p class="endpoint-response-divider">Reponse Codes:</p>
+      <p class="endpoint-response-success">200</p>
+      <p class="endpoint-response-divider">|</p>
+      <p class="endpoint-response-error">400</p>
     </div>
-    <div class="endpoint-body">
-        <div class="endpoint-body-left">
-            <h3 class="endpoint-body-title">Description</h3>
-            <p class="endpoint-paragraph">
-                Updates the name of a guest.<br><br>
-                
-                <b>guestId:</b> The guest which should be updated.<br>
-                <b>newName:</b> The guest's new name.<br>
-            </p>
-            <h3 class="endpoint-body-title">Socket.IO Event</h3>
-            <p class="endpoint-paragraph">
-                <b>Event name:</b> username-updated<br>
-                <b>Data:</b> { user, message }
-            </p>
-        </div>
-        <div class="endpoint-body-right">
-            <div class="endpoint-request-body">
-                <pre>
+  </div>
+  <div class="endpoint-body">
+    <div class="endpoint-body-left">
+      <h3 class="endpoint-body-title">Description</h3>
+      <p class="endpoint-paragraph">
+        Updates the name of a guest.<br /><br />
+
+        <b>guestId:</b> The guest which should be updated.<br />
+        <b>newName:</b> The guest's new name.<br />
+      </p>
+      <h3 class="endpoint-body-title">Socket.IO Event</h3>
+      <p class="endpoint-paragraph">
+        <b>Event name:</b> username-updated<br />
+        <b>Data:</b> { user, message }
+      </p>
+    </div>
+    <div class="endpoint-body-right">
+      <div class="endpoint-request-body">
+        <pre>
                     <code class="language-json">
                         // Request Body
                         {
@@ -92,15 +85,15 @@
                         }
                     </code>
                 </pre>
-            </div>
-            <div class="endpoint-response-body">
-                <pre>
+      </div>
+      <div class="endpoint-response-body">
+        <pre>
                     <code class="language-json">
                         // Response Code
                         HTTP: 200 OK
                     </code>
                 </pre>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>

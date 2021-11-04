@@ -1,51 +1,46 @@
 <div class="section-title">
-    <h2 >Party Endpoints</h2>
-    <hr>
+  <h2>Party Endpoints</h2>
+  <hr />
 </div>
 
 <div class="endpoint-container">
-    <div class="endpoint-header">
-        <h3 class="endpoint-method">POST</h3>
-        <p class="endpoint-path">/party</p>
-        <div class="endpoint-response-codes">
-            <p class="endpoint-response-divider">Reponse Codes: </p>
-            <p class="endpoint-response-success">200</p>
-            <p class="endpoint-response-divider">|</p>
-            <p class="endpoint-response-error">400</p>
-        </div>
+  <div class="endpoint-header">
+    <h3 class="endpoint-method">POST</h3>
+    <p class="endpoint-path">/party</p>
+    <div class="endpoint-response-codes">
+      <p class="endpoint-response-divider">Reponse Codes:</p>
+      <p class="endpoint-response-success">200</p>
+      <p class="endpoint-response-divider">|</p>
+      <p class="endpoint-response-error">400</p>
     </div>
-    <div class="endpoint-body">
-        <div class="endpoint-body-left">
-            <h3 class="endpoint-body-title">Description</h3>
-            <p class="endpoint-paragraph">
-                Creates a new party.<br><br>
+  </div>
+  <div class="endpoint-body">
+    <div class="endpoint-body-left">
+      <h3 class="endpoint-body-title">Description</h3>
+      <p class="endpoint-paragraph">
+        Creates a new party.<br /><br />
 
-                <b>activityPackId:</b> If the parameter points to
-                an activity pack that exists in the database, then this
-                activity pack will be assigned to the party.<br>
-                Alternatively, the id of an activity pack template 
-                <em>(/src/templates/default_activity_packs.ts)</em>
-                can be used. This will create a clone of the template
-                and the activities contained in it and generate unique
-                ids for all of them. This is not recommended, as it
-                increased the response time of the request. A better
-                solution would be to create the activity pack first via
-                the "/activity/create" endpoint and then use the returned
-                id to create the party.<br>
+        <b>activityPackId:</b> If the parameter points to an activity pack that
+        exists in the database, then this activity pack will be assigned to the
+        party.<br />
+        Alternatively, the id of an activity pack template
+        <em>(/src/templates/default_activity_packs.ts)</em>
+        can be used. This will create a clone of the template and the activities
+        contained in it and generate unique ids for all of them. This is not
+        recommended, as it increased the response time of the request. A better
+        solution would be to create the activity pack first via the
+        "/activity/create" endpoint and then use the returned id to create the
+        party.<br />
 
-                <b>hostName:</b> The name of the host. A document will
-                automatically be added to the guests collection when
-                the party is created  
-
-            </p>
-            <h3 class="endpoint-body-title">Socket.IO Event</h3>
-            <p class="endpoint-paragraph">
-                No event emitted
-            </p>
-        </div>
-        <div class="endpoint-body-right">
-            <div class="endpoint-request-body">
-                <pre>
+        <b>hostName:</b> The name of the host. A document will automatically be
+        added to the guests collection when the party is created
+      </p>
+      <h3 class="endpoint-body-title">Socket.IO Event</h3>
+      <p class="endpoint-paragraph">No event emitted</p>
+    </div>
+    <div class="endpoint-body-right">
+      <div class="endpoint-request-body">
+        <pre>
                     <code class="language-json">
                         // Request Body
                         {
@@ -54,9 +49,9 @@
                         }
                     </code>
                 </pre>
-            </div>
-            <div class="endpoint-response-body">
-                <pre>
+      </div>
+      <div class="endpoint-response-body">
+        <pre>
                     <code class="language-json">
                         // Response Body
                         {
@@ -65,56 +60,47 @@
                         }
                     </code>
                 </pre>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="endpoint-container">
-    <div class="endpoint-header">
-        <h3 class="endpoint-method">GET</h3>
-        <p class="endpoint-path">/party</p>
-        <div class="endpoint-response-codes">
-            <p class="endpoint-response-divider">Reponse Codes: </p>
-            <p class="endpoint-response-success">200</p>
-            <p class="endpoint-response-divider">|</p>
-            <p class="endpoint-response-error">400</p>
-        </div>
+  <div class="endpoint-header">
+    <h3 class="endpoint-method">GET</h3>
+    <p class="endpoint-path">/party/:partyId/:guestId</p>
+    <div class="endpoint-response-codes">
+      <p class="endpoint-response-divider">Reponse Codes:</p>
+      <p class="endpoint-response-success">200</p>
+      <p class="endpoint-response-divider">|</p>
+      <p class="endpoint-response-error">400</p>
     </div>
-    <div class="endpoint-body">
-        <div class="endpoint-body-left">
-            <h3 class="endpoint-body-title">Description</h3>
-            <p class="endpoint-paragraph">
-                Returns information about the party matching the
-                provided id.<br><br>
+  </div>
+  <div class="endpoint-body">
+    <div class="endpoint-body-left">
+      <h3 class="endpoint-body-title">Description</h3>
+      <p class="endpoint-paragraph">
+        Returns information about the party matching the provided id.<br /><br />
 
-                <b>partyId:</b> The id of the party you want information
-                about.<br>
+        <b>partyId:</b> The id of the party you want information about.<br />
 
-                <b>guestId:</b> A guestId needs to be provided.
-                This ensures that only users who have the partyId can
-                request information about the party. A hostId will also
-                grant access to the endpoint. 
-            </p>
-            <h3 class="endpoint-body-title">Socket.IO Event</h3>
-            <p class="endpoint-paragraph">
-                No event emitted
-            </p>
-        </div>
-        <div class="endpoint-body-right">
-            <div class="endpoint-request-body">
-                <pre>
+        <b>guestId:</b> A guestId needs to be provided. This ensures that only
+        users who have the partyId can request information about the party. A
+        hostId will also grant access to the endpoint.
+      </p>
+      <h3 class="endpoint-body-title">Socket.IO Event</h3>
+      <p class="endpoint-paragraph">No event emitted</p>
+    </div>
+    <div class="endpoint-body-right">
+      <div class="endpoint-request-body">
+        <pre>
                     <code class="language-json">
-                        // Request Body
-                        {
-                            "partyId": string,
-                            "guestId": string
-                        }
+                        //No Request Body
                     </code>
                 </pre>
-            </div>
-            <div class="endpoint-response-body">
-                <pre>
+      </div>
+      <div class="endpoint-response-body">
+        <pre>
                     <code class="language-json">
                         // Response Body
                         {
@@ -126,50 +112,48 @@
                         }
                     </code>
                 </pre>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="endpoint-container">
-    <div class="endpoint-header">
-        <h3 class="endpoint-method">PATCH</h3>
-        <p class="endpoint-path">/party</p>
-        <div class="endpoint-response-codes">
-            <p class="endpoint-response-divider">Reponse Codes: </p>
-            <p class="endpoint-response-success">200</p>
-            <p class="endpoint-response-divider">|</p>
-            <p class="endpoint-response-error">400</p>
-        </div>
+  <div class="endpoint-header">
+    <h3 class="endpoint-method">PATCH</h3>
+    <p class="endpoint-path">/party</p>
+    <div class="endpoint-response-codes">
+      <p class="endpoint-response-divider">Reponse Codes:</p>
+      <p class="endpoint-response-success">200</p>
+      <p class="endpoint-response-divider">|</p>
+      <p class="endpoint-response-error">400</p>
     </div>
-    <div class="endpoint-body">
-        <div class="endpoint-body-left">
-            <h3 class="endpoint-body-title">Description</h3>
-            <p class="endpoint-paragraph">
-                Updates the activity pack and/or primary host reference
-                of a party.<br><br>
+  </div>
+  <div class="endpoint-body">
+    <div class="endpoint-body-left">
+      <h3 class="endpoint-body-title">Description</h3>
+      <p class="endpoint-paragraph">
+        Updates the activity pack and/or primary host reference of a party.<br /><br />
 
-                <b>partyId:</b> The party which should be updated.<br>
-                <b>primaryHostId:</b> The id of the primary host. 
-                This field ensures that only the primary host can
-                update the activity pack reference.<br>
-                <b>newActivityPackId:</b> The id of the new activity pack.<br>
-                <b>newPrimary:</b> The id of the new primary host.
-            </p>
-            <h3 class="endpoint-body-title">Socket.IO Events</h3>
-            <p class="endpoint-paragraph">
-                <b>Event name:</b> activity-pack-updated<br>
-                <b>Data:</b> { ActivityPack, message }<br><br>
+        <b>partyId:</b> The party which should be updated.<br />
+        <b>primaryHostId:</b> The id of the primary host. This field ensures
+        that only the primary host can update the activity pack reference.<br />
+        <b>newActivityPackId:</b> The id of the new activity pack.<br />
+        <b>newPrimary:</b> The id of the new primary host.
+      </p>
+      <h3 class="endpoint-body-title">Socket.IO Events</h3>
+      <p class="endpoint-paragraph">
+        <b>Event name:</b> activity-pack-updated<br />
+        <b>Data:</b> { ActivityPack, message }<br /><br />
 
-                And / Or<br><br>
+        And / Or<br /><br />
 
-                <b>Event name:</b> primary-host-updated<br>
-                <b>Data:</b> { partyId, newPrimaryHostId, message }
-            </p>
-        </div>
-        <div class="endpoint-body-right">
-            <div class="endpoint-request-body">
-                <pre>
+        <b>Event name:</b> primary-host-updated<br />
+        <b>Data:</b> { partyId, newPrimaryHostId, message }
+      </p>
+    </div>
+    <div class="endpoint-body-right">
+      <div class="endpoint-request-body">
+        <pre>
                     <code class="language-json">
                         // Request Body
                         {
@@ -180,50 +164,50 @@
                         }
                     </code>
                 </pre>
-            </div>
-            <div class="endpoint-response-body">
-                <pre>
+      </div>
+      <div class="endpoint-response-body">
+        <pre>
                     <code class="language-json">
                         // Response Code
                         HTTP: 200 OK
                     </code>
                 </pre>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="endpoint-container">
-    <div class="endpoint-header">
-        <h3 class="endpoint-method">POST</h3>
-        <p class="endpoint-path">/party/add-host</p>
-        <div class="endpoint-response-codes">
-            <p class="endpoint-response-divider">Reponse Codes: </p>
-            <p class="endpoint-response-success">200</p>
-            <p class="endpoint-response-divider">|</p>
-            <p class="endpoint-response-error">400</p>
-        </div>
+  <div class="endpoint-header">
+    <h3 class="endpoint-method">POST</h3>
+    <p class="endpoint-path">/party/add-host</p>
+    <div class="endpoint-response-codes">
+      <p class="endpoint-response-divider">Reponse Codes:</p>
+      <p class="endpoint-response-success">200</p>
+      <p class="endpoint-response-divider">|</p>
+      <p class="endpoint-response-error">400</p>
     </div>
-    <div class="endpoint-body">
-        <div class="endpoint-body-left">
-            <h3 class="endpoint-body-title">Description</h3>
-            <p class="endpoint-paragraph">
-                Promotes a guest to a host.<br><br>
-                
-                <b>partyId:</b> The party which should be updated.<br>
-                <b>hostId:</b> The id of any current host in the party.
-                This field ensures that only hosts can add other hosts.<br>
-                <b>newHostId:</b> The id of the new host.
-            </p>
-            <h3 class="endpoint-body-title">Socket.IO Event</h3>
-            <p class="endpoint-paragraph">
-                <b>Event name:</b> guest-promoted<br>
-                <b>Data:</b> { newHostId, newHostName, message }
-            </p>
-        </div>
-        <div class="endpoint-body-right">
-            <div class="endpoint-request-body">
-                <pre>
+  </div>
+  <div class="endpoint-body">
+    <div class="endpoint-body-left">
+      <h3 class="endpoint-body-title">Description</h3>
+      <p class="endpoint-paragraph">
+        Promotes a guest to a host.<br /><br />
+
+        <b>partyId:</b> The party which should be updated.<br />
+        <b>hostId:</b> The id of any current host in the party. This field
+        ensures that only hosts can add other hosts.<br />
+        <b>newHostId:</b> The id of the new host.
+      </p>
+      <h3 class="endpoint-body-title">Socket.IO Event</h3>
+      <p class="endpoint-paragraph">
+        <b>Event name:</b> guest-promoted<br />
+        <b>Data:</b> { newHostId, newHostName, message }
+      </p>
+    </div>
+    <div class="endpoint-body-right">
+      <div class="endpoint-request-body">
+        <pre>
                     <code class="language-json">
                         // Request Body
                         {
@@ -233,54 +217,52 @@
                         }
                     </code>
                 </pre>
-            </div>
-            <div class="endpoint-response-body">
-                <pre>
+      </div>
+      <div class="endpoint-response-body">
+        <pre>
                     <code class="language-json">
                         // Response Code
                         HTTP: 200 OK
                     </code>
                 </pre>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="endpoint-container">
-    <div class="endpoint-header">
-        <h3 class="endpoint-method">POST</h3>
-        <p class="endpoint-path">/party/remove-host</p>
-        <div class="endpoint-response-codes">
-            <p class="endpoint-response-divider">Reponse Codes: </p>
-            <p class="endpoint-response-success">200</p>
-            <p class="endpoint-response-divider">|</p>
-            <p class="endpoint-response-error">400</p>
-            <p class="endpoint-response-divider">|</p>
-            <p class="endpoint-response-error">403</p>
-        </div>
+  <div class="endpoint-header">
+    <h3 class="endpoint-method">POST</h3>
+    <p class="endpoint-path">/party/remove-host</p>
+    <div class="endpoint-response-codes">
+      <p class="endpoint-response-divider">Reponse Codes:</p>
+      <p class="endpoint-response-success">200</p>
+      <p class="endpoint-response-divider">|</p>
+      <p class="endpoint-response-error">400</p>
+      <p class="endpoint-response-divider">|</p>
+      <p class="endpoint-response-error">403</p>
     </div>
-    <div class="endpoint-body">
-        <div class="endpoint-body-left">
-            <h3 class="endpoint-body-title">Description</h3>
-            <p class="endpoint-paragraph">
-                Demotes a host to a guest.<br><br>
-                
-                <b>partyId:</b> The party which should be updated.<br>
-                <b>primaryHostId:</b> The id of the primary host.
-                This field ensures that only the primary host can remove
-                other hosts.<br>
-                <b>removedHostId:</b> The id of the host that should be
-                demoted.
-            </p>
-            <h3 class="endpoint-body-title">Socket.IO Event</h3>
-            <p class="endpoint-paragraph">
-                <b>Event name:</b> host-demoted<br>
-                <b>Data:</b> { removedHostId, removedHostName, message }
-            </p>
-        </div>
-        <div class="endpoint-body-right">
-            <div class="endpoint-request-body">
-                <pre>
+  </div>
+  <div class="endpoint-body">
+    <div class="endpoint-body-left">
+      <h3 class="endpoint-body-title">Description</h3>
+      <p class="endpoint-paragraph">
+        Demotes a host to a guest.<br /><br />
+
+        <b>partyId:</b> The party which should be updated.<br />
+        <b>primaryHostId:</b> The id of the primary host. This field ensures
+        that only the primary host can remove other hosts.<br />
+        <b>removedHostId:</b> The id of the host that should be demoted.
+      </p>
+      <h3 class="endpoint-body-title">Socket.IO Event</h3>
+      <p class="endpoint-paragraph">
+        <b>Event name:</b> host-demoted<br />
+        <b>Data:</b> { removedHostId, removedHostName, message }
+      </p>
+    </div>
+    <div class="endpoint-body-right">
+      <div class="endpoint-request-body">
+        <pre>
                     <code class="language-json">
                         // Request Body
                         {
@@ -290,52 +272,50 @@
                         }
                     </code>
                 </pre>
-            </div>
-            <div class="endpoint-response-body">
-                <pre>
+      </div>
+      <div class="endpoint-response-body">
+        <pre>
                     <code class="language-json">
                         // Response Code
                         HTTP: 200 OK
                     </code>
                 </pre>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="endpoint-container">
-    <div class="endpoint-header">
-        <h3 class="endpoint-method">POST</h3>
-        <p class="endpoint-path">/party/remove-guest</p>
-        <div class="endpoint-response-codes">
-            <p class="endpoint-response-divider">Reponse Codes: </p>
-            <p class="endpoint-response-success">200</p>
-            <p class="endpoint-response-divider">|</p>
-            <p class="endpoint-response-error">400</p>
-        </div>
+  <div class="endpoint-header">
+    <h3 class="endpoint-method">POST</h3>
+    <p class="endpoint-path">/party/remove-guest</p>
+    <div class="endpoint-response-codes">
+      <p class="endpoint-response-divider">Reponse Codes:</p>
+      <p class="endpoint-response-success">200</p>
+      <p class="endpoint-response-divider">|</p>
+      <p class="endpoint-response-error">400</p>
     </div>
-    <div class="endpoint-body">
-        <div class="endpoint-body-left">
-            <h3 class="endpoint-body-title">Description</h3>
-            <p class="endpoint-paragraph">
-                Removes a guest from the party.<br><br>
-                
-                <b>partyId:</b> The party which should be updated.<br>
-                <b>hostId:</b> The id of any current host.
-                This field ensures that only hosts can remove guest from
-                the party.<br>
-                <b>removedGuestId:</b> The id of the guest that should be
-                removed.
-            </p>
-            <h3 class="endpoint-body-title">Socket.IO Event</h3>
-            <p class="endpoint-paragraph">
-                <b>Event name:</b> guest-removed<br>
-                <b>Data:</b> { partyId, removedGuestId, message }
-            </p>
-        </div>
-        <div class="endpoint-body-right">
-            <div class="endpoint-request-body">
-                <pre>
+  </div>
+  <div class="endpoint-body">
+    <div class="endpoint-body-left">
+      <h3 class="endpoint-body-title">Description</h3>
+      <p class="endpoint-paragraph">
+        Removes a guest from the party.<br /><br />
+
+        <b>partyId:</b> The party which should be updated.<br />
+        <b>hostId:</b> The id of any current host. This field ensures that only
+        hosts can remove guest from the party.<br />
+        <b>removedGuestId:</b> The id of the guest that should be removed.
+      </p>
+      <h3 class="endpoint-body-title">Socket.IO Event</h3>
+      <p class="endpoint-paragraph">
+        <b>Event name:</b> guest-removed<br />
+        <b>Data:</b> { partyId, removedGuestId, message }
+      </p>
+    </div>
+    <div class="endpoint-body-right">
+      <div class="endpoint-request-body">
+        <pre>
                     <code class="language-json">
                         // Request Body
                         {
@@ -345,49 +325,48 @@
                         }
                     </code>
                 </pre>
-            </div>
-            <div class="endpoint-response-body">
-                <pre>
+      </div>
+      <div class="endpoint-response-body">
+        <pre>
                     <code class="language-json">
                         // Response Code
                         HTTP: 200 OK
                     </code>
                 </pre>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="endpoint-container">
-    <div class="endpoint-header">
-        <h3 class="endpoint-method">POST</h3>
-        <p class="endpoint-path">/party/join</p>
-        <div class="endpoint-response-codes">
-            <p class="endpoint-response-divider">Reponse Codes: </p>
-            <p class="endpoint-response-success">200</p>
-            <p class="endpoint-response-divider">|</p>
-            <p class="endpoint-response-error">400</p>
-        </div>
+  <div class="endpoint-header">
+    <h3 class="endpoint-method">POST</h3>
+    <p class="endpoint-path">/party/join</p>
+    <div class="endpoint-response-codes">
+      <p class="endpoint-response-divider">Reponse Codes:</p>
+      <p class="endpoint-response-success">200</p>
+      <p class="endpoint-response-divider">|</p>
+      <p class="endpoint-response-error">400</p>
     </div>
-    <div class="endpoint-body">
-        <div class="endpoint-body-left">
-            <h3 class="endpoint-body-title">Description</h3>
-            <p class="endpoint-paragraph">
-                Connects a guest to a party.<br><br>
-                
-                <b>partyId:</b> The id of the party which the user 
-                wishes to join<br>
-                <b>guestName:</b> The name of the guest
-            </p>
-            <h3 class="endpoint-body-title">Socket.IO Event</h3>
-            <p class="endpoint-paragraph">
-                <b>Event name:</b> user-joined-party<br>
-                <b>Data:</b> { guestId, guestName, message }
-            </p>
-        </div>
-        <div class="endpoint-body-right">
-            <div class="endpoint-request-body">
-                <pre>
+  </div>
+  <div class="endpoint-body">
+    <div class="endpoint-body-left">
+      <h3 class="endpoint-body-title">Description</h3>
+      <p class="endpoint-paragraph">
+        Connects a guest to a party.<br /><br />
+
+        <b>partyId:</b> The id of the party which the user wishes to join<br />
+        <b>guestName:</b> The name of the guest
+      </p>
+      <h3 class="endpoint-body-title">Socket.IO Event</h3>
+      <p class="endpoint-paragraph">
+        <b>Event name:</b> user-joined-party<br />
+        <b>Data:</b> { guestId, guestName, message }
+      </p>
+    </div>
+    <div class="endpoint-body-right">
+      <div class="endpoint-request-body">
+        <pre>
                     <code class="language-json">
                         // Request Body
                         {
@@ -396,9 +375,9 @@
                         }
                     </code>
                 </pre>
-            </div>
-            <div class="endpoint-response-body">
-                <pre>
+      </div>
+      <div class="endpoint-response-body">
+        <pre>
                     <code class="language-json">
                         // Response Body
                         {
@@ -407,44 +386,42 @@
                         }
                     </code>
                 </pre>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="endpoint-container">
-    <div class="endpoint-header">
-        <h3 class="endpoint-method">POST</h3>
-        <p class="endpoint-path">/party/leave</p>
-        <div class="endpoint-response-codes">
-            <p class="endpoint-response-divider">Reponse Codes: </p>
-            <p class="endpoint-response-success">200</p>
-            <p class="endpoint-response-divider">|</p>
-            <p class="endpoint-response-error">400</p>
-        </div>
+  <div class="endpoint-header">
+    <h3 class="endpoint-method">POST</h3>
+    <p class="endpoint-path">/party/leave</p>
+    <div class="endpoint-response-codes">
+      <p class="endpoint-response-divider">Reponse Codes:</p>
+      <p class="endpoint-response-success">200</p>
+      <p class="endpoint-response-divider">|</p>
+      <p class="endpoint-response-error">400</p>
     </div>
-    <div class="endpoint-body">
-        <div class="endpoint-body-left">
-            <h3 class="endpoint-body-title">Description</h3>
-            <p class="endpoint-paragraph">
-                Disconnects a user from a party.<br><br>
-            
-                <b>partyId:</b> The id of the party which the user
-                wishes to leave<br>
-                <b>userId:</b> The id of the user. Both guests and
-                hosts can leave a party. However, the primary host
-                can not leave a party. The primary host has to assign
-                a new primary host first or delete the party.
-            </p>
-            <h3 class="endpoint-body-title">Socket.IO Event</h3>
-            <p class="endpoint-paragraph">
-                <b>Event name:</b> user-left-party<br>
-                <b>Data:</b> { userId, userName, message }
-            </p>
-        </div>
-        <div class="endpoint-body-right">
-            <div class="endpoint-request-body">
-                <pre>
+  </div>
+  <div class="endpoint-body">
+    <div class="endpoint-body-left">
+      <h3 class="endpoint-body-title">Description</h3>
+      <p class="endpoint-paragraph">
+        Disconnects a user from a party.<br /><br />
+
+        <b>partyId:</b> The id of the party which the user wishes to leave<br />
+        <b>userId:</b> The id of the user. Both guests and hosts can leave a
+        party. However, the primary host can not leave a party. The primary host
+        has to assign a new primary host first or delete the party.
+      </p>
+      <h3 class="endpoint-body-title">Socket.IO Event</h3>
+      <p class="endpoint-paragraph">
+        <b>Event name:</b> user-left-party<br />
+        <b>Data:</b> { userId, userName, message }
+      </p>
+    </div>
+    <div class="endpoint-body-right">
+      <div class="endpoint-request-body">
+        <pre>
                     <code class="language-json">
                         // Request Body
                         {
@@ -453,51 +430,49 @@
                         }
                     </code>
                 </pre>
-            </div>
-            <div class="endpoint-response-body">
-                <pre>
+      </div>
+      <div class="endpoint-response-body">
+        <pre>
                     <code class="language-json">
                         // Response Code
                         HTTP: 200 OK
                     </code>
                 </pre>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="endpoint-container">
-    <div class="endpoint-header">
-        <h3 class="endpoint-method">DELETE</h3>
-        <p class="endpoint-path">/party</p>
-        <div class="endpoint-response-codes">
-            <p class="endpoint-response-divider">Reponse Codes: </p>
-            <p class="endpoint-response-success">200</p>
-            <p class="endpoint-response-divider">|</p>
-            <p class="endpoint-response-error">400</p>
-        </div>
+  <div class="endpoint-header">
+    <h3 class="endpoint-method">DELETE</h3>
+    <p class="endpoint-path">/party</p>
+    <div class="endpoint-response-codes">
+      <p class="endpoint-response-divider">Reponse Codes:</p>
+      <p class="endpoint-response-success">200</p>
+      <p class="endpoint-response-divider">|</p>
+      <p class="endpoint-response-error">400</p>
     </div>
-    <div class="endpoint-body">
-        <div class="endpoint-body-left">
-            <h3 class="endpoint-body-title">Description</h3>
-            <p class="endpoint-paragraph">
-                Deletes a party.<br><br>
-                
-                <b>partyId:</b> The id of the party which should be
-                deleted.<br>
-                <b>primaryHostId:</b> The id of the primary host.
-                This field ensures that only the primary host can delete
-                a party.
-            </p>
-            <h3 class="endpoint-body-title">Socket.IO Event</h3>
-            <p class="endpoint-paragraph">
-                <b>Event name:</b> party-deleted<br>
-                <b>Data:</b> { partyId, message }
-            </p>
-        </div>
-        <div class="endpoint-body-right">
-            <div class="endpoint-request-body">
-                <pre>
+  </div>
+  <div class="endpoint-body">
+    <div class="endpoint-body-left">
+      <h3 class="endpoint-body-title">Description</h3>
+      <p class="endpoint-paragraph">
+        Deletes a party.<br /><br />
+
+        <b>partyId:</b> The id of the party which should be deleted.<br />
+        <b>primaryHostId:</b> The id of the primary host. This field ensures
+        that only the primary host can delete a party.
+      </p>
+      <h3 class="endpoint-body-title">Socket.IO Event</h3>
+      <p class="endpoint-paragraph">
+        <b>Event name:</b> party-deleted<br />
+        <b>Data:</b> { partyId, message }
+      </p>
+    </div>
+    <div class="endpoint-body-right">
+      <div class="endpoint-request-body">
+        <pre>
                     <code class="language-json">
                         // Request Body
                         {
@@ -506,15 +481,15 @@
                         }
                     </code>
                 </pre>
-            </div>
-            <div class="endpoint-response-body">
-                <pre>
+      </div>
+      <div class="endpoint-response-body">
+        <pre>
                     <code class="language-json">
                         // Response Code
                         HTTP: 200 OK
                     </code>
                 </pre>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>
