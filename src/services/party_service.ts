@@ -443,7 +443,7 @@ export class PartyService {
         }
     }
 
-    private static async isUserAHost(hostId: string, partyId: string) {
+    public static async isUserAHost(hostId: string, partyId: string) {
         const collection = await this.getPartiesCollection();
         const party = await collection.findOne({ _id: partyId });
 

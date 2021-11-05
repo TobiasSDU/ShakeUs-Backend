@@ -175,6 +175,49 @@ export class ActivityService {
         return deleteResult.deletedCount == activityIds.length;
     }
 
+    public static async postponeActivities(
+        partyId: string,
+        hostId: string,
+        time: number
+    ) {
+        const activities = await this.getPartyActivities(partyId, hostId);
+        const collection = await this.getActivitiesCollection();
+
+        if (activities && PartyService.isUserAHost(partyId, hostId)) {
+            for (let i = 0; i < activities.length; i++) {
+                const activity = await this.showActivity(activities[i]);
+                if (activity) {
+                    const newStartTime =
+                        activity.getStartTime + time * 1000 * 60;
+                    const updateResults = await collection.updateOne(
+                        { _id: activity.id },
+                        { $set: { startTime: newStartTime } }
+                    );
+
+                    if (updateResults.modifiedCount == activities.length) {
+                        const socketService: SocketService =
+                            app.get('socketService');
+
+                        socketService.emitToRoom(
+                            'all-activities-postponed',
+                            {
+                                updatedActivites: await this.getPartyActivities(
+                                    partyId,
+                                    hostId
+                                ),
+                                message: 'All activities have been postponed',
+                            },
+                            partyId
+                        );
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
     private static async getActivitiesCollection(): Promise<Collection> {
         const db: Db = await getDatabase(getDbConnectionString());
 
