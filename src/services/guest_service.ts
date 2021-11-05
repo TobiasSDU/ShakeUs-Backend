@@ -65,6 +65,71 @@ export class GuestService {
         return deleteResult.acknowledged;
     }
 
+    public static async getGuestsByPartyId(partyId: string, userId: string) {
+        const collection = await this.getGuestsCollection();
+        const party = await PartyService.getPartyInfo(partyId, userId);
+
+        if (party) {
+            const partyGuestsIds = party.getGuests;
+            const queryGuests = await collection
+                .find({
+                    _id: { $in: partyGuestsIds },
+                })
+                .toArray();
+
+            const guests = queryGuests.map((guest) => {
+                return new Guest(guest._id, guest.name);
+            });
+
+            return guests;
+        }
+
+        return null;
+    }
+
+    public static async getHostsByPartyId(partyId: string, userId: string) {
+        const collection = await this.getGuestsCollection();
+        const party = await PartyService.getPartyInfo(partyId, userId);
+
+        if (party) {
+            const partyHostsIds = party.getHosts;
+            const queryHosts = await collection
+                .find({
+                    _id: { $in: partyHostsIds },
+                })
+                .toArray();
+
+            const hosts = queryHosts.map((host) => {
+                return new Guest(host._id, host.name);
+            });
+
+            return hosts;
+        }
+
+        return null;
+    }
+
+    public static async getPrimaryHostByPartyId(
+        partyId: string,
+        userId: string
+    ) {
+        const collection = await this.getGuestsCollection();
+        const party = await PartyService.getPartyInfo(partyId, userId);
+
+        if (party) {
+            const primaryHost = party.getPrimaryHost;
+            const queryResult = await collection.findOne({
+                _id: primaryHost,
+            });
+
+            if (queryResult) {
+                return new Guest(queryResult._id, queryResult.name);
+            }
+        }
+
+        return null;
+    }
+
     private static async getGuestsCollection(): Promise<Collection> {
         const db: Db = await getDatabase(getDbConnectionString());
 

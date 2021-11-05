@@ -14,6 +14,8 @@ import { SocketService } from '../../src/services/socket_service';
 import http from 'http';
 import { seedActivityPackCollection } from '../seed/activity_pack.seed';
 import { seedActivityCollection } from '../seed/activity.seed';
+import { testGuest2 } from '../seed/guest.seed';
+import { seedGuestsCollection } from './../seed/guest.seed';
 
 let server: http.Server;
 
@@ -27,6 +29,7 @@ beforeAll(() => {
 beforeEach(async () => {
     await seedActivityCollection();
     await seedActivityPackCollection();
+    await seedGuestsCollection();
     await seedPartiesCollection();
 });
 
@@ -158,8 +161,12 @@ describe('endpoint tests for Party routes using POST', () => {
         });
 
         expect(res.statusCode).toEqual(200);
-        expect(res.body._id).toBeTruthy();
-        expect(res.body.name).toEqual(guestName);
+        expect(res.body.newGuest._id).toBeTruthy();
+        expect(res.body.newGuest.name).toEqual(guestName);
+        expect(res.body.guests.length).toEqual(2);
+        expect(res.body.hosts.length).toEqual(1);
+        expect(res.body.hosts[0].name).toEqual(testGuest2.getName);
+        expect(res.body.primaryHost.name).toEqual(testGuest2.getName);
     });
 
     test('POST request to /party/leave returns 400 if primary host attempts to leave', async () => {

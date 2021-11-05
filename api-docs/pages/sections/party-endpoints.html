@@ -367,25 +367,43 @@
     <div class="endpoint-body-right">
       <div class="endpoint-request-body">
         <pre>
-                    <code class="language-json">
-                        // Request Body
-                        {
-                            "partyId": string,
-                            "guestName": string
-                        }
-                    </code>
-                </pre>
+            <code class="language-json">
+                // Request Body
+                {
+                    "partyId": string,
+                    "guestName": string
+                }
+            </code>
+        </pre>
       </div>
       <div class="endpoint-response-body">
         <pre>
-                    <code class="language-json">
-                        // Response Body
-                        {
-                            "_id": string,
-                            "name": string
-                        }
-                    </code>
-                </pre>
+            <code class="language-json">
+                // Response Body
+                {
+                  newGuest: {
+                    "_id": string,
+                    "name": string
+                  },
+                  guests: [
+                    {
+                      "_id": string,
+                      "name": string
+                    }
+                  ],
+                  hosts: [
+                    {
+                      "_id": string,
+                      "name": string
+                    }
+                  ],
+                  primaryHost: {
+                    "_id": string,
+                    "name": string
+                  }
+                }
+            </code>
+        </pre>
       </div>
     </div>
   </div>
