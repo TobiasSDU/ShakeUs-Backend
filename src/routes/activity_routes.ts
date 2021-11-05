@@ -13,8 +13,8 @@ import {
 export const activityRoutes = express.Router();
 
 activityRoutes.post('', createActivity);
-activityRoutes.get('/:activityId', showActivity);
 activityRoutes.get('/templates', getActivityTemplates);
+activityRoutes.get('/:activityId', showActivity);
 activityRoutes.get('/next/:partyId/:userId', nextActivity);
 activityRoutes.patch('', updateActivity);
 activityRoutes.delete('', deleteActivity);

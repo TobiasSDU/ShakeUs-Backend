@@ -292,7 +292,7 @@ export class ActivityService {
         }
     }
 
-    private static async getPartyActivities(partyId: string, userId: string) {
+    public static async getPartyActivities(partyId: string, userId: string) {
         const party = await PartyService.getPartyInfo(partyId, userId);
 
         if (party) {

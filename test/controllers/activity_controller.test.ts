@@ -5,6 +5,11 @@ import { getTestActivity } from '../helpers/activity_test_helpers';
 import { seedActivityCollection, testActivity1 } from '../seed/activity.seed';
 import { dropDatabase, req } from './endpoint_tests_setup';
 import http from 'http';
+import { testParty1 } from '../seed/party.seed';
+import { ActivityService } from './../../src/services/activity_service';
+import { seedPartiesCollection } from './../seed/party.seed';
+import { seedGuestsCollection } from './../seed/guest.seed';
+import { seedActivityPackCollection } from '../seed/activity_pack.seed';
 
 let server: http.Server;
 
@@ -17,6 +22,9 @@ beforeAll(() => {
 
 beforeEach(async () => {
     await seedActivityCollection();
+    await seedPartiesCollection();
+    await seedGuestsCollection();
+    await seedActivityPackCollection();
 });
 
 describe('endpoint tests for Activity routes using GET', () => {
@@ -70,6 +78,54 @@ describe('endpoint tests for Activity routes using POST', () => {
         expect(activity.body.title).toEqual(title);
         expect(activity.body.description).toEqual(description);
         expect(activity.body.startTime).toEqual(startTime);
+    });
+
+    test('POST request to /activity/postpone-all updates the start time of all activities', async () => {
+        const partyId = testParty1.id;
+        const hostId = testParty1.getPrimaryHost;
+        const delay = 15;
+
+        let allActivities = await ActivityService.getPartyActivities(
+            partyId,
+            hostId
+        );
+
+        if (allActivities) {
+            const initialStartTimes = allActivities.map(async (activity) => {
+                const a = await ActivityService.showActivity(activity);
+                if (a) return a.getStartTime;
+                return null;
+            });
+
+            const res = await req.post('/activity/postpone-all').send({
+                partyId: partyId,
+                hostId: hostId,
+                delay: delay,
+            });
+
+            expect(res.statusCode).toEqual(200);
+
+            allActivities = await ActivityService.getPartyActivities(
+                partyId,
+                hostId
+            );
+
+            if (allActivities) {
+                const finalStartTimes = allActivities.map(async (activity) => {
+                    const a = await ActivityService.showActivity(activity);
+                    if (a) return a.getStartTime;
+                    return null;
+                });
+
+                for (let i = 0; i < allActivities.length; i++) {
+                    const iTime = await initialStartTimes[i];
+                    const fTime = await finalStartTimes[i];
+                    if (iTime && fTime) {
+                        expect(fTime - iTime).toEqual(delay * 1000 * 60);
+                    }
+                }
+            }
+        }
     });
 });
 
