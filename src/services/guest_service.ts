@@ -48,7 +48,7 @@ export class GuestService {
                     'username-updated',
                     {
                         user: { ...user },
-                        message: 'The party has ended',
+                        message: 'User has changed name',
                     },
                     party._id
                 );

@@ -46,10 +46,9 @@ describe('endpoint tests for Party routes using GET', () => {
     });
 
     test('GET request to /party with a valid host id returns a party', async () => {
-        const res = await req.get('/party').send({
-            partyId: testParty2.id,
-            guestId: testParty2.getHosts[0],
-        });
+        const res = await req
+            .get(`/party/${testParty2.id}/${testParty2.getHosts[0]}`)
+            .send();
 
         expect(res.statusCode).toEqual(200);
         expect(res.body._id).toEqual(testParty2.id);
@@ -226,10 +225,9 @@ describe('endpoint tests for Party routes using PATCH', () => {
 
         expect(res.statusCode).toEqual(200);
 
-        const party = await req.get('/party').send({
-            partyId: partyId,
-            guestId: primaryHostId,
-        });
+        const party = await req
+            .get(`/party/${partyId}/${primaryHostId}`)
+            .send();
 
         expect(party.body.activityPackId).toEqual(newActivityPackId);
     });

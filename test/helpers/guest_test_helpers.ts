@@ -3,9 +3,7 @@ import { getCollection, req } from '../controllers/endpoint_tests_setup';
 const guestsCollectionName = 'guests';
 
 export const getTestGuest = async (guestId: string) => {
-    return await req.get('/guest').send({
-        guestId: guestId,
-    });
+    return await req.get(`/guest/${guestId}`).send();
 };
 
 export const testHostOrGuest = async (userId: string, userName: string) => {

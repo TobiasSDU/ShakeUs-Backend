@@ -123,8 +123,7 @@ dist
 .webpack/
 
 ### TS Compiler Output ###
-./build
-./build/**/*
+
 
 ### Generated index.html ###
 api-docs/index.html

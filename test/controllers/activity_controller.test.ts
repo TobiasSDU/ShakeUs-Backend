@@ -23,9 +23,7 @@ describe('endpoint tests for Activity routes using GET', () => {
     test('GET request to /activity returns an activity', async () => {
         const activityId = testActivity1.id;
 
-        const res = await req.get('/activity').send({
-            activityId: activityId,
-        });
+        const res = await req.get(`/activity/${activityId}`).send();
 
         expect(res.statusCode).toEqual(200);
         expect(res.body._id).toBeTruthy();
@@ -38,14 +36,14 @@ describe('endpoint tests for Activity routes using GET', () => {
         expect(res.body.startTime).toEqual(testActivity1.getStartTime);
     });
 
-    test('GET request to /activity with an invalid id returns 400', async () => {
+    test('GET request to /activity with an invalid id returns 404', async () => {
         const activityId = 'invalidId';
 
         const res = await req.get('/activity').send({
             activityId: activityId,
         });
 
-        expect(res.statusCode).toEqual(400);
+        expect(res.statusCode).toEqual(404);
         expect(Object.keys(res.body).length).toEqual(0);
     });
 });

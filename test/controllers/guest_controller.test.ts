@@ -23,9 +23,7 @@ describe('endpoint tests for Guest routes using GET', () => {
     test('GET request to /guest returns a guest', async () => {
         const guestId = testGuest1.id;
 
-        const res = await req.get('/guest').send({
-            guestId: guestId,
-        });
+        const res = await req.get(`/guest/${guestId}`).send();
 
         expect(res.statusCode).toEqual(200);
         expect(res.body._id).toBeTruthy();
@@ -36,9 +34,7 @@ describe('endpoint tests for Guest routes using GET', () => {
     test('GET request to /guest with an invalid guestId returns 400', async () => {
         const guestId = 'invalidId';
 
-        const res = await req.get('/guest').send({
-            guestId: guestId,
-        });
+        const res = await req.get(`/guest/${guestId}`).send();
 
         expect(res.statusCode).toEqual(400);
         expect(Object.keys(res.body).length).toEqual(0);

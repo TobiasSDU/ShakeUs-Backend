@@ -28,9 +28,7 @@ describe('endpoint tests for ActivityPack routes using GET', () => {
     test('GET request to /activity-pack returns an activity pack', async () => {
         const activityPackId = testActivityPack1.id;
 
-        const res = await req.get('/activity-pack').send({
-            activityPackId: activityPackId,
-        });
+        const res = await req.get(`/activity-pack/${activityPackId}`).send();
 
         expect(res.statusCode).toEqual(200);
         expect(res.body._id).toBeTruthy();
@@ -46,9 +44,7 @@ describe('endpoint tests for ActivityPack routes using GET', () => {
     test('GET request to /activity-pack with an invalid id returns 400', async () => {
         const activityPackId = 'invalidId';
 
-        const res = await req.get('/activity-pack').send({
-            activityPackId: activityPackId,
-        });
+        const res = await req.get(`/activity-pack/${activityPackId}`).send();
 
         expect(res.statusCode).toEqual(400);
         expect(Object.keys(res.body).length).toEqual(0);
