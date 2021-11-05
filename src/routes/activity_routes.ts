@@ -7,6 +7,7 @@ import {
     getActivityTemplates,
     updateActivity,
     postponeActivities,
+    postponeActivity,
 } from './../controllers/activity_controller';
 
 export const activityRoutes = express.Router();
@@ -17,4 +18,5 @@ activityRoutes.get('/templates', getActivityTemplates);
 activityRoutes.get('/next/:partyId/:userId', nextActivity);
 activityRoutes.patch('', updateActivity);
 activityRoutes.delete('', deleteActivity);
-activityRoutes.post('/postpone', postponeActivities);
+activityRoutes.post('/postpone-all', postponeActivities);
+activityRoutes.post('/postpone-one', postponeActivity);

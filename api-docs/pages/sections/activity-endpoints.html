@@ -280,7 +280,7 @@
 <div class="endpoint-container">
   <div class="endpoint-header">
     <h3 class="endpoint-method">POST</h3>
-    <p class="endpoint-path">/activity/postpone</p>
+    <p class="endpoint-path">/activity/postpone-all</p>
     <div class="endpoint-response-codes">
       <p class="endpoint-response-divider">Reponse Codes:</p>
       <p class="endpoint-response-success">200</p>
@@ -314,6 +314,62 @@
                 {
                     "partyId": string,
                     "hostId": string,
+                    "delay": number
+                }
+            </code>
+        </pre>
+      </div>
+      <div class="endpoint-response-body">
+        <pre>
+            <code class="language-json">
+                // Response Code
+                HTTP: 200 OK
+            </code>
+        </pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="endpoint-container">
+  <div class="endpoint-header">
+    <h3 class="endpoint-method">POST</h3>
+    <p class="endpoint-path">/activity/postpone-one</p>
+    <div class="endpoint-response-codes">
+      <p class="endpoint-response-divider">Reponse Codes:</p>
+      <p class="endpoint-response-success">200</p>
+      <p class="endpoint-response-divider">|</p>
+      <p class="endpoint-response-error">400</p>
+    </div>
+  </div>
+  <div class="endpoint-body">
+    <div class="endpoint-body-left">
+      <h3 class="endpoint-body-title">Description</h3>
+      <p class="endpoint-paragraph">
+        Postpones one activity in a party by a set amount of minutes.<br /><br />
+
+        <b>partyId:</b> The id of the party containing the activity
+        that should be postponed.<br />
+        <b>hostId:</b> The id of one of the party hosts. This ensures that only
+        hosts can postpone an activity<br />
+        <b>activityId:</b> The id of the activity that should be postponed<br />
+        <b>delay:</b> The amount of time (in minutes) the activity should be postponed by.<br />
+      </p>
+      <h3 class="endpoint-body-title">Socket.IO Event</h3>
+      <p class="endpoint-paragraph">
+        <b>Event name:</b> one-activity-postponed<br />
+        <b>Data:</b> { updatedActivity, message }
+      </p>
+    </div>
+    <div class="endpoint-body-right">
+      <div class="endpoint-request-body">
+        <pre>
+            <code class="language-json">
+                // Request Body
+                {
+                    "partyId": string,
+                    "hostId": string,
+                    "activityId": string,
                     "delay": number
                 }
             </code>

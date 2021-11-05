@@ -158,14 +158,36 @@ export const deleteActivity = async (req: Request, res: Response) => {
 };
 
 export const postponeActivities = async (req: Request, res: Response) => {
-    const partyId = req.params.partyId;
-    const hostId = req.params.hostId;
+    const partyId = req.body.partyId;
+    const hostId = req.body.hostId;
     const delay = req.body.delay;
 
     if (partyId && hostId && delay) {
         const updateResult = await ActivityService.postponeActivities(
             partyId,
             hostId,
+            delay
+        );
+
+        if (updateResult) {
+            return res.sendStatus(200);
+        }
+    }
+
+    return res.sendStatus(400);
+};
+
+export const postponeActivity = async (req: Request, res: Response) => {
+    const partyId = req.body.partyId;
+    const hostId = req.body.hostId;
+    const activityId = req.body.activityId;
+    const delay = req.body.delay;
+
+    if (partyId && hostId && activityId && delay) {
+        const updateResult = await ActivityService.postponeActivity(
+            partyId,
+            hostId,
+            activityId,
             delay
         );
 

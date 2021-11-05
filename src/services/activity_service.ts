@@ -218,6 +218,41 @@ export class ActivityService {
         return false;
     }
 
+    public static async postponeActivity(
+        partyId: string,
+        hostId: string,
+        activityId: string,
+        time: number
+    ) {
+        const collection = await this.getActivitiesCollection();
+        const activity = await this.showActivity(activityId);
+
+        if (activity && PartyService.isUserAHost(partyId, hostId)) {
+            const newStartTime = activity.getStartTime + time * 1000 * 60;
+            const updateResults = await collection.updateOne(
+                { _id: activity.id },
+                { $set: { startTime: newStartTime } }
+            );
+
+            if (updateResults.modifiedCount == 1) {
+                const socketService: SocketService = app.get('socketService');
+
+                socketService.emitToRoom(
+                    'one-activity-postponed',
+                    {
+                        updatedActivity: await this.showActivity(activity.id),
+                        message: 'An activity has been postponed',
+                    },
+                    partyId
+                );
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private static async getActivitiesCollection(): Promise<Collection> {
         const db: Db = await getDatabase(getDbConnectionString());
 
