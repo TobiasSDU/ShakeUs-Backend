@@ -34,21 +34,21 @@ beforeEach(async () => {
 });
 
 describe('endpoint tests for Party routes using GET', () => {
-    test('GET request to /party with an invalid user id does not return a party', async () => {
+    test('GET request to /party/:partyId/:guestId with an invalid user id does not return a party', async () => {
         const res = await getTestParty(testParty2.id, 'invalidId');
 
         expect(res.statusCode).toEqual(400);
         expect(Object.keys(res.body).length).toEqual(0);
     });
 
-    test('GET request to /party with a vailid guest id returns a party', async () => {
+    test('GET request to /party/:partyId/:guestId with a vailid guest id returns a party', async () => {
         const res = await getTestParty(testParty1.id, testParty1.getGuests[0]);
 
         expect(res.statusCode).toEqual(200);
         expect(res.body._id).toEqual(testParty1.id);
     });
 
-    test('GET request to /party with a valid host id returns a party', async () => {
+    test('GET request to /party/:partyId/:guestId with a valid host id returns a party', async () => {
         const res = await req
             .get(`/party/${testParty2.id}/${testParty2.getHosts[0]}`)
             .send();
