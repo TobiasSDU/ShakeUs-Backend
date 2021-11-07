@@ -2,7 +2,11 @@ import { setCurrentDbMode } from '../../config/database_connection';
 import { app } from '../../src';
 import { SocketService } from '../../src/services/socket_service';
 import { getTestActivity } from '../helpers/activity_test_helpers';
-import { seedActivityCollection, testActivity1 } from '../seed/activity.seed';
+import {
+    seedActivityCollection,
+    testActivity1,
+    testActivity2,
+} from '../seed/activity.seed';
 import { dropDatabase, req } from './endpoint_tests_setup';
 import http from 'http';
 import { testParty1 } from '../seed/party.seed';
@@ -10,6 +14,8 @@ import { ActivityService } from './../../src/services/activity_service';
 import { seedPartiesCollection } from './../seed/party.seed';
 import { seedGuestsCollection } from './../seed/guest.seed';
 import { seedActivityPackCollection } from '../seed/activity_pack.seed';
+import { testActivityPack1 } from './../seed/activity_pack.seed';
+import { ActivityPackService } from './../../src/services/activity_pack_service';
 
 let server: http.Server;
 
@@ -54,13 +60,42 @@ describe('endpoint tests for Activity routes using GET', () => {
         expect(res.statusCode).toEqual(404);
         expect(Object.keys(res.body).length).toEqual(0);
     });
+
+    test('GET request to /activity/templates returns an array of default activities', async () => {
+        const res = await req.get('/activity/templates').send();
+
+        expect(res.statusCode).toEqual(200);
+        expect(res.body.length).toEqual(4);
+    });
+
+    test('GET request to /activity/next/:partyId/:userId returns the next activity to start', async () => {
+        await ActivityPackService.addActivityPackActivity(
+            testActivityPack1.id,
+            testActivity2.id
+        );
+        await ActivityService.updateActivityStartTime(
+            testActivity1.id,
+            Date.now() - 1000
+        );
+        await ActivityService.updateActivityStartTime(
+            testActivity2.id,
+            Date.now() + 5000
+        );
+
+        const res = await req
+            .get(`/activity/next/${testParty1.id}/${testParty1.getPrimaryHost}`)
+            .send();
+
+        expect(res.statusCode).toEqual(200);
+        expect(res.body._id).toEqual(testActivity2.id);
+    });
 });
 
 describe('endpoint tests for Activity routes using POST', () => {
-    test('POST request to /activity returns an activity', async () => {
+    test('POST request to /activity creates an activity', async () => {
         const title = 'TestTitle';
         const description = 'TestDescription';
-        const startTime = 1635082733652;
+        const startTime = Date.now() + 60000;
 
         const res = await req.post('/activity').send({
             title: title,
@@ -78,6 +113,33 @@ describe('endpoint tests for Activity routes using POST', () => {
         expect(activity.body.title).toEqual(title);
         expect(activity.body.description).toEqual(description);
         expect(activity.body.startTime).toEqual(startTime);
+    });
+
+    test('POST request to /activity/postpone-one updtes the start time of an activity', async () => {
+        const partyId = testParty1.id;
+        const hostId = testParty1.getPrimaryHost;
+        const activityId = testActivity1.id;
+        const delay = 15;
+
+        let activity = await getTestActivity(activityId);
+
+        if (activity) {
+            const initialStartTime = activity.body.startTime;
+
+            const res = await req.post(`/activity/postpone-one`).send({
+                partyId: partyId,
+                hostId: hostId,
+                activityId: activityId,
+                delay: delay,
+            });
+
+            expect(res.statusCode).toEqual(200);
+
+            activity = await getTestActivity(activityId);
+            const newStartTime = activity.body.startTime;
+
+            expect(newStartTime - initialStartTime).toEqual(delay * 1000 * 60);
+        }
     });
 
     test('POST request to /activity/postpone-all updates the start time of all activities', async () => {

@@ -80,7 +80,7 @@ export class ActivityService {
                 .sort({ startTime: 1 });
 
             if (await activities.hasNext()) {
-                return activities.next();
+                return await activities.next();
             }
 
             return null;
@@ -124,7 +124,7 @@ export class ActivityService {
 
     public static async updateActivityStartTime(
         id: string,
-        newStartTime: string
+        newStartTime: number
     ) {
         const collection = await this.getActivitiesCollection();
         const updateResult = await collection.updateOne(
@@ -138,7 +138,7 @@ export class ActivityService {
                 await rescheduleActivity(activity);
             }
 
-            await this.emitActivityUpdated(id, 'start-time', newStartTime);
+            await this.emitActivityUpdated(id, 'start-time', '' + newStartTime);
             return true;
         }
 

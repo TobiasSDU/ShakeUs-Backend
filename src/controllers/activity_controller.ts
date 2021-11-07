@@ -128,7 +128,7 @@ const updateActivityDescription = async (
     return false;
 };
 
-const updateActivityStartTime = async (id: string, newStartTime: string) => {
+const updateActivityStartTime = async (id: string, newStartTime: number) => {
     if (id && newStartTime) {
         const updateResult = await ActivityService.updateActivityStartTime(
             id,

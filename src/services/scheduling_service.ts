@@ -22,7 +22,6 @@ export const scheduleActivity = async (activity: Activity) => {
         );
 
         if (party) {
-            console.log('Scheduler reached');
             jobs[activityId] = schedule.scheduleJob(executionTime, function () {
                 socketService.emitToRoom(
                     'activity-started',
