@@ -25,7 +25,7 @@ beforeEach(async () => {
 });
 
 describe('endpoint tests for ActivityPack routes using GET', () => {
-    test('GET request to /activity-pack returns an activity pack', async () => {
+    test('GET request to /activity-pack/:activityPackId returns an activity pack', async () => {
         const activityPackId = testActivityPack1.id;
 
         const res = await req.get(`/activity-pack/${activityPackId}`).send();
@@ -41,7 +41,7 @@ describe('endpoint tests for ActivityPack routes using GET', () => {
         expect(res.body.activities).toEqual(testActivityPack1.getActivities);
     });
 
-    test('GET request to /activity-pack with an invalid id returns 400', async () => {
+    test('GET request to /activity-pack/:activityPackId with an invalid id returns 400', async () => {
         const activityPackId = 'invalidId';
 
         const res = await req.get(`/activity-pack/${activityPackId}`).send();
