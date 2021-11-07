@@ -20,7 +20,7 @@ beforeEach(async () => {
 });
 
 describe('endpoint tests for Guest routes using GET', () => {
-    test('GET request to /guest returns a guest', async () => {
+    test('GET request to /guest/:guestId returns a guest', async () => {
         const guestId = testGuest1.id;
 
         const res = await req.get(`/guest/${guestId}`).send();
@@ -31,7 +31,7 @@ describe('endpoint tests for Guest routes using GET', () => {
         expect(res.body.name).toBeTruthy();
     });
 
-    test('GET request to /guest with an invalid guestId returns 400', async () => {
+    test('GET request to /guest/:guestId with an invalid guestId returns 400', async () => {
         const guestId = 'invalidId';
 
         const res = await req.get(`/guest/${guestId}`).send();
