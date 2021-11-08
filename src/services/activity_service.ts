@@ -307,4 +307,24 @@ export class ActivityService {
 
         return null;
     }
+
+    public static async getActivitiesByActivityPackId(activityPackId: string) {
+        const collection = await this.getActivitiesCollection();
+        const activityPack = await ActivityPackService.showActivityPack(
+            activityPackId
+        );
+
+        if (activityPack) {
+            const activities = await collection
+                .find({
+                    _id: { $in: activityPack.getActivities },
+                })
+                .sort({ startTime: 1 })
+                .toArray();
+
+            return activities;
+        }
+
+        return null;
+    }
 }

@@ -13,7 +13,7 @@ export const testActivityPack2 = new ActivityPack(
     'ActivityPack2Id',
     'ActivityPack2',
     'ActivityPack2Desc',
-    [testActivity2.id]
+    [testActivity1.id, testActivity2.id]
 );
 
 export const seedActivityPackCollection = async () => {

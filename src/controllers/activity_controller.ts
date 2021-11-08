@@ -65,6 +65,25 @@ export const nextActivity = async (req: Request, res: Response) => {
     return res.sendStatus(400);
 };
 
+export const getAllActivitiesByActivityPackId = async (
+    req: Request,
+    res: Response
+) => {
+    const activityPackId = req.params.activityPackId;
+
+    if (activityPackId) {
+        const activities = await ActivityService.getActivitiesByActivityPackId(
+            activityPackId
+        );
+
+        if (activities) {
+            return res.json(activities);
+        }
+    }
+
+    return res.sendStatus(400);
+};
+
 export const updateActivity = async (req: Request, res: Response) => {
     const id = req.body.activityId;
     const newTitle = req.body.newTitle;

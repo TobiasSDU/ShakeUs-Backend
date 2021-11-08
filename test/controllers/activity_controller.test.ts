@@ -13,7 +13,10 @@ import { testParty1 } from '../seed/party.seed';
 import { ActivityService } from './../../src/services/activity_service';
 import { seedPartiesCollection } from './../seed/party.seed';
 import { seedGuestsCollection } from './../seed/guest.seed';
-import { seedActivityPackCollection } from '../seed/activity_pack.seed';
+import {
+    seedActivityPackCollection,
+    testActivityPack2,
+} from '../seed/activity_pack.seed';
 import { testActivityPack1 } from './../seed/activity_pack.seed';
 import { ActivityPackService } from './../../src/services/activity_pack_service';
 
@@ -88,6 +91,17 @@ describe('endpoint tests for Activity routes using GET', () => {
 
         expect(res.statusCode).toEqual(200);
         expect(res.body._id).toEqual(testActivity2.id);
+    });
+
+    test('GET request to /activity/get-all/:activityPackId return all activities in the provided activity pack', async () => {
+        const res = await req
+            .get(`/activity/get-all/${testActivityPack2.id}`)
+            .send();
+
+        expect(res.statusCode).toEqual(200);
+        expect(res.body.length).toEqual(2);
+        expect(res.body[0]._id).toEqual(testActivity1.id);
+        expect(res.body[1]._id).toEqual(testActivity2.id);
     });
 });
 
