@@ -1,7 +1,12 @@
 import express from 'express';
-import { showGuest, updateGuestName } from '../controllers/guest_controller';
+import {
+    getAllGuestsByPartyId,
+    showGuest,
+    updateGuestName,
+} from '../controllers/guest_controller';
 
 export const guestRoutes = express.Router();
 
 guestRoutes.patch('', updateGuestName);
 guestRoutes.get('/:guestId', showGuest);
+guestRoutes.get('/get-all/:partyId/:userId', getAllGuestsByPartyId);

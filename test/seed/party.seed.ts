@@ -3,7 +3,7 @@ import { Party } from '../../src/models/party';
 import { generatePartyId } from '../../src/util/party_id_generator';
 import { getCollection } from '../controllers/endpoint_tests_setup';
 import { testActivityPack1, testActivityPack2 } from './activity_pack.seed';
-import { testGuest1, testGuest2 } from './guest.seed';
+import { testGuest1, testGuest2, testGuest3 } from './guest.seed';
 
 export const testParty1 = new Party(
     generatePartyId(),
@@ -15,9 +15,9 @@ export const testParty1 = new Party(
 
 export const testParty2 = new Party(
     generatePartyId(),
-    ['TestHost2', 'TestHost3'],
+    ['TestHost2', 'TestHost3', testGuest3.id],
     'TestHost2',
-    ['TestGuest2', 'TestGuest3'],
+    [testGuest1.id, testGuest2.id],
     testActivityPack2.id
 );
 
