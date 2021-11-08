@@ -7,25 +7,25 @@ export const defaultActivities: Activity[] = [
         'DefaultActivity1',
         'Activity1',
         'Activity1Description',
-        Date.now()
+        Date.now() + 1000 * 60 * 30
     ),
     new Activity(
         'DefaultActivity2',
         'Activity2',
         'Activity2Description',
-        Date.now()
+        Date.now() + 1000 * 60 * 60
     ),
     new Activity(
         'DefaultActivity3',
         'Activity3',
         'Activity3Description',
-        Date.now()
+        Date.now() + 1000 * 60 * 90
     ),
     new Activity(
         'DefaultActivity4',
         'Activity4',
         'Activity4Description',
-        Date.now()
+        Date.now() + 1000 * 60 * 120
     ),
 ];
 
