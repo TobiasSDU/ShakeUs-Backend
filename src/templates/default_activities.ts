@@ -45,7 +45,7 @@ export const createActivitiesFromTemplate = async (activityIds: string[]) => {
                     activity.id,
                     activity.getTitle,
                     activity.getDescription,
-                    Date.now() + 60000 * 60
+                    Date.now() + 1000 * 60 * 30 * (i + 1)
                 )
             );
         }
