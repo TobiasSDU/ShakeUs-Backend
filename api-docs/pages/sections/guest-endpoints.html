@@ -28,21 +28,68 @@
     <div class="endpoint-body-right">
       <div class="endpoint-request-body">
         <pre>
-                    <code class="language-json">
-                        //No Request Body
-                    </code>
-                </pre>
+          <code class="language-json">
+              //No Request Body
+          </code>
+        </pre>
       </div>
       <div class="endpoint-response-body">
         <pre>
-                    <code class="language-json">
-                        // Response Body
-                        {
-                            "_id": string,
-                            "name": string
-                        }
-                    </code>
-                </pre>
+          <code class="language-json">
+              // Response Body
+              {
+                "_id": string,
+                "name": string
+              }
+          </code>
+        </pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="endpoint-container">
+  <div class="endpoint-header">
+    <h3 class="endpoint-method">GET</h3>
+    <p class="endpoint-path">/get-all/:partyId/:userId</p>
+    <div class="endpoint-response-codes">
+      <p class="endpoint-response-divider">Reponse Codes:</p>
+      <p class="endpoint-response-success">200</p>
+      <p class="endpoint-response-divider">|</p>
+      <p class="endpoint-response-error">400</p>
+    </div>
+  </div>
+  <div class="endpoint-body">
+    <div class="endpoint-body-left">
+      <h3 class="endpoint-body-title">Description</h3>
+      <p class="endpoint-paragraph">
+        Returns all the guests and hosts belonging to the party with
+        the provided partyId.<br /><br />
+
+        <b>partyId:</b> The id of the party you want the guests and hosts from.<br />
+        <b>userId:</b> The id of a user requesting the information.<br />
+      </p>
+      <h3 class="endpoint-body-title">Socket.IO Event</h3>
+      <p class="endpoint-paragraph">No event emitted</p>
+    </div>
+    <div class="endpoint-body-right">
+      <div class="endpoint-request-body">
+        <pre>
+          <code class="language-json">
+              //No Request Body
+          </code>
+        </pre>
+      </div>
+      <div class="endpoint-response-body">
+        <pre>
+          <code class="language-json">
+              // Response Body
+              {
+                "guests": Guest[],
+                "hosts": Hosts[]
+              }
+          </code>
+        </pre>
       </div>
     </div>
   </div>
