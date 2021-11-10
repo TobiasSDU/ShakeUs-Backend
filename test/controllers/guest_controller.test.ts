@@ -1,25 +1,32 @@
-import { setCurrentDbMode } from '../../config/database_connection';
+import {
+    getDbConnectionString,
+    setCurrentDbMode,
+} from '../../config/database_connection';
 import { app } from '../../src';
-import { SocketService } from '../../src/services/socket_service';
 import { getTestGuest } from '../helpers/guest_test_helpers';
 import {
     seedGuestsCollection,
     testGuest1,
     testGuest2,
 } from '../seed/guest.seed';
-import { dropDatabase, req } from './endpoint_tests_setup';
-import http from 'http';
+import {
+    closeTestDb,
+    connectToTestDb,
+    dropDatabase,
+    req,
+} from './endpoint_tests_setup';
 import { testParty2 } from '../seed/party.seed';
 import { seedPartiesCollection } from './../seed/party.seed';
 import { testGuest3 } from './../seed/guest.seed';
+import { MongoClient } from 'mongodb';
 
-let server: http.Server;
+let dbClient: MongoClient;
 
-beforeAll(() => {
-    server = http.createServer(app);
-
+beforeAll(async () => {
     setCurrentDbMode('testFile2');
-    app.set('socketService', new SocketService(server));
+
+    dbClient = new MongoClient(getDbConnectionString());
+    await connectToTestDb(dbClient, 'shake-us-test-2');
 });
 
 beforeEach(async () => {
@@ -105,5 +112,7 @@ afterEach(async () => {
 });
 
 afterAll(() => {
+    const server = app.get('server');
     server.close();
+    closeTestDb(dbClient);
 });

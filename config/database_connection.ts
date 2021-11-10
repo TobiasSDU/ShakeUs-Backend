@@ -1,4 +1,5 @@
-import { MongoClient, Db } from 'mongodb';
+import { Db } from 'mongodb';
+import { app } from '../src';
 
 declare global {
     // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -53,9 +54,6 @@ export const getDbConnectionString = () => {
     return connectionString;
 };
 
-export const getDatabase = async (connectionString: string): Promise<Db> => {
-    const client = new MongoClient(connectionString);
-    await client.connect();
-
-    return client.db();
+export const getDatabase = async (): Promise<Db> => {
+    return await app.get('database');
 };

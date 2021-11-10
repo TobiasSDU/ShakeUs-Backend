@@ -1,14 +1,20 @@
-import { setCurrentDbMode } from '../../config/database_connection';
+import {
+    getDbConnectionString,
+    setCurrentDbMode,
+} from '../../config/database_connection';
 import { app } from '../../src';
-import { SocketService } from '../../src/services/socket_service';
 import { getTestActivity } from '../helpers/activity_test_helpers';
 import {
     seedActivityCollection,
     testActivity1,
     testActivity2,
 } from '../seed/activity.seed';
-import { dropDatabase, req } from './endpoint_tests_setup';
-import http from 'http';
+import {
+    closeTestDb,
+    connectToTestDb,
+    dropDatabase,
+    req,
+} from './endpoint_tests_setup';
 import { testParty1 } from '../seed/party.seed';
 import { ActivityService } from './../../src/services/activity_service';
 import { seedPartiesCollection } from './../seed/party.seed';
@@ -19,14 +25,15 @@ import {
 } from '../seed/activity_pack.seed';
 import { testActivityPack1 } from './../seed/activity_pack.seed';
 import { ActivityPackService } from './../../src/services/activity_pack_service';
+import { MongoClient } from 'mongodb';
 
-let server: http.Server;
+let dbClient: MongoClient;
 
-beforeAll(() => {
-    server = http.createServer(app);
-
+beforeAll(async () => {
     setCurrentDbMode('testFile4');
-    app.set('socketService', new SocketService(server));
+
+    dbClient = new MongoClient(getDbConnectionString());
+    await connectToTestDb(dbClient, 'shake-us-test-4');
 });
 
 beforeEach(async () => {
@@ -286,5 +293,7 @@ afterEach(async () => {
 });
 
 afterAll(() => {
+    const server = app.get('server');
     server.close();
+    closeTestDb(dbClient);
 });

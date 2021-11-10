@@ -1,9 +1,6 @@
 import { Collection, Db } from 'mongodb';
 import { app } from '..';
-import {
-    getDatabase,
-    getDbConnectionString,
-} from '../../config/database_connection';
+import { getDatabase } from '../../config/database_connection';
 import { Guest } from '../models/guest';
 import { PartyService } from './party_service';
 import { SocketService } from './socket_service';
@@ -175,7 +172,7 @@ export class GuestService {
     }
 
     private static async getGuestsCollection(): Promise<Collection> {
-        const db: Db = await getDatabase(getDbConnectionString());
+        const db: Db = await getDatabase();
 
         return db.collection('guests');
     }

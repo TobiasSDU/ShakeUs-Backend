@@ -1,22 +1,29 @@
-import { setCurrentDbMode } from '../../config/database_connection';
+import {
+    getDbConnectionString,
+    setCurrentDbMode,
+} from '../../config/database_connection';
 import { app } from '../../src';
-import { SocketService } from '../../src/services/socket_service';
 import { getActivityPack } from '../helpers/activity_pack_test_helpers';
 import {
     seedActivityPackCollection,
     testActivityPack1,
 } from '../seed/activity_pack.seed';
-import { dropDatabase, req } from './endpoint_tests_setup';
-import http from 'http';
+import {
+    closeTestDb,
+    connectToTestDb,
+    dropDatabase,
+    req,
+} from './endpoint_tests_setup';
 import { seedActivityCollection, testActivity1 } from './../seed/activity.seed';
+import { MongoClient } from 'mongodb';
 
-let server: http.Server;
+let dbClient: MongoClient;
 
-beforeAll(() => {
-    server = http.createServer(app);
-
+beforeAll(async () => {
     setCurrentDbMode('testFile3');
-    app.set('socketService', new SocketService(server));
+
+    dbClient = new MongoClient(getDbConnectionString());
+    await connectToTestDb(dbClient, 'shake-us-test-3');
 });
 
 beforeEach(async () => {
@@ -191,5 +198,7 @@ afterEach(async () => {
 });
 
 afterAll(() => {
+    const server = app.get('server');
     server.close();
+    closeTestDb(dbClient);
 });

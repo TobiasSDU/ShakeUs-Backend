@@ -1,9 +1,6 @@
 import { Collection, Db } from 'mongodb';
 import { app } from '..';
-import {
-    getDatabase,
-    getDbConnectionString,
-} from '../../config/database_connection';
+import { getDatabase } from '../../config/database_connection';
 import { ActivityPack } from './../models/activity_pack';
 import { SocketService } from './socket_service';
 import { ActivityService } from './activity_service';
@@ -217,7 +214,7 @@ export class ActivityPackService {
     }
 
     private static async getActivityPacksCollection(): Promise<Collection> {
-        const db: Db = await getDatabase(getDbConnectionString());
+        const db: Db = await getDatabase();
 
         return db.collection('activity-packs');
     }
