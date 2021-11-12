@@ -1,3 +1,9 @@
+import { Activity } from '../models/activity';
+import { ActivityPack } from '../models/activity_pack';
+import { ActivityPackService } from './../services/activity_pack_service';
+import { generateUUID } from './../util/uuid_generator';
+import { ActivityService } from './../services/activity_service';
+
 const defaultActivityPack1 = {
     id: 'AP1',
     title: 'The Classics',
@@ -129,3 +135,77 @@ export const defaultActivityPacks = [
     defaultActivityPack2,
     defaultActivityPack3,
 ];
+
+export const createActivityPackFromTemplate = async (
+    activityPackId: string
+) => {
+    const activityPack = getActivityPackById(activityPackId);
+
+    if (activityPack) {
+        activityPack.id = generateUUID();
+
+        const newActivityIds = await createActivitiesFromTemplate(
+            activityPack.activities
+        );
+        updateActivityIds(activityPack, newActivityIds);
+
+        await ActivityPackService.createActivityPack(activityPack);
+
+        return activityPack.id;
+    }
+
+    return '';
+};
+
+const getActivityPackById = (activityPackId: string) => {
+    for (let i = 0; i < defaultActivityPacks.length; i++) {
+        if (defaultActivityPacks[i].id == activityPackId) {
+            return Object.assign(
+                Object.getPrototypeOf(defaultActivityPacks[i]),
+                defaultActivityPacks[i]
+            );
+        }
+    }
+
+    return null;
+};
+
+const updateActivityIds = (
+    activityPack: ActivityPack,
+    newActivityIds: string[]
+) => {
+    activityPack.setActivities = [];
+    for (let i = 0; i < newActivityIds.length; i++) {
+        activityPack.addActivity(newActivityIds[i]);
+    }
+};
+
+type TemplateActivity = {
+    title: string;
+    description: string;
+    startTime: number;
+};
+
+const createActivitiesFromTemplate = async (
+    templateActivities: TemplateActivity[]
+) => {
+    const newActivityIds: string[] = [];
+    const newActivities: Activity[] = [];
+
+    for (let i = 0; i < templateActivities.length; i++) {
+        const id = generateUUID();
+        const activity = new Activity(
+            id,
+            templateActivities[i].title,
+            templateActivities[i].description,
+            templateActivities[i].startTime
+        );
+
+        newActivityIds.push(id);
+        newActivities.push(activity);
+    }
+
+    await ActivityService.createManyActivities(newActivities);
+
+    return newActivityIds;
+};
