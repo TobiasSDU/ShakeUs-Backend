@@ -13,7 +13,7 @@ export const createParty = async (req: Request, res: Response) => {
     const hostNotificationToken = req.body.hostNotificationToken;
     const host = new Guest(generateUUID(), hostName, hostNotificationToken);
 
-    if (partyId && host && activityPackId) {
+    if (partyId && host && activityPackId && hostNotificationToken) {
         const party = new Party(
             partyId,
             [host.id],
@@ -25,7 +25,11 @@ export const createParty = async (req: Request, res: Response) => {
         const insertResult = await PartyService.createParty(party, host);
 
         if (insertResult) {
-            return res.json({ hostId: host.id, partyId: partyId });
+            return res.json({
+                hostId: host.id,
+                partyId: partyId,
+                hostNotificationToken: hostNotificationToken,
+            });
         }
     }
 
@@ -190,7 +194,7 @@ export const joinParty = async (req: Request, res: Response) => {
     const guestName = req.body.guestName;
     const guestNotificationToken = req.body.guestNotificationToken;
 
-    if (partyId && guestName) {
+    if (partyId && guestName && guestNotificationToken) {
         const newGuest = new Guest(
             generateUUID(),
             guestName,

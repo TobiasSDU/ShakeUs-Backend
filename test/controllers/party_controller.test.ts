@@ -70,10 +70,12 @@ describe('endpoint tests for Party routes using POST', () => {
     test('POST request to /party creates a party and a host', async () => {
         const activityPackId = testActivityPack1.id;
         const hostName = 'TestHost';
+        const hostNotificationToken = 'TestToken';
 
         const res = await req.post('/party').send({
             activityPackId: activityPackId,
             hostName: hostName,
+            hostNotificationToken: hostNotificationToken,
         });
 
         const partyId = res.body.partyId;
@@ -81,6 +83,8 @@ describe('endpoint tests for Party routes using POST', () => {
 
         await testParty(partyId, [hostId], hostId, []);
         await testHostOrGuest(hostId, hostName);
+
+        expect(res.body.hostNotificationToken).toEqual(hostNotificationToken);
     });
 
     test('POST request to /party/add-host adds a new host to the hosts array', async () => {
@@ -162,15 +166,20 @@ describe('endpoint tests for Party routes using POST', () => {
     test('POST request to /party/join returns a new guest', async () => {
         const partyId = testParty1.id;
         const guestName = 'NewTestGuest';
+        const guestNotificationToken = 'TestToken';
 
         const res = await req.post('/party/join').send({
             partyId: partyId,
             guestName: guestName,
+            guestNotificationToken: guestNotificationToken,
         });
 
         expect(res.statusCode).toEqual(200);
         expect(res.body.newGuest._id).toBeTruthy();
         expect(res.body.newGuest.name).toEqual(guestName);
+        expect(res.body.newGuest.notificationToken).toEqual(
+            guestNotificationToken
+        );
         expect(res.body.guests.length).toEqual(2);
         expect(res.body.hosts.length).toEqual(1);
         expect(res.body.hosts[0].name).toEqual(testGuest2.getName);
