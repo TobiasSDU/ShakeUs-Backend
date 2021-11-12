@@ -4,7 +4,6 @@ import {
     showActivity,
     deleteActivity,
     nextActivity,
-    getActivityTemplates,
     updateActivity,
     postponeActivities,
     postponeActivity,
@@ -14,7 +13,6 @@ import {
 export const activityRoutes = express.Router();
 
 activityRoutes.post('', createActivity);
-activityRoutes.get('/templates', getActivityTemplates);
 activityRoutes.get('/:activityId', showActivity);
 activityRoutes.get('/next/:partyId/:userId', nextActivity);
 activityRoutes.get(

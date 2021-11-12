@@ -109,57 +109,6 @@
 <div class="endpoint-container">
   <div class="endpoint-header">
     <h3 class="endpoint-method">GET</h3>
-    <p class="endpoint-path">/activity/templates</p>
-    <div class="endpoint-response-codes">
-      <p class="endpoint-response-divider">Reponse Codes:</p>
-      <p class="endpoint-response-success">200</p>
-      <p class="endpoint-response-divider">|</p>
-      <p class="endpoint-response-error">404</p>
-    </div>
-  </div>
-  <div class="endpoint-body">
-    <div class="endpoint-body-left">
-      <h3 class="endpoint-body-title">Description</h3>
-      <p class="endpoint-paragraph">
-        Returns an array of template activities. These activities are in the app
-        by default and can be added to activity packs.<br /><br />
-
-        This endpoint does not require any request parameters.
-      </p>
-      <h3 class="endpoint-body-title">Socket.IO Event</h3>
-      <p class="endpoint-paragraph">No event emitted</p>
-    </div>
-    <div class="endpoint-body-right">
-      <div class="endpoint-request-body">
-        <pre>
-                    <code class="language-json">
-                        // No Request Body
-                    </code>
-                </pre>
-      </div>
-      <div class="endpoint-response-body">
-        <pre>
-                    <code class="language-json">
-                        // Response Body
-                        [
-                            {
-                                "_id": string,
-                                "title": string,
-                                "description": string,
-                                "startTime": number
-                            },
-                            ...
-                        ]
-                    </code>
-                </pre>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="endpoint-container">
-  <div class="endpoint-header">
-    <h3 class="endpoint-method">GET</h3>
     <p class="endpoint-path">/activity/next/:partyId/:userId</p>
     <div class="endpoint-response-codes">
       <p class="endpoint-response-divider">Reponse Codes:</p>
@@ -249,10 +198,10 @@
             {
               [
                 {
-                  _id: string,
-                  title: string,
-                  description: string,
-                  startTime: number
+                  "_id": string,
+                  "title": string,
+                  "description": string,
+                  "startTime": number
                 },
                 ...
               ]

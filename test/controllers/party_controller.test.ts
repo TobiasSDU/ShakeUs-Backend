@@ -23,6 +23,7 @@ import { seedActivityCollection } from '../seed/activity.seed';
 import { testGuest2 } from '../seed/guest.seed';
 import { seedGuestsCollection } from './../seed/guest.seed';
 import { MongoClient } from 'mongodb';
+import { testActivityPack1 } from './../seed/activity_pack.seed';
 
 let dbClient: MongoClient;
 
@@ -67,7 +68,7 @@ describe('endpoint tests for Party routes using GET', () => {
 
 describe('endpoint tests for Party routes using POST', () => {
     test('POST request to /party creates a party and a host', async () => {
-        const activityPackId = 'testId';
+        const activityPackId = testActivityPack1.id;
         const hostName = 'TestHost';
 
         const res = await req.post('/party').send({

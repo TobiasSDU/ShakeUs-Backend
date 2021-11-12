@@ -71,13 +71,6 @@ describe('endpoint tests for Activity routes using GET', () => {
         expect(Object.keys(res.body).length).toEqual(0);
     });
 
-    test('GET request to /activity/templates returns an array of default activities', async () => {
-        const res = await req.get('/activity/templates').send();
-
-        expect(res.statusCode).toEqual(200);
-        expect(res.body.length).toEqual(4);
-    });
-
     test('GET request to /activity/next/:partyId/:userId returns the next activity to start', async () => {
         await ActivityPackService.addActivityPackActivity(
             testActivityPack1.id,

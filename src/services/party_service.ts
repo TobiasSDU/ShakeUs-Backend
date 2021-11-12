@@ -6,7 +6,6 @@ import { Party } from '../models/party';
 import { GuestService } from './guest_service';
 import { SocketService } from './socket_service';
 import { ActivityPackService } from './activity_pack_service';
-import { createActivityPackFromTemplate } from '../templates/default_activity_packs';
 
 export class PartyService {
     public static async createParty(party: Party, host: Guest) {
@@ -17,18 +16,13 @@ export class PartyService {
             party.getActivityPackId
         );
 
-        if (activityPack == null) {
-            const activityPackId = await createActivityPackFromTemplate(
-                party.getActivityPackId
-            );
-            party.setActivityPackId = activityPackId;
-        }
-
-        if (createHostResult) {
-            const insertResult = await collection.insertOne({ ...party });
-            return insertResult.acknowledged;
-        } else {
-            return false;
+        if (activityPack) {
+            if (createHostResult) {
+                const insertResult = await collection.insertOne({ ...party });
+                return insertResult.acknowledged;
+            } else {
+                return false;
+            }
         }
     }
 
