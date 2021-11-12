@@ -114,6 +114,9 @@
 
         <b>guestId:</b> The guest which should be updated.<br />
         <b>newName:</b> The guest's new name.<br />
+        <b>newNotificationToken: The token used by Expo to send
+        notifications to the user, when an activity starts.
+        </b>
       </p>
       <h3 class="endpoint-body-title">Socket.IO Event</h3>
       <p class="endpoint-paragraph">
@@ -128,18 +131,19 @@
                         // Request Body
                         {
                             "guestId": string,
-                            "newName": string
+                            "newName": string, // Optional
+                            "newNotificationToken": string // Optional
                         }
                     </code>
                 </pre>
       </div>
       <div class="endpoint-response-body">
         <pre>
-                    <code class="language-json">
-                        // Response Code
-                        HTTP: 200 OK
-                    </code>
-                </pre>
+            <code class="language-json">
+                // Response Code
+                HTTP: 200 OK
+            </code>
+        </pre>
       </div>
     </div>
   </div>

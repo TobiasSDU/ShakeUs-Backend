@@ -20,7 +20,11 @@ export class GuestService {
         const queryResult = await collection.findOne({ _id: guestId });
 
         if (queryResult) {
-            guest = new Guest(queryResult._id, queryResult.name);
+            guest = new Guest(
+                queryResult._id,
+                queryResult.name,
+                queryResult.notificationToken
+            );
 
             return guest;
         }
@@ -39,7 +43,11 @@ export class GuestService {
                 .toArray();
 
             const guests = queryGuests.map((guest) => {
-                return new Guest(guest._id, guest.name);
+                return new Guest(
+                    guest._id,
+                    guest.name,
+                    guest.notificationToken
+                );
             });
 
             return guests;
@@ -61,7 +69,7 @@ export class GuestService {
                 .toArray();
 
             const hosts = queryHosts.map((host) => {
-                return new Guest(host._id, host.name);
+                return new Guest(host._id, host.name, host.notificationToken);
             });
 
             return hosts;
@@ -99,6 +107,19 @@ export class GuestService {
         return modCount > 0;
     }
 
+    public static async updateGuestNotificationToken(
+        guestId: string,
+        token: string
+    ) {
+        const collection = await this.getGuestsCollection();
+        const updateResult = await collection.updateOne(
+            { _id: guestId },
+            { $set: { notificationToken: token } }
+        );
+
+        return updateResult.modifiedCount > 0;
+    }
+
     public static async deleteGuest(guestId: string) {
         const collection = await this.getGuestsCollection();
         const deleteResult = await collection.deleteOne({ _id: guestId });
@@ -119,7 +140,11 @@ export class GuestService {
                 .toArray();
 
             const guests = queryGuests.map((guest) => {
-                return new Guest(guest._id, guest.name);
+                return new Guest(
+                    guest._id,
+                    guest.name,
+                    guest.notificationToken
+                );
             });
 
             return guests;
@@ -141,7 +166,7 @@ export class GuestService {
                 .toArray();
 
             const hosts = queryHosts.map((host) => {
-                return new Guest(host._id, host.name);
+                return new Guest(host._id, host.name, host.notificationToken);
             });
 
             return hosts;
@@ -164,7 +189,11 @@ export class GuestService {
             });
 
             if (queryResult) {
-                return new Guest(queryResult._id, queryResult.name);
+                return new Guest(
+                    queryResult._id,
+                    queryResult.name,
+                    queryResult.notificationToken
+                );
             }
         }
 

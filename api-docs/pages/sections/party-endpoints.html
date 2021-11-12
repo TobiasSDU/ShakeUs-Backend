@@ -33,7 +33,10 @@
         party.<br />
 
         <b>hostName:</b> The name of the host. A document will automatically be
-        added to the guests collection when the party is created
+        added to the guests collection when the party is created<br />
+
+        <b>hostNotificationToken: </b> The token used by Expo to notify the user
+        when an actiivty starts
       </p>
       <h3 class="endpoint-body-title">Socket.IO Event</h3>
       <p class="endpoint-paragraph">No event emitted</p>
@@ -45,7 +48,8 @@
                         // Request Body
                         {
                             "activityPackId": string,
-                            "hostName": string
+                            "hostName": string,
+                            "hostNotificationToken": string
                         }
                     </code>
                 </pre>
@@ -56,7 +60,8 @@
                         // Response Body
                         {
                             "hostId": string,
-                            "partyId": string
+                            "partyId": string,
+                            "notificationToken": string
                         }
                     </code>
                 </pre>
@@ -356,7 +361,9 @@
         Connects a guest to a party.<br /><br />
 
         <b>partyId:</b> The id of the party which the user wishes to join<br />
-        <b>guestName:</b> The name of the guest
+        <b>guestName:</b> The name of the guest<br />
+        <b>guestNotificationToken: </b> The token used by Expo to notify the user
+        when an actiivty starts
       </p>
       <h3 class="endpoint-body-title">Socket.IO Event</h3>
       <p class="endpoint-paragraph">
@@ -371,7 +378,8 @@
                 // Request Body
                 {
                     "partyId": string,
-                    "guestName": string
+                    "guestName": string,
+                    "guestNotificationToken": string
                 }
             </code>
         </pre>
@@ -383,7 +391,8 @@
                 {
                   newGuest: {
                     "_id": string,
-                    "name": string
+                    "name": string,
+                    "notificationToken": string
                   },
                   guests: [
                     {

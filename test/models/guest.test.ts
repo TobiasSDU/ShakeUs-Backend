@@ -2,7 +2,8 @@ import { Guest } from '../../src/models/guest';
 import { generateUUID } from '../../src/util/uuid_generator';
 
 const testName = 'TestGuest';
-const originalGuest = new Guest(generateUUID(), testName);
+const testToken = 'TestToken';
+const originalGuest = new Guest(generateUUID(), testName, testToken);
 
 describe('guest model methods return expected values', () => {
     let testGuest: Guest;
@@ -23,5 +24,9 @@ describe('guest model methods return expected values', () => {
 
     it('returns the correct test name', () => {
         expect(testGuest.getName).toEqual(testName);
+    });
+
+    it('return the correct notification token', () => {
+        expect(testGuest.getNotificationToken).toEqual(testToken);
     });
 });

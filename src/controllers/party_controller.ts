@@ -10,7 +10,8 @@ export const createParty = async (req: Request, res: Response) => {
     const partyId = generatePartyId();
     const activityPackId = req.body.activityPackId;
     const hostName = req.body.hostName;
-    const host = new Guest(generateUUID(), hostName);
+    const hostNotificationToken = req.body.hostNotificationToken;
+    const host = new Guest(generateUUID(), hostName, hostNotificationToken);
 
     if (partyId && host && activityPackId) {
         const party = new Party(
@@ -187,9 +188,14 @@ export const removeGuest = async (req: Request, res: Response) => {
 export const joinParty = async (req: Request, res: Response) => {
     const partyId = req.body.partyId;
     const guestName = req.body.guestName;
+    const guestNotificationToken = req.body.guestNotificationToken;
 
     if (partyId && guestName) {
-        const newGuest = new Guest(generateUUID(), guestName);
+        const newGuest = new Guest(
+            generateUUID(),
+            guestName,
+            guestNotificationToken
+        );
         const updateResult = await PartyService.joinParty(partyId, newGuest);
 
         if (updateResult) {

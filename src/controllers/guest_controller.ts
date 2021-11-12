@@ -18,14 +18,26 @@ export const showGuest = async (req: Request, res: Response) => {
 export const updateGuestName = async (req: Request, res: Response) => {
     const guestId = req.body.guestId;
     const newName = req.body.newName;
+    const newNotificationToken = req.body.newNotificationToken;
+    const resultArray = [];
 
-    if (guestId && newName) {
-        const updateResult = await GuestService.updateGuestName(
-            guestId,
-            newName
-        );
+    if (guestId) {
+        if (newName) {
+            resultArray.push(
+                await GuestService.updateGuestName(guestId, newName)
+            );
+        }
 
-        if (updateResult) {
+        if (newNotificationToken) {
+            resultArray.push(
+                await GuestService.updateGuestNotificationToken(
+                    guestId,
+                    newNotificationToken
+                )
+            );
+        }
+
+        if (!resultArray.includes(false)) {
             return res.sendStatus(200);
         }
     }
