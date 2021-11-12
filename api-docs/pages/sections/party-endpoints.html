@@ -20,17 +20,8 @@
       <p class="endpoint-paragraph">
         Creates a new party.<br /><br />
 
-        <b>activityPackId:</b> If the parameter points to an activity pack that
-        exists in the database, then this activity pack will be assigned to the
-        party.<br />
-        Alternatively, the id of an activity pack template
-        <em>(/src/templates/default_activity_packs.ts)</em>
-        can be used. This will create a clone of the template and the activities
-        contained in it and generate unique ids for all of them. This is not
-        recommended, as it increased the response time of the request. A better
-        solution would be to create the activity pack first via the
-        "/activity/create" endpoint and then use the returned id to create the
-        party.<br />
+        <b>activityPackId:</b> The id of the activity pack the party should use.
+        The activity pack must be created before the party.<br />
 
         <b>hostName:</b> The name of the host. A document will automatically be
         added to the guests collection when the party is created<br />
