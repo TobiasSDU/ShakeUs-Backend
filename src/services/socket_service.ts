@@ -8,13 +8,10 @@ export class SocketService {
         this.io = new Server(server);
 
         this.io.on('connection', (socket) => {
-            console.log("Socket connected: " + socket.id);
             socket.on('join-room', (roomId) => {
                 socket.join(roomId);
                 console.log('User joined room: ' + roomId);
             });
-
-            socket.emit("Davs", "Ay");
 
             socket.on('leave-room', (roomId) => {
                 socket.leave(roomId);
