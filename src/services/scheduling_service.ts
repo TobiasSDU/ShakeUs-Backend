@@ -4,6 +4,7 @@ import { Activity } from './../models/activity';
 import { SocketService } from './socket_service';
 import { ActivityPackService } from './activity_pack_service';
 import { PartyService } from './party_service';
+import { GuestService } from './guest_service';
 
 const jobs: Record<string, schedule.Job> = {};
 
@@ -31,6 +32,8 @@ export const scheduleActivity = async (activity: Activity) => {
                     },
                     party._id
                 );
+
+                sendExpoPushNotification(activity);
             });
         }
     }
@@ -44,4 +47,53 @@ export const rescheduleActivity = async (activity: Activity) => {
         delete jobs[activityId];
     }
     await scheduleActivity(activity);
+};
+
+const sendExpoPushNotification = async (activity: Activity) => {
+    const message = {
+        to: getExpoPushTokens(activity.id),
+        sound: 'default',
+        title: activity.getTitle,
+        body: activity.getDescription,
+        data: {
+            activity: activity,
+        },
+    };
+
+    await fetch('https://exp.host/--/api/v2/push/send', {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Accept-encoding': 'gzip, deflate',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(message),
+    });
+};
+
+const getExpoPushTokens = async (partyId: string) => {
+    const party = await PartyService.getPartyInfoWithoutAuth(partyId);
+    const expoTokens: string[] = [];
+
+    if (party) {
+        const hosts = await GuestService.getHostsByPartyId(
+            partyId,
+            party.getPrimaryHost
+        );
+
+        if (hosts) {
+            hosts.map((host) => expoTokens.push(host.getNotificationToken));
+        }
+
+        const guests = await GuestService.getGuestsByPartyId(
+            partyId,
+            party.getPrimaryHost
+        );
+
+        if (guests) {
+            guests.map((guest) => expoTokens.push(guest.getNotificationToken));
+        }
+    }
+
+    return expoTokens;
 };

@@ -57,6 +57,23 @@ export class PartyService {
         }
     }
 
+    public static async getPartyInfoWithoutAuth(partyId: string) {
+        const collection = await this.getPartiesCollection();
+        const queryResult = await collection.findOne({ _id: partyId });
+
+        if (queryResult) {
+            return new Party(
+                queryResult._id,
+                queryResult.hosts,
+                queryResult.primaryHost,
+                queryResult.guests,
+                queryResult.activityPackId
+            );
+        } else {
+            return null;
+        }
+    }
+
     public static async updateActivityPack(
         partyId: string,
         primaryHostId: string,
