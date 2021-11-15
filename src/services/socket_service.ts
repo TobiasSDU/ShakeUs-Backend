@@ -7,6 +7,10 @@ export class SocketService {
     constructor(server: http.Server) {
         this.io = new Server(server);
 
+        this.io.on('HEJ', (socket) => {
+            console.log(socket.id + " sagde hej");
+        })
+
         this.io.on('connection', (socket) => {
             console.log("Socket connected: " + socket.id);
             socket.on('join-room', (roomId) => {
