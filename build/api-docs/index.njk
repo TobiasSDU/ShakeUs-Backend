@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>ShakeUS API Docs</title>
+        <meta charset="utf-8">
+        <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
+        <link
+        rel="stylesheet" href="css/index.css"> <!-- Pretty Code Snippets -->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/atom-one-dark.min.css">
+    </head>
+
+    <body>
+        {% include "./pages/sections/sidebar.html" %}
+        {% include "./pages/sections/github-link.html" %}
+
+        <div id="pageContainer">
+            <h1 id="pageTitle">ShakeUs Backend Documentation</h1>
+
+            <!-- Page section imports -->
+            {% include "./pages/sections/party-endpoints.html" %}
+            {% include "./pages/sections/guest-endpoints.html" %}
+            {% include "./pages/sections/activity-endpoints.html" %}
+            {% include "./pages/sections/activity-pack-endpoints.html" %}
+            
+        </div>
+
+        <!-- Include Scripts -->
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="./scripts/index.js"></script>
+        
+
+        <!-- Pretty Code Snippets -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+        <script>
+            hljs.highlightAll();
+        </script>
+    </body>
+
+</html>
+

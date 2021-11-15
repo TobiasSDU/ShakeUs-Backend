@@ -1,0 +1,40 @@
+#sidebar {
+    width: 300px;
+    background-color: #282C34;
+    position: fixed;
+    top: 0; left: 0;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+#sidebar h1, #sidebar h2, #sidebar .scrollListener {
+    color: white;
+}
+
+#sidebar h1 {
+    text-align: center;
+}
+
+#sidebar h2 {
+    font-size: 18px;
+    padding-left: 15px;
+    margin: 25px 0 8px;
+}
+
+#sidebar .scrollListener {
+    width: calc(100% - 80px);
+    padding: 8px 40px;
+    font-size: 16px;
+}
+
+#sidebar .scrollListener:hover {
+    cursor: pointer;
+    background-color: #1e2125;
+}
+
+#sidebar #shakeUsLogo {
+    width: 150px;
+    position: fixed;
+    left: 75px; bottom: 25px;
+}

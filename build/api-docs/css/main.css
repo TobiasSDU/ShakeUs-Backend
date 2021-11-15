@@ -1,0 +1,35 @@
+body {
+    padding: 0;
+    margin: 0;
+    margin-bottom: -100px;
+}
+
+#pageContainer {
+    width: calc(100% - 300px);
+    background-color: white;
+    min-height: 100vh;
+    margin-left: 300px;
+}
+
+#pageTitle {
+    text-align: center;
+    margin: 35px auto;
+}
+
+.section-title {
+    background-color: #1296B3;
+    color: white;
+    display: block;
+    padding: 25px;
+    margin-bottom: -40px;
+}
+
+.section-title h2 {
+    margin: 0;
+    width: 100%;
+}
+
+.section-title hr {
+    border-top: 2px solid white;
+    width: 100%;
+}
