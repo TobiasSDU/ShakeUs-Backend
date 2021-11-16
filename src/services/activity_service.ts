@@ -93,7 +93,7 @@ export class ActivityService {
             { $set: { title: newTitle } }
         );
 
-        if (updateResult.modifiedCount == 1) {
+        if (updateResult.modifiedCount >= 0) {
             await this.emitActivityUpdated(id, 'title', newTitle);
             return true;
         }
@@ -111,7 +111,7 @@ export class ActivityService {
             { $set: { description: newDescription } }
         );
 
-        if (updateResult.modifiedCount == 1) {
+        if (updateResult.modifiedCount >= 0) {
             await this.emitActivityUpdated(id, 'description', newDescription);
             return true;
         }
@@ -129,7 +129,7 @@ export class ActivityService {
             { $set: { startTime: newStartTime } }
         );
 
-        if (updateResult.modifiedCount == 1) {
+        if (updateResult.modifiedCount >= 0) {
             const activity = await this.showActivity(id);
             if (activity) {
                 await rescheduleActivity(activity);
