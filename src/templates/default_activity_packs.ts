@@ -35,7 +35,8 @@ export const defaultActivityPacks: ActivityPack[] = [
 ];
 
 export const createActivityPackFromTemplate = async (
-  activityPackId: string
+  activityPackId: string,
+  startTime: number
 ) => {
   const activityPack = getActivityPackById(activityPackId);
 
@@ -43,7 +44,8 @@ export const createActivityPackFromTemplate = async (
     activityPack.id = generateUUID();
 
     const newActivityIds = await createActivitiesFromTemplate(
-      activityPack.getActivities
+      activityPack.getActivities,
+      startTime
     );
     updateActivityIds(activityPack, newActivityIds);
 
