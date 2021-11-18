@@ -51,9 +51,9 @@ export const rescheduleActivity = async (activity: Activity) => {
 };
 
 const sendExpoPushNotification = async (activity: Activity) => {
-    console.log('EXPO TOKENS:', getExpoPushTokens(activity.id));
+    console.log('EXPO TOKENS:', await getExpoPushTokens(activity.id));
     const message = {
-        to: getExpoPushTokens(activity.id),
+        to: await getExpoPushTokens(activity.id),
         sound: 'default',
         title: activity.getTitle,
         body: activity.getDescription,
