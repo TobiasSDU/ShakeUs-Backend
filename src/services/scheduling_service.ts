@@ -5,6 +5,7 @@ import { SocketService } from './socket_service';
 import { ActivityPackService } from './activity_pack_service';
 import { PartyService } from './party_service';
 import { GuestService } from './guest_service';
+import axios from 'axios';
 
 const jobs: Record<string, schedule.Job> = {};
 
@@ -60,14 +61,8 @@ const sendExpoPushNotification = async (activity: Activity) => {
         },
     };
 
-    await fetch('https://exp.host/--/api/v2/push/send', {
-        method: 'POST',
-        headers: {
-            Accept: 'application/json',
-            'Accept-encoding': 'gzip, deflate',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(message),
+    await axios.post('https://exp.host/--/api/v2/push/send', {
+        ...message,
     });
 };
 

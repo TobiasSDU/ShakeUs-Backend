@@ -6,6 +6,15 @@ function loadScript(path) {
     body.appendChild(script);
 }
 
-loadScript('./scripts/create-party.js');
 loadScript('./scripts/sidebar-scroll-listeners.js');
 loadScript('./scripts/adjust-code-snippet-size.js');
+
+// eslint-disable-next-line no-undef
+const socket = io();
+
+socket.emit('join-room', 'gj8b4p0');
+
+socket.on('activity-title-updated', (message) => {
+    console.log(new Date(Date.now()));
+    console.log(message);
+});
