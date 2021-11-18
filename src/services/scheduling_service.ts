@@ -34,7 +34,7 @@ export const scheduleActivity = async (activity: Activity) => {
                     party._id
                 );
 
-                sendExpoPushNotification(activity);
+                sendExpoPushNotification(activity, party._id);
             });
         }
     }
@@ -50,10 +50,13 @@ export const rescheduleActivity = async (activity: Activity) => {
     await scheduleActivity(activity);
 };
 
-const sendExpoPushNotification = async (activity: Activity) => {
-    console.log('EXPO TOKENS:', await getExpoPushTokens(activity.id));
+const sendExpoPushNotification = async (
+    activity: Activity,
+    partyId: string
+) => {
+    console.log('EXPO TOKENS:', await getExpoPushTokens(partyId));
     const message = {
-        to: await getExpoPushTokens(activity.id),
+        to: await getExpoPushTokens(partyId),
         sound: 'default',
         title: activity.getTitle,
         body: activity.getDescription,
