@@ -71,11 +71,13 @@ describe('endpoint tests for Party routes using POST', () => {
         const activityPackId = testActivityPack1.id;
         const hostName = 'TestHost';
         const hostNotificationToken = 'TestToken';
+        const startTime = +new Date();
 
         const res = await req.post('/party').send({
             activityPackId: activityPackId,
             hostName: hostName,
             hostNotificationToken: hostNotificationToken,
+            startTime: startTime,
         });
 
         const partyId = res.body.partyId;
@@ -85,6 +87,7 @@ describe('endpoint tests for Party routes using POST', () => {
         await testHostOrGuest(hostId, hostName);
 
         expect(res.body.hostNotificationToken).toEqual(hostNotificationToken);
+        expect(res.body.startTime).toEqual(startTime);
     });
 
     test('POST request to /party/add-host adds a new host to the hosts array', async () => {
