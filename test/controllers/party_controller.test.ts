@@ -87,7 +87,6 @@ describe('endpoint tests for Party routes using POST', () => {
         await testHostOrGuest(hostId, hostName);
 
         expect(res.body.hostNotificationToken).toEqual(hostNotificationToken);
-        expect(res.body.startTime).toEqual(startTime);
     });
 
     test('POST request to /party/add-host adds a new host to the hosts array', async () => {
